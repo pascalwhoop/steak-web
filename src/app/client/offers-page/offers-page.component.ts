@@ -1,58 +1,66 @@
+import * as _ from "underscore";
 import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
 import {Offer} from "../../shared/api/model/Offer";
-import {Http} from "@angular/http";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {PageTitleService} from "../../shared/services/page-title.service";
 
 @Component({
     selector: 'steak-offers-page',
     templateUrl: './offers-page.component.html',
-    styleUrls: ['./offers-page.component.css']
+    styleUrls: ['offers-page.component.scss']
 })
 export class OffersPageComponent implements OnInit {
 
-    offers: Observable<Offer[]>;
-    days: Date[];
+    offers: Array<Array<Offer>>;
 
-    constructor(public title: PageTitleService, public offersApi: OffersApi) {}
-
-    generateDays(){
-        this.days = [];
-        this.days.push(new Date()); //throw in today, remove at the end
-        while(this.days.length < 15){
-            let last = this.days[this.days.length-1];
-            let day = last.getDay();
-            let date = last.getDate();
-            let next = new Date(last);
-            if(day == 5){
-                next.setDate(date + 3)
-            }else{
-                next.setDate(date+1);
-            }
-            this.days.push(next);
-        }
-        this.days = this.days.slice(1)
-
+    constructor(public title: PageTitleService, public offersApi: OffersApi) {
     }
 
     ngOnInit() {
-        this.generateDays();
         this.title.title = "Offers";
-        this.offers = this.offersApi.offerGet('pbr', null, new Date());
+
+        this.offersApi.offerGet('pbr', null, new Date())
+            .map(res => {
+                res.map((el) => {
+                    el.date = new Date(el.date);
+                    return el;
+                });
+                return res;
+            })
+            .subscribe(res => {
+                this.offers = this.groupOffers(res);
+            })
     }
 
-    getWeekDayForNumber(num: number){
-        let weekday = new Array(7);
-        weekday[0] =  "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
 
-        return weekday[num]
+    groupOffers(offers: Offer[]): Array<Array<Offer>> {
+        let days: Map<string, Array<Offer>> = new Map();
+        for (let o of offers) {
+            let k = o.date.toDateString();
+            !days[k] ? days[k] = [] : null;
+            days[k].push(o);
+        }
+        return _.values(days);
     }
 
+    makeDaySubtitle(offer: Offer): string{
+        let d = offer.date;
+        let day = d.getDate();
+        let month = d.getMonth() + 1;
+        let _day = day < 10 ? "0"+day: "" + day;
+        let _month = month < 10 ? "0"+month : "" + month;
+        return  _day + '.' + _month
+    }
+
+    makeDayTitle(offer: Offer): string{
+        let weekday=new Array(7);
+        weekday[0]="Sunday";
+        weekday[1]="Monday";
+        weekday[2]="Tuesday";
+        weekday[3]="Wednesday";
+        weekday[4]="Thursday";
+        weekday[5]="Friday";
+        weekday[6]="Saturday";
+        return weekday[offer.date.getDay()];
+    }
 }

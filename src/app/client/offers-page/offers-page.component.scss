@@ -1,0 +1,10 @@
+.day-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+  .day-tile {
+    display: block;
+    flex-grow: 1;
+  }
+}
