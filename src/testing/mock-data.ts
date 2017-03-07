@@ -36,7 +36,7 @@ export const MOCK_OFFERS: Offer[] = [
         "vegetarian": true,
         "price": 4,
         "time": "Mittag",
-        "date": new Date("2013-05-11T00:00:00.000Z"),
+        "date": new Date("2013-10-04T00:00:00.000Z"),
         "main_offer": false,
         "heat": 70
     }

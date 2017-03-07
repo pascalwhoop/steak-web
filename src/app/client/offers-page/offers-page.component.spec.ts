@@ -59,5 +59,22 @@ describe('OffersPageComponent', () => {
         let el = fixture.debugElement.query(By.css('.offer-list'));
         //check that offer list is displayed
         expect(el.children.length).toBe(4);
-    }))
+    }));
+
+    it('should group the incoming offers in days', ()=>{
+       let groups = component.groupOffers(MOCK_OFFERS);
+       expect(groups[0].length).toBe(3);
+       expect(groups[1].length).toBe(1);
+    });
+
+    it('should build a week day from an offer',()=>{
+        expect(component.makeDayTitle(MOCK_OFFERS[0])).toBe("Saturday");
+    });
+
+    it('should build a readable date from an offer', ()=>{
+        expect(component.makeDaySubtitle(MOCK_OFFERS[0])).toBe("11.05");
+        expect(component.makeDaySubtitle(MOCK_OFFERS[1])).toBe("11.05");
+        expect(component.makeDaySubtitle(MOCK_OFFERS[2])).toBe("11.05");
+        expect(component.makeDaySubtitle(MOCK_OFFERS[3])).toBe("04.10");
+    });
 });
