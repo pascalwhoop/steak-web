@@ -1,0 +1,8 @@
+<p md-line>{{offer.description}}</p>
+<p md-line>{{offer.price}} €</p>
+<p md-line>{{offer | json}}</p>
+<md-chip-list md-line>
+  <md-chip *ngIf="!offer.vegetarian">w/ Meat</md-chip>
+  <md-chip *ngIf="offer.vegetarian">Vegetarian</md-chip>
+  <md-chip *ngIf="offer.time">{{offer.time}}</md-chip>
+</md-chip-list>

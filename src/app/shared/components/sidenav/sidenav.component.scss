@@ -1,0 +1,63 @@
+@import "../../../../styles/variables";
+
+$sidenav-spacing-unit: 8px;
+$sidenav-width: 240px;
+
+steak-sidenav {
+  display: flex;
+
+  md-toolbar.oc-logo-container{
+    padding: 0;
+    img{
+      height: 80%;
+      display: block;
+      margin: auto;
+    }
+  }
+
+  .steak-sidenav-container {
+    width: 100%;
+
+    .mat-sidenav-content {
+      position: absolute;
+      right: 0;
+      left: 0;
+    }
+  }
+
+  .steak-sidenav-inner {
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    width: $sidenav-width;
+    bottom: 0;
+    overflow: auto;
+    height: 100%;
+
+    &.mat-sidenav-opened {
+      box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+    }
+
+    nav{
+      a[md-list-item]{
+        text-decoration: none;
+      }
+
+      a.active{
+        font-weight: bold;
+      }
+    }
+
+  }
+
+  .page-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    // The rule will match the element following the router-outlet which will be the routed component.
+    router-outlet + * {
+      flex-grow: 1;
+    }
+  }
+
+}
+

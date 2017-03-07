@@ -1,0 +1,27 @@
+<md-sidenav-container class="steak-sidenav-container">
+  <md-sidenav #sidenav class="steak-sidenav-inner"
+              [opened]="!isScreenSmall()"
+              [mode]="isScreenSmall() ? 'over' : 'side'">
+    <md-toolbar class="oc-logo-container">
+          <img src="assets/img/Opitz-Consulting-Logo.SVG" alt="OC_Logo">
+    </md-toolbar>
+    <nav>
+
+      <md-list>
+        <h3 md-subheader>Steak</h3>
+        <a md-list-item routerLink="/client/offers" routerLinkActive="active">Offers</a>
+        <a md-list-item routerLink="/client/orders" routerLinkActive="active">Orders</a>
+        <a md-list-item routerLink="/admin" routerLinkActive="active">Administration</a>
+        <a md-list-item routerLink="/client/billing" routerLinkActive="active">Billing</a>
+        <md-divider></md-divider>
+        <h3 md-subheader>TimeTrak</h3>
+      </md-list>
+    </nav>
+  </md-sidenav>
+
+  <div class="page-wrapper">
+    <!--set the header from the page in viewLoaded-->
+    <steak-page-header (toggleSidenav)="sidenav.toggle()"></steak-page-header>
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>

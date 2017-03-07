@@ -1,0 +1,22 @@
+@import "../../../../styles/variables";
+
+@mixin steak-page-content-style($padding){
+  steak-page-content{
+    display: block;
+
+    &[padding]{
+      padding: $padding;
+    }
+  }
+}
+
+
+@include steak-page-content-style($padding-l)
+
+@media ($mat-small) {
+  @include steak-page-content-style($padding-m)
+}
+
+@media ($mat-xsmall) {
+  @include steak-page-content-style($padding-s)
+}

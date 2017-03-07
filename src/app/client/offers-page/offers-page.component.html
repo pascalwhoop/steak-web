@@ -1,0 +1,15 @@
+<steak-page-content>
+    <md-list>
+        <md-list-item *ngFor="let day of days">
+            {{getWeekDayForNumber(day.getDay())}} {{day.getDay()}}
+        </md-list-item>
+    </md-list>
+
+    <md-list class="offer-list">
+        <md-list-item *ngFor="let offer of offers | async">
+            <steak-offer-item [offer]="offer"></steak-offer-item>
+        </md-list-item>
+    </md-list>
+</steak-page-content>
+
+
