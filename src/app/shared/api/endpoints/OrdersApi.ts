@@ -31,14 +31,11 @@ import {BASE_PATH} from "../variables";
 
 @Injectable()
 export class OrdersApi {
-    protected basePath = 'https://10.100.175.13:443/v0.2';
+    public basePath = BASE_PATH;
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
+    constructor(protected http: Http, @Optional() configuration: Configuration) {
         if (configuration) {
             this.configuration = configuration;
         }

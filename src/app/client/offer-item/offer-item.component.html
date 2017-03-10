@@ -1,7 +1,37 @@
-<p md-line>{{offer.description}}</p>
-<p md-line>{{offer.price}} €</p>
-<md-chip-list md-line>
-  <md-chip *ngIf="!offer.vegetarian">w/ Meat</md-chip>
-  <md-chip *ngIf="offer.vegetarian">Vegetarian</md-chip>
-  <md-chip *ngIf="offer.time">{{offer.time}}</md-chip>
-</md-chip-list>
+<div>
+    <span class="offer-text">{{offer.description}}</span>
+    <span class="offer-price">{{offer.price}} €</span>
+    <md-chip-list class="offer-tags">
+        <md-chip color="primary">V</md-chip>
+    </md-chip-list>
+</div>
+<div class="orders-box">
+    <div class="order-counter">
+        <p>Ordered: {{orderCount(offer) || 0}}</p>
+    </div>
+    <div class="offer-actions">
+        <button md-mini-fab>-</button>
+        <button md-mini-fab>+</button>
+    </div>
+</div>
+
+
+
+
+
+<!--<div md-line>-->
+<!--<p>{{offer.description}}</p>-->
+<!--<div style="float: right;">{{offer.price}} €</div>-->
+<!--</div>-->
+
+
+<!--&lt;!&ndash;<md-icon md-list-icon *ngIf="offer.vegetarian">local_florist</md-icon>&ndash;&gt;-->
+<!--<md-chip-list md-line>-->
+<!--<md-chip color="primary">V</md-chip>-->
+<!--</md-chip-list>-->
+<!--<div md-line>-->
+<!--<button md-mini-fab>-</button>-->
+<!--<button md-mini-fab>+</button>-->
+
+<!--</div>-->
+

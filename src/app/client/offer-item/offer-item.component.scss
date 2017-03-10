@@ -1,0 +1,45 @@
+@import "../../../styles/app-theme";
+@import "../../../styles/variables";
+
+steak-offer-item {
+  display: block;
+  $border-color: mat-color($steak-app-grey, 0.5);
+  border-bottom: 1px solid $border-color;
+  padding-bottom: $padding-s;
+  padding-top: $padding-s;
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  &:first-child {
+    padding-top: 0;
+  }
+
+  .offer-text {
+    font-weight: bold;
+  }
+
+  .offer-price {
+    float: right;
+    font-weight: bolder;
+  }
+
+  .orders-box{
+    display: flex;
+    .order-counter{
+      flex: 1 0 auto;
+    }
+    .offer-actions {
+      flex: 1 0 auto;
+      text-align: right;
+    }
+  }
+
+
+
+  .offer-tags {
+    margin: $padding-s 0;
+    display: block;
+    text-align: right;
+  }
+}

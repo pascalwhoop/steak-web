@@ -1,4 +1,5 @@
 import {Offer} from "../app/shared/api/model/Offer";
+import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
 export const MOCK_OFFERS: Offer[] = [
     {
         "_id": "58a47bd88fdd83084b5c88a2",
@@ -40,4 +41,8 @@ export const MOCK_OFFERS: Offer[] = [
         "main_offer": false,
         "heat": 70
     }
+];
+
+export const MOCK_OFFER_ORDER_PAIRS: OfferOrdersPair[] = [
+    
 ];

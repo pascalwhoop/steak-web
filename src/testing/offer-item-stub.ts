@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
 
 @Component({
     moduleId: module.id,
@@ -8,8 +9,8 @@ import {Component, OnInit, Input} from '@angular/core';
 export class OfferItemStubComponent implements OnInit {
     constructor() { }
 
-    @Input('offer')
-    offer;
+    @Input('oo-pair')
+    ooPair: OfferOrdersPair;
 
     ngOnInit() { }
 

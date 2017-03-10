@@ -3,10 +3,13 @@ import {MaterialModule} from "@angular/material";
 
 
 import { OfferItemComponent } from './offer-item.component';
+import {OffersApi} from "../../shared/api/endpoints/OffersApi";
+import Spy = jasmine.Spy;
 
 describe('OfferItemComponent', () => {
   let component: OfferItemComponent;
   let fixture: ComponentFixture<OfferItemComponent>;
+  let orderSpy: Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,6 +22,8 @@ describe('OfferItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OfferItemComponent);
     component = fixture.componentInstance;
+
+    orderSpy = spyOn(component.orderApi)
 
     //set Input value to something
     let expectedOffer = {

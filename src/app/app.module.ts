@@ -4,7 +4,7 @@ import {AppComponent} from "./app.component";
 import {ClientModule} from "./client/client.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {SharedModule} from "./shared/shared.module";
-import {SidenavComponent} from "./shared/components/sidenav/sidenav.component";
+import {LoginModule} from "./login/login.module";
 
 
 
@@ -17,7 +17,7 @@ import {SidenavComponent} from "./shared/components/sidenav/sidenav.component";
         SharedModule,
         AppRoutingModule,
         ClientModule,
-
+        LoginModule
     ],
     providers: [],
     bootstrap: [AppComponent]

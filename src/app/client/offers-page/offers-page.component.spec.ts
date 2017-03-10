@@ -8,12 +8,12 @@ import {MOCK_OFFERS} from "../../../testing/mock-data";
 import Spy = jasmine.Spy;
 import {Observable, Subscriber} from "rxjs";
 import {By} from "@angular/platform-browser";
+import {UsersApi} from "../../shared/api/endpoints/UsersApi";
 
 describe('OffersPageComponent', () => {
     let component: OffersPageComponent;
     let fixture: ComponentFixture<OffersPageComponent>;
     let titleService: PageTitleService;
-    let offersService: OffersApi;
     let offersSpy: Spy;
 
     beforeEach(async(() => {
@@ -21,7 +21,7 @@ describe('OffersPageComponent', () => {
         TestBed.configureTestingModule({
             imports: [MaterialModule],
             providers: [PageTitleService,//its ok since its a really simple service and we are spying on it
-                OffersApi],
+                UsersApi],
             declarations: [OffersPageComponent],
             schemas: [NO_ERRORS_SCHEMA]
         })
@@ -35,7 +35,7 @@ describe('OffersPageComponent', () => {
 
         //spy on things and get services
         titleService = fixture.debugElement.injector.get(PageTitleService);
-        offersSpy = spyOn(component.offersApi, 'offerGet').and.returnValues(Observable.create((s: Subscriber<any>)=> s.next((MOCK_OFFERS))));
+        offersSpy = spyOn(component.usersApi, 'offersOrdersGET').and.returnValues(Observable.create((s: Subscriber<any>)=> s.next((MOCK_OFFERS))));
 
 
         fixture.detectChanges();
@@ -56,7 +56,8 @@ describe('OffersPageComponent', () => {
     it('should display offers in list', fakeAsync(()=>{
         tick();
         fixture.detectChanges();
-        let el = fixture.debugElement.query(By.css('.offer-list'));
+        let el = fixture.debugElement.query(By.css('.day-tile'));
+        console.log(el);
         //check that offer list is displayed
         expect(el.children.length).toBe(4);
     }));

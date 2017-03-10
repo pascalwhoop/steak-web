@@ -29,14 +29,12 @@ import {BASE_PATH} from "../variables";
 
 @Injectable()
 export class OffersApi {
-    protected basePath = BASE_PATH;
+    public basePath = BASE_PATH;
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
+    constructor(protected http: Http, @Optional() configuration: Configuration) {
+
         if (configuration) {
             this.configuration = configuration;
         }

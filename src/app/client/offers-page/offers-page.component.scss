@@ -1,10 +1,16 @@
+@import "../../../styles/variables";
 .day-grid-container {
   display: flex;
+  
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   
   .day-tile {
+    margin: $padding-s;
     display: block;
     flex-grow: 1;
+
+    min-width: 300px;
+    max-width: 500px;
   }
 }

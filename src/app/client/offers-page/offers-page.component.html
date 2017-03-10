@@ -1,5 +1,5 @@
 <steak-page-content>
-    
+
     <!--<md-list>-->
         <!--<md-list-item *ngFor="let day of days">-->
             <!--{{getWeekDayForNumber(day.getDay())}} {{day.getDay()}}-->
@@ -9,15 +9,17 @@
     <div class="day-grid-container">
         <div class="day-tile" *ngFor="let day of offers">
             <md-card>
-                <md-card-title>{{makeDayTitle(day[0])}}</md-card-title>
-                <md-card-subtitle>{{makeDaySubtitle(day[0])}}</md-card-subtitle>
+                <md-card-title>{{makeDayTitle(day[0].offer)}}</md-card-title>
+                <md-card-subtitle>{{makeDaySubtitle(day[0].offer)}}</md-card-subtitle>
                 <md-card-content>
-                    <steak-offer-item [offer]="offer" *ngFor="let offer of day"></steak-offer-item>
+                    <md-list>
+                            <steak-offer-item md-list-item [oo-pair]="ooPair" *ngFor="let ooPair of day"></steak-offer-item>
+                    </md-list>
                 </md-card-content>
             </md-card>
         </div>
     </div>
-    
+
 
 </steak-page-content>
 
