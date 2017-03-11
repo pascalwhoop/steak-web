@@ -1,1 +1,19 @@
-Login Works!
+<div class="login-form-container">
+    <img src="assets/img/Opitz-Consulting-Logo.SVG" alt="" class="oc-logo">
+    <h1>Login</h1>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <md-input-container [dividerColor]="loginData.username ? 'primary' : 'warn'">
+            <input mdInput placeholder="Username (Kürzel)" name="username" [(ngModel)]="loginData.username" required #username>
+        </md-input-container>
+        <!--{{username.className}}-->
+
+        <md-input-container [dividerColor]="loginData.password ? 'primary' : 'warn'">
+            
+            <input mdInput placeholder="Password" name="password" [(ngModel)]="loginData.password" type="password" required #password>
+        </md-input-container>
+        <!--{{password.className}}-->
+
+        <button md-raised-button type="submit" [disabled]="!loginForm.form.valid" color="primary">Login</button>
+    </form>
+</div>

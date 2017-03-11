@@ -1,0 +1,24 @@
+@import "../../../styles/app-theme";
+@import "../../../styles/variables";
+
+$background-color: mat-color($steak-app-grey, 0.5);
+
+
+.login-form-container{
+  .oc-logo{
+    max-width: 300px;
+  }
+  h1{
+    font-weight: 400;
+  }
+  padding: 50px;
+  //background: $background-color;
+  text-align:center;
+  form{
+    max-width: 400px;
+    margin:auto;
+    md-input-container{
+      display: block;
+    }
+  }
+}

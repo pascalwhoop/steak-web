@@ -5,6 +5,7 @@ import {SharedModule} from "../shared/shared.module";
 import {Routes, RouterModule} from "@angular/router";
 import {UserService} from "./user.service";
 import {LoggedInGuard} from "./logged-in.guard";
+import { LogoutButtonComponent } from './logout-button/logout-button.component';
 
 
 const ROUTES : Routes =[
@@ -17,7 +18,7 @@ const ROUTES : Routes =[
         SharedModule,
         RouterModule.forChild(ROUTES)
     ],
-    declarations: [LoginPageComponent],
+    declarations: [LoginPageComponent, LogoutButtonComponent],
     providers: [UserService, LoggedInGuard]
 })
 /**

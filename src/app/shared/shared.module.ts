@@ -8,6 +8,7 @@ import {PageHeaderComponent} from "./components/page-header/page-header.componen
 import { PageContentComponent } from './components/page-content/page-content.component';
 import {PageTitleService} from "./services/page-title.service";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
 @NgModule({
@@ -15,6 +16,7 @@ import 'hammerjs';
         CommonModule,
         ApiModule,
         FormsModule,
+        FlexLayoutModule.forRoot(),
         MaterialModule,
         RouterModule
     ],

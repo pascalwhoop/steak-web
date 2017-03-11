@@ -14,14 +14,12 @@ import { Inject, Injectable, Optional }                      from '@angular/core
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
-
 import { Observable }                                        from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
-
 import * as models                                           from '../model/models';
 import {Configuration} from "../configuration";
-import {BASE_PATH} from "../variables";
+import {environment} from "../../../../environments/environment";
+
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -29,7 +27,7 @@ import {BASE_PATH} from "../variables";
 
 @Injectable()
 export class OffersApi {
-    public basePath = BASE_PATH;
+    public basePath = environment.endpoints.HOST + environment.endpoints.STEAK_BASE_URI;
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -158,10 +156,7 @@ export class OffersApi {
             'application/json'
         ];
 
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('api_key', this.configuration.apiKey);
-        }
+
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Delete,
@@ -229,10 +224,7 @@ export class OffersApi {
             'application/json'
         ];
 
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('api_key', this.configuration.apiKey);
-        }
+
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
@@ -278,10 +270,7 @@ export class OffersApi {
             'application/json'
         ];
 
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('api_key', this.configuration.apiKey);
-        }
+
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
@@ -327,10 +316,7 @@ export class OffersApi {
             'application/json'
         ];
 
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('api_key', this.configuration.apiKey);
-        }
+
 
         headers.set('Content-Type', 'application/json');
 
@@ -379,10 +365,7 @@ export class OffersApi {
             'application/json'
         ];
 
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('api_key', this.configuration.apiKey);
-        }
+
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,

@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "version": "1.0.0-beta.28.3",
     "name": "steak-web"
@@ -36,7 +37,7 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.json"
+      "project": "src/tsconfig.app.json"
     },
     {
       "project": "src/tsconfig.spec.json"

@@ -1,5 +1,8 @@
 # SteakWeb
 
+This application is based on Angular 2 + Angular Material + Angular flex-layout
+
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server
