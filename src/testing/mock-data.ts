@@ -2,6 +2,8 @@ import {Offer} from "../app/shared/api/model/Offer";
 import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
 import {Order} from "../app/shared/api/model/Order";
 import {User} from "../app/shared/api/model/User";
+
+
 export const MOCK_OFFERS: Offer[] = [
     {
         "_id": "58a47bd88fdd83084b5c88a2",
@@ -53,7 +55,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
             "vegetarian": false,
             "price": 5,
             "time": "Fruehstueck",
-            "date": "2017-02-22T00:00:00.000Z",
+            "date": new Date("2017-02-22T00:00:00.000Z"),
             "main_offer": true,
             "heat": -40
         },
@@ -74,7 +76,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
             "vegetarian": false,
             "price": 5,
             "time": "Fruehstueck",
-            "date": "2017-02-22T00:00:00.000Z",
+            "date": new Date("2017-02-22T00:00:00.000Z"),
             "main_offer": true,
             "heat": -40
         },
@@ -102,7 +104,7 @@ export const MOCK_ORDERS: Order[] = [
             "vegetarian": false,
             "price": 5,
             "time": "Fruehstueck",
-            "date": "2017-02-22T00:00:00.000Z",
+            "date": new Date("2017-02-22T00:00:00.000Z"),
             "main_offer": true,
             "heat": -40
         },
@@ -119,7 +121,7 @@ export const MOCK_ORDERS: Order[] = [
             "vegetarian": false,
             "price": 5,
             "time": "lunch",
-            "date": "2017-02-21T00:00:00.000Z",
+            "date": new Date("2017-02-21T00:00:00.000Z"),
             "main_offer": true,
             "heat": 40
         },
