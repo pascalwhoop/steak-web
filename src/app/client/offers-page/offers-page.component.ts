@@ -86,7 +86,7 @@ export class OffersPageComponent implements OnInit {
         return weekday[offer.date.getDay()];
     }
 
-    private makeOfferOrderPairs(offers: Offer[], orders: Order[]): OfferOrdersPair[] {
+    makeOfferOrderPairs(offers: Offer[], orders: Order[]): OfferOrdersPair[] {
         return offers.map(offer => {
             return {
                 offer: offer,

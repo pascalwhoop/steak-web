@@ -3,7 +3,7 @@ import {OffersPageComponent} from "./offers-page.component";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {MOCK_OFFERS, MOCK_OFFER_ORDER_PAIR} from "../../../testing/mock-data";
+import {MOCK_OFFERS, MOCK_OFFER_ORDER_PAIR, MOCK_ORDERS} from "../../../testing/mock-data";
 import {Observable, Subscriber} from "rxjs";
 import {By} from "@angular/platform-browser";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
@@ -66,16 +66,19 @@ describe('OffersPageComponent', () => {
     });
 
     it('should display offers in list', fakeAsync(() => {
+        component.offerOrderData = component.mapPairsToDays(MOCK_OFFER_ORDER_PAIR);
+        //let UI update
         tick();
         fixture.detectChanges();
         let elements = fixture.debugElement.queryAll(By.css('steak-offer-item'));
-        expect(elements.length).toBe(4);
+        expect(elements.length).toBe(2);
     }));
 
-    it('should group the incoming offers in days', () => {
-        // let groups = component.mapPairsToDays(MOCK_OFFERS);
-        // expect(groups[0].length).toBe(3);
-        // expect(groups[1].length).toBe(1);
+    it('should group the offers and orders into objects for each offer', () => {
+        //our mock data includes 2 orders that match the first offer in the offer mock data. therefore, there should be 1 offer with 2 orders
+        let pairs = component.makeOfferOrderPairs(MOCK_OFFERS, MOCK_ORDERS);
+        expect(pairs[0].orders.length).toBe(2);
+
     });
 
     it('should build a week day from an offer', () => {

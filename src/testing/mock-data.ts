@@ -99,7 +99,7 @@ export const MOCK_ORDERS: Order[] = [
         "takeaway_Flag": true,
         "paid": false,
         "offer": {
-            "_id": "58aafa33fcf99f402c680c49",
+            "_id": "58a47bd88fdd83084b5c88a2",
             "description": "Backfisch mit Remoulade, Bratkartoffeln und Salatteller",
             "vegetarian": false,
             "price": 5,
@@ -116,7 +116,7 @@ export const MOCK_ORDERS: Order[] = [
         "takeaway_Flag": true,
         "paid": false,
         "offer": {
-            "_id": "58ab0a21d555c54fdb5ca7e3",
+            "_id": "58a47bd88fdd83084b5c88a2",
             "description": "Pudding alla schwarzes Loch",
             "vegetarian": false,
             "price": 5,
