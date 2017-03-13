@@ -10,6 +10,7 @@ import {PageTitleService} from "./services/page-title.service";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
+import { ObjectToArrayPipe } from './pipes/object-to-array.pipe';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import 'hammerjs';
         MaterialModule,
         RouterModule
     ],
-    declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent],
+    declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent, ObjectToArrayPipe],
     exports : [
         CommonModule,
         ApiModule,
@@ -29,6 +30,7 @@ import 'hammerjs';
         PageHeaderComponent,
         PageContentComponent,
         SidenavComponent,
+        ObjectToArrayPipe,
         FlexLayoutModule
     ],
     providers: [PageTitleService]
