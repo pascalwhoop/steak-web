@@ -1,13 +1,13 @@
 <div>
-    <span class="offer-text">{{offer.description}}</span>
-    <span class="offer-price">{{offer.price}} €</span>
+    <span class="offer-text">{{ooPair.offer.description}}</span>
+    <span class="offer-price">{{ooPair.offer.price}} €</span>
     <md-chip-list class="offer-tags">
         <md-chip color="primary">V</md-chip>
     </md-chip-list>
 </div>
 <div class="orders-box">
     <div class="order-counter">
-        <p>Ordered: {{orderCount(offer) || 0}}</p>
+        <p>Ordered: {{ooPair.orders.length}}</p>
     </div>
     <div class="offer-actions">
         <button md-mini-fab>-</button>

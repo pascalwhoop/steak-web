@@ -63,7 +63,7 @@ export class OffersApi {
      * @param startdate 
      * @param enddate 
      */
-    public offerGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
+    public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
         return this.offerGetWithHttpInfo(date, startdate, enddate)
             .map((response: Response) => {
                 if (response.status === 204) {

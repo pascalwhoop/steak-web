@@ -1,6 +1,7 @@
 import {Offer} from "../app/shared/api/model/Offer";
 import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
 import {Order} from "../app/shared/api/model/Order";
+import {User} from "../app/shared/api/model/User";
 export const MOCK_OFFERS: Offer[] = [
     {
         "_id": "58a47bd88fdd83084b5c88a2",
@@ -124,4 +125,19 @@ export const MOCK_ORDERS: Order[] = [
         },
         "amount": 5
     }
-]
+];
+
+export const MOCK_USERS: User [] = [
+    {
+        employeeId: 'abc',
+        openPaymentsSum: 1000
+    },
+    {
+        employeeId: 'afg',
+        openPaymentsSum: 421
+    },
+    {
+        employeeId: 'cde',
+        openPaymentsSum: 12312
+    }
+];

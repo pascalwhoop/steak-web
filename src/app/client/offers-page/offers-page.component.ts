@@ -1,10 +1,14 @@
-import * as _ from "underscore";
 import {Component, OnInit} from "@angular/core";
 import {Offer} from "../../shared/api/model/Offer";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
 import {OfferOrdersPair} from "../../shared/api/model/OfferOrdersPair";
-import {UserService} from "../../login/user.service";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/forkJoin' //forkJoin is not default imported. 
+import {OffersApi} from "../../shared/api/endpoints/OffersApi";
+import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
+import {Order} from "../../shared/api/model/Order";
+
 
 @Component({
     selector: 'steak-offers-page',
@@ -13,40 +17,46 @@ import {UserService} from "../../login/user.service";
 })
 export class OffersPageComponent implements OnInit {
 
-    offers: Array<Array<OfferOrdersPair>>;
+    offerOrderData: {[date: string] : OfferOrdersPair[]};
 
-    constructor(public title: PageTitleService, public usersApi: UsersApi, public userService: UserService) {
+    constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi) {
+
     }
+
 
     ngOnInit() {
         this.title.title = "Offers";
 
-        this.usersApi.offersOrdersGET(this.userService.username, new Date())
-            .map(res => {
-                res.map((el: OfferOrdersPair) => {
-                    el.offer.date = new Date(el.offer.date);
-                    return el;
-                });
-                return res;
+        this.fetchData()
+            .subscribe((pairs) => {
+                this.offerOrderData = this.mapPairsToDays(pairs);
             })
-            .subscribe(res => {
-                this.offers = this.groupOffers(res);
-            })
+
     }
 
 
-    groupOffers(pairings: OfferOrdersPair[]): Array<Array<OfferOrdersPair>> {
-        let days: Map<string, Array<Offer>> = new Map();
-        for (let p of pairings) {
-            let k = p.offer.date.toDateString();
-            !days[k] ? days[k] = [] : null;
-            days[k].push(p);
-        }
-        return _.values(days);
+    fetchData(): Observable<OfferOrdersPair[]> {
+        return new Observable(observer => {
+            let offerObs = this.offersApi.offersGet(null, new Date());
+            let orderObs = this.ordersApi.ordersGET(new Date());
+
+            Observable.forkJoin(offerObs, orderObs)
+                .subscribe(results => {
+                    let offers = results[0];
+                    let orders = results[1];
+                    observer.next(this.makeOfferOrderPairs(offers, orders));
+                });
+        })
+    }
+
+    mapPairsToDays(pairings: OfferOrdersPair[]): {[date: string] : OfferOrdersPair[]} {
+        let results = {};
+        pairings.map(pair => results[pair.offer.date.toString()] = pair);
+        return results;
     }
 
     makeDaySubtitle(offer: Offer): string {
-        let d = offer.date;
+        let d = new Date(offer.date);
         let day = d.getDate();
         let month = d.getMonth() + 1;
         let _day = day < 10 ? "0" + day : "" + day;
@@ -64,5 +74,14 @@ export class OffersPageComponent implements OnInit {
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
         return weekday[offer.date.getDay()];
+    }
+
+    private makeOfferOrderPairs(offers: Offer[], orders: Order[]): OfferOrdersPair[] {
+        return offers.map(offer => {
+            return {
+                offer: offer,
+                orders: orders.filter(o => o.offer._id == offer._id)
+            }
+        })
     }
 }

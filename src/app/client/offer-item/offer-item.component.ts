@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Offer} from "../../shared/api/model/Offer";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {OfferOrdersPair} from "../../shared/api/model/OfferOrdersPair";
+import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 
 @Component({
   selector: 'steak-offer-item',
@@ -13,7 +14,7 @@ export class OfferItemComponent implements OnInit {
   @Input('oo-pair')
   ooPair: OfferOrdersPair;
 
-  constructor(public orderApi: OrdersApi) { }
+  constructor(public orderApi: OrdersApi, public offersApi: OffersApi) { }
 
   ngOnInit() {
   }

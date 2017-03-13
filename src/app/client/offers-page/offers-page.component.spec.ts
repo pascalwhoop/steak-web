@@ -8,18 +8,26 @@ import Spy = jasmine.Spy;
 import {Observable, Subscriber} from "rxjs";
 import {By} from "@angular/platform-browser";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
+import {OffersApiStub} from "../../../testing/offers-api-stub";
+import {UsersApiStub} from "../../../testing/users-api-stub";
+import {OrdersApiStub} from "../../../testing/orders-api-stub";
+import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 
 describe('OffersPageComponent', () => {
     let component: OffersPageComponent;
     let fixture: ComponentFixture<OffersPageComponent>;
     let titleService: PageTitleService;
     let offersSpy: Spy;
+    let ordersSpy: Spy;
 
-    beforeAll(async(() => {
+    beforeEach(async(() => {
 
         TestBed.configureTestingModule({
             providers: [PageTitleService,
-                OffersApi], //its ok since we are spying on it
+                {provide: OffersApi, useClass: OffersApiStub},
+                {provide: OrdersApi, useClass: OrdersApiStub},
+                {provide: UsersApi, useClass: UsersApiStub}
+                ],
             declarations: [OffersPageComponent],
             schemas: [NO_ERRORS_SCHEMA]
         })
@@ -33,9 +41,8 @@ describe('OffersPageComponent', () => {
 
         //spy on things and get services
         titleService = fixture.debugElement.injector.get(PageTitleService);
-        offersSpy = spyOn(component.usersApi, 'offersOrdersGET').and.returnValues(Observable.create((s: Subscriber<any>)=> s.next((MOCK_OFFERS))));
-
-
+        offersSpy = spyOn(component.offersApi, 'offersGet').and.callThrough();
+        ordersSpy = spyOn(component.ordersApi, 'ordersGET').and.callThrough();
         fixture.detectChanges();
     });
 
@@ -47,8 +54,9 @@ describe('OffersPageComponent', () => {
         expect(titleService.title).toBe('Offers');
     });
 
-    it('should fetch all offers of the future', () => {
+    it('should fetch all offers and orders of the future', () => {
         expect(offersSpy.calls.mostRecent()).toBeTruthy();
+        expect(ordersSpy.calls.mostRecent()).toBeTruthy();
     });
 
     it('should display offers in list', fakeAsync(()=>{

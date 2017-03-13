@@ -14,7 +14,5 @@ import * as models from './models';
 
 export interface OrderBooking {
     offerId?: string;
-
     takeawayFlag?: boolean;
-
 }

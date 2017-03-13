@@ -16,10 +16,10 @@ export class AdminHomeComponent implements OnInit {
 
     constructor(public title: PageTitleService, public offerApi: OffersApi) {
         this.dates = this.generateNextDays();
-        this.fetchOffers();
     }
 
     ngOnInit() {
+        this.fetchOffers();
         this.title.title = "Administration";
     }
 
@@ -41,7 +41,7 @@ export class AdminHomeComponent implements OnInit {
 
 
     private fetchOffers() {
-        this.offerApi.offerGet()
+        this.offerApi.offersGet()
             .subscribe(offers => this.offers = offers);
     }
 }

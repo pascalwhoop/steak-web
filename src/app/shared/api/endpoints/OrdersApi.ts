@@ -112,7 +112,6 @@ export class OrdersApi {
     /**
      * Order[]
      * Alle Bestellungen
-     * @param username The username of the user that is performing the request
      * @param startdate
      * @param date
      * @param enddate
@@ -121,8 +120,46 @@ export class OrdersApi {
      * @param limit Result limiter.
      * @param openPayments A flag that can be set to true to only get employees with open payments
      */
-    public ordersGET(username: string, startdate?: Date, date?: Date, enddate?: Date, userid?: string, cursor?: string, limit?: number, openPayments?: boolean, extraHttpRequestParams?: any): Observable<Array<models.Order>> {
-        return this.ordersGETWithHttpInfo(username, startdate, date, enddate, userid, cursor, limit, openPayments, extraHttpRequestParams)
+    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, cursor?: string, limit?: number, openPayments?: boolean, extraHttpRequestParams?: any): Observable<Array<models.Order>> {
+        const path = this.basePath + `/orders`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON());
+
+        if (startdate !== undefined) {
+            queryParameters.set('startdate', <any>startdate);
+        }
+
+        if (date !== undefined) {
+            queryParameters.set('date', <any>date);
+        }
+
+        if (enddate !== undefined) {
+            queryParameters.set('enddate', <any>enddate);
+        }
+
+        if (userid !== undefined) {
+            queryParameters.set('userid', <any>userid);
+        }
+
+        if (cursor !== undefined) {
+            queryParameters.set('cursor', <any>cursor);
+        }
+
+        if (limit !== undefined) {
+            queryParameters.set('limit', <any>limit);
+        }
+
+        if (openPayments !== undefined) {
+            queryParameters.set('open_payments', <any>openPayments);
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+            search: queryParameters
+        });
+
+        return this.http.get(path, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -316,79 +353,6 @@ export class OrdersApi {
         return this.http.request(path, requestOptions);
     }
 
-    /**
-     * Order[]
-     * Alle Bestellungen
-     * @param username The username of the user that is performing the request
-     * @param startdate
-     * @param date
-     * @param enddate
-     * @param userid The user id for which to fetch data
-     * @param cursor Pagination cursor. If there is not a limit defined, each cursor result gives back 30 results
-     * @param limit Result limiter.
-     * @param openPayments A flag that can be set to true to only get employees with open payments
-     */
-    public ordersGETWithHttpInfo(username: string, startdate?: Date, date?: Date, enddate?: Date, userid?: string, cursor?: string, limit?: number, openPayments?: boolean, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/orders`;
 
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling ordersGET.');
-        }
-        if (startdate !== undefined) {
-                queryParameters.set('startdate', <any>startdate);
-        }
-
-        if (date !== undefined) {
-                queryParameters.set('date', <any>date);
-        }
-
-        if (enddate !== undefined) {
-                queryParameters.set('enddate', <any>enddate);
-        }
-
-        if (userid !== undefined) {
-                queryParameters.set('userid', <any>userid);
-        }
-
-        if (cursor !== undefined) {
-            queryParameters.set('cursor', <any>cursor);
-        }
-
-        if (limit !== undefined) {
-            queryParameters.set('limit', <any>limit);
-        }
-
-        if (openPayments !== undefined) {
-                queryParameters.set('open_payments', <any>openPayments);
-        }
-
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
 
 }
