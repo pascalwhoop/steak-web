@@ -8,7 +8,6 @@ export class ObjectToArrayPipe {
      Takes a value and makes it lowercase.
      */
     transform(object: any, args?: any[]): any[] {
-        console.log(object);
 
         let values: any[] = [];
         for (let key in object) {
@@ -16,7 +15,6 @@ export class ObjectToArrayPipe {
                 values.push(object[key]);
             }
         }
-        console.log(values.length);
         return values;
     }
 }
