@@ -7,13 +7,13 @@
     <!--</md-list>-->
 
     <div class="day-grid-container">
-        <div class="day-tile" *ngFor="let day of offers">
+        <div class="day-tile" *ngFor="let day of offerOrderData">
             <md-card>
-                <md-card-title>{{makeDayTitle(day[0].offer)}}</md-card-title>
-                <md-card-subtitle>{{makeDaySubtitle(day[0].offer)}}</md-card-subtitle>
+                <md-card-title>{{makeDayTitle(day.offerOrderPairs[0].offer)}}</md-card-title>
+                <md-card-subtitle>{{makeDaySubtitle(day.offerOrderPairs[0].offer)}}</md-card-subtitle>
                 <md-card-content>
                     <md-list>
-                            <steak-offer-item md-list-item [oo-pair]="ooPair" *ngFor="let ooPair of day"></steak-offer-item>
+                            <steak-offer-item md-list-item [oo-pair]="ooPair" *ngFor="let ooPair of day.offerOrderPairs"></steak-offer-item>
                     </md-list>
                 </md-card-content>
             </md-card>

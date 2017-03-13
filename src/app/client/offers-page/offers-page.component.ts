@@ -17,7 +17,7 @@ import * as _ from "lodash";
 })
 export class OffersPageComponent implements OnInit {
 
-    offerOrderData: {[date: string] : OfferOrdersPair[]};
+    offerOrderData: IDayPack[];
 
     constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi) {
 
@@ -49,14 +49,24 @@ export class OffersPageComponent implements OnInit {
         })
     }
 
-    mapPairsToDays(pairings: OfferOrdersPair[]): {[date: string] : OfferOrdersPair[]} {
-        let results = {};
-        pairings.map(pair => results[pair.offer.date.toString()] = pair);
+    mapPairsToDays(pairings: OfferOrdersPair[]): IDayPack[] {
+        let results: IDayPack[] = [];
+
+        let dateStrings = pairings.map(pair => pair.offer.date.toString());
+        dateStrings = _.uniq(dateStrings);
+
+        dateStrings.forEach(dateString => {
+            results.push(
+                {
+                    date: new Date(dateString),
+                    offerOrderPairs: pairings.filter(pair => dateString == pair.offer.date.toString())
+                });
+        });
         return results;
     }
 
     makeDaySubtitle(offer: Offer): string {
-        let d = new Date(offer.date);
+        let d = offer.date;
         let day = d.getDate();
         let month = d.getMonth() + 1;
         let _day = day < 10 ? "0" + day : "" + day;
@@ -84,4 +94,10 @@ export class OffersPageComponent implements OnInit {
             }
         })
     }
+}
+
+
+interface IDayPack {
+    date: Date;
+    offerOrderPairs: OfferOrdersPair[]
 }
