@@ -18,7 +18,7 @@ export class OffersApiStub {
     }
 
 
-    public offerGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
+    public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
         return new Observable(observer => {
             observer.next(MOCK_OFFERS);
         })

@@ -1,0 +1,60 @@
+import {Inject, Injectable, Optional} from "@angular/core";
+import {
+    Http,
+    Headers,
+    URLSearchParams,
+    RequestMethod,
+    RequestOptions,
+    RequestOptionsArgs,
+    Response
+} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+
+import {Order} from "../app/shared/api/model/Order";
+import {OrderBooking} from "../app/shared/api/model/OrderBooking";
+import {MOCK_ORDERS} from "./mock-data";
+
+
+@Injectable()
+export class OrdersApiStub {
+
+    constructor() {
+    }
+
+
+    public orderDelete(orderid: string, extraHttpRequestParams?: any): Observable<{}> {
+        return new Observable(observer => {
+            observer.next({});
+        })
+    }
+
+
+    public orderGetOne(orderid: string, extraHttpRequestParams?: any): Observable<Order> {
+        return new Observable(observer => {
+            observer.next(MOCK_ORDERS[0]);
+        })
+    }
+
+
+    public orderPUT(orderBooking: OrderBooking, extraHttpRequestParams?: any): Observable<Order> {
+        return new Observable(observer => {
+            observer.next(MOCK_ORDERS[0]);
+        })
+    }
+
+    public orderPost(orderid: string, order: Order): Observable<Order> {
+        return new Observable(observer => {
+            observer.next(order);
+        })
+    }
+
+
+    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Array<Order>> {
+        return new Observable(observer => {
+            observer.next(MOCK_ORDERS);
+        })
+    }
+
+
+}
