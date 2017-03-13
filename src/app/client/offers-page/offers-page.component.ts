@@ -4,11 +4,11 @@ import {PageTitleService} from "../../shared/services/page-title.service";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
 import {OfferOrdersPair} from "../../shared/api/model/OfferOrdersPair";
 import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/forkJoin' //forkJoin is not default imported. 
+import "rxjs/add/observable/forkJoin";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {Order} from "../../shared/api/model/Order";
-
+import * as _ from "lodash";
 
 @Component({
     selector: 'steak-offers-page',
