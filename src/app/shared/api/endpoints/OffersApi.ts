@@ -16,9 +16,9 @@ import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http
 import { Response, ResponseContentType }                     from '@angular/http';
 import { Observable }                                        from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import * as models                                           from '../model/models';
 import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
+import {Offer} from "../model/Offer";
 
 
 
@@ -44,8 +44,8 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerDelete(username: string, offerid: string, extraHttpRequestParams?: any): Observable<{}> {
-        return this.offerDeleteWithHttpInfo(username, offerid, extraHttpRequestParams)
+    public offerDelete(username: string, offerid: string): Observable<{}> {
+        return this.offerDeleteWithHttpInfo(username, offerid)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -63,8 +63,8 @@ export class OffersApi {
      * @param startdate 
      * @param enddate 
      */
-    public offerGet(username: string, date?: Date, startdate?: Date, enddate?: Date, extraHttpRequestParams?: any): Observable<Array<models.Offer>> {
-        return this.offerGetWithHttpInfo(username, date, startdate, enddate, extraHttpRequestParams)
+    public offerGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
+        return this.offerGetWithHttpInfo(date, startdate, enddate)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -80,8 +80,8 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerGetOne(username: string, offerid: string, extraHttpRequestParams?: any): Observable<models.Offer> {
-        return this.offerGetOneWithHttpInfo(username, offerid, extraHttpRequestParams)
+    public offerGetOne(username: string, offerid: string): Observable<Offer> {
+        return this.offerGetOneWithHttpInfo(username, offerid)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -97,8 +97,8 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerData ...
      */
-    public offerPUT(username: string, offerData: models.Offer, extraHttpRequestParams?: any): Observable<models.Offer> {
-        return this.offerPUTWithHttpInfo(username, offerData, extraHttpRequestParams)
+    public offerPUT(offerData: Offer): Observable<Offer> {
+        return this.offerPUTWithHttpInfo(offerData)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -114,15 +114,16 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerPost(username: string, offerid: string, extraHttpRequestParams?: any): Observable<models.Offer> {
-        return this.offerPostWithHttpInfo(username, offerid, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+    public offerPost(offer: Offer): Observable<Offer> {
+        // return this.offerPostWithHttpInfo(username, offerid)
+        //     .map((response: Response) => {
+        //         if (response.status === 204) {
+        //             return undefined;
+        //         } else {
+        //             return response.json();
+        //         }
+        //     });
+        return null;
     }
 
 
@@ -132,7 +133,7 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerDeleteWithHttpInfo(username: string, offerid: string, extraHttpRequestParams?: any): Observable<Response> {
+    public offerDeleteWithHttpInfo(username: string, offerid: string): Observable<Response> {
         const path = this.basePath + `/offers/${offerid}`;
 
         let queryParameters = new URLSearchParams();
@@ -147,14 +148,7 @@ export class OffersApi {
         }
         headers.set('username', String(username));
 
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
+        
 
 
 
@@ -164,11 +158,7 @@ export class OffersApi {
             search: queryParameters
         });
 
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
+   
         return this.http.request(path, requestOptions);
     }
 
@@ -180,15 +170,11 @@ export class OffersApi {
      * @param startdate 
      * @param enddate 
      */
-    public offerGetWithHttpInfo(username: string, date?: Date, startdate?: Date, enddate?: Date, extraHttpRequestParams?: any): Observable<Response> {
+    public offerGetWithHttpInfo(date?: Date, startdate?: Date, enddate?: Date): Observable<Response> {
         const path = this.basePath + `/offers`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling offerGet.');
-        }
         if (date !== undefined) {
             if(date instanceof Date) {
                 queryParameters.set('date', <any>date.toISOString());
@@ -213,17 +199,6 @@ export class OffersApi {
             }
         }
 
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -232,10 +207,7 @@ export class OffersApi {
             search: queryParameters
         });
 
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
+     
 
         return this.http.request(path, requestOptions);
     }
@@ -246,7 +218,7 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerGetOneWithHttpInfo(username: string, offerid: string, extraHttpRequestParams?: any): Observable<Response> {
+    public offerGetOneWithHttpInfo(username: string, offerid: string): Observable<Response> {
         const path = this.basePath + `/offers/${offerid}`;
 
         let queryParameters = new URLSearchParams();
@@ -261,14 +233,7 @@ export class OffersApi {
         }
         headers.set('username', String(username));
 
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
+        
 
 
 
@@ -278,10 +243,7 @@ export class OffersApi {
             search: queryParameters
         });
 
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
+     
 
         return this.http.request(path, requestOptions);
     }
@@ -292,32 +254,16 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerData ...
      */
-    public offerPUTWithHttpInfo(username: string, offerData: models.Offer, extraHttpRequestParams?: any): Observable<Response> {
+    public offerPUTWithHttpInfo(offerData: Offer): Observable<Response> {
         const path = this.basePath + `/offers`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling offerPUT.');
-        }
+
         // verify required parameter 'offerData' is not null or undefined
         if (offerData === null || offerData === undefined) {
             throw new Error('Required parameter offerData was null or undefined when calling offerPUT.');
         }
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
-
-
         headers.set('Content-Type', 'application/json');
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
@@ -327,58 +273,11 @@ export class OffersApi {
             search: queryParameters
         });
 
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
+       
 
         return this.http.request(path, requestOptions);
     }
 
-    /**
-     * OfferPOST
-     * Updates the Offer specified by the ID in the path
-     * @param username The username of the user that is performing the request
-     * @param offerid The ID for the offer, given by the DB
-     */
-    public offerPostWithHttpInfo(username: string, offerid: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/offers/${offerid}`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling offerPost.');
-        }
-        // verify required parameter 'offerid' is not null or undefined
-        if (offerid === null || offerid === undefined) {
-            throw new Error('Required parameter offerid was null or undefined when calling offerPost.');
-        }
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
-            headers: headers,
-            search: queryParameters
-        });
-
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
+   
 
 }
