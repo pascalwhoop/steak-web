@@ -16,7 +16,7 @@ import 'hammerjs';
         CommonModule,
         ApiModule,
         FormsModule,
-        FlexLayoutModule.forRoot(),
+        FlexLayoutModule,
         MaterialModule,
         RouterModule
     ],
@@ -28,7 +28,8 @@ import 'hammerjs';
         MaterialModule,
         PageHeaderComponent,
         PageContentComponent,
-        SidenavComponent
+        SidenavComponent,
+        FlexLayoutModule
     ],
     providers: [PageTitleService]
 })

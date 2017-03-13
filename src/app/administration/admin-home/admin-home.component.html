@@ -1,3 +1,26 @@
-<p>
-  admin-home works!
-</p>
+<div fxLayout="row">
+
+  <!--the list of elements-->
+  <div fxFlex="grow">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="start stretch">
+      <div fxFlex="1 2 calc(30em + 20px)" *ngFor="let date of dates" class="day-box">
+        <md-card>
+          <md-card-title>{{date.toString()}}</md-card-title>
+
+          <md-card-actions>
+            <button md-button (click)="createNewFor(date)">+ Add new entry</button>
+
+          </md-card-actions>
+        </md-card>
+      </div>
+    </div>
+  </div>
+
+  <!--the create new dialog space-->
+  <div fxFlex="grow" *ngIf="editingForDate">
+    <steak-offer-form [date]="editingForDate"></steak-offer-form>
+  </div>
+
+</div>
+
+
