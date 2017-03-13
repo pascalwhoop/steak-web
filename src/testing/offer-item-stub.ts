@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
 
 @Component({
-    moduleId: module.id,
+    moduleId: module._id,
     selector: 'steak-offer-item',
     template: ''
 })

@@ -34,7 +34,7 @@ export interface Offer {
     /**
      * ...
      */
-    date: Date;
+    date: Date | string;
 
     /**
      * Frühstück / Mittags

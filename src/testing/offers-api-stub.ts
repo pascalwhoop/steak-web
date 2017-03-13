@@ -1,11 +1,15 @@
 import {Observable} from "rxjs/Observable";
-import {Inject, Injectable, Optional} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {Offer} from "../app/shared/api/model/Offer";
 import {MOCK_OFFERS} from "./mock-data";
 
 
 @Injectable()
 export class OffersApiStub {
+
+    constructor(){
+
+    }
 
     public offerDelete(username: string, offerid: string): Observable<{}> {
         return new Observable(observer => {

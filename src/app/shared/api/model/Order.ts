@@ -16,24 +16,24 @@ export interface Order {
     /**
      * The ID given by the database
      */
-    id?: string;
+    _id?: string;
 
     /**
      * ...
      */
     employee_id: string;
 
-    offer: models.Offer;
+    offer?: models.Offer;
 
     /**
      * Is takeaway
      */
-    takeaway_flag: boolean;
+    takeaway_Flag: boolean;
 
     /**
      * ...
      */
-    date?: Date;
+    date?: Date | string;
 
     /**
      * The price paid by the employee. some pay less because of their status.
