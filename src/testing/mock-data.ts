@@ -63,7 +63,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
             {
                 "_id": "58ab03d320f496430c230559",
                 "employee_id": "pbr",
-                "takeaway_Flag": true,
+                "takeaway_flag": true,
                 "paid": false,
                 "amount": 5
             }
@@ -84,7 +84,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
             {
                 "_id": "58ab03d320f493430c230949",
                 "employee_id": "pbr",
-                "takeaway_Flag": true,
+                "takeaway_flag": true,
                 "paid": false,
                 "amount": 5
             }
@@ -96,7 +96,7 @@ export const MOCK_ORDERS: Order[] = [
     {
         "_id": "58ab03d320f496430c230559",
         "employee_id": "pbr",
-        "takeaway_Flag": true,
+        "takeaway_flag": true,
         "paid": false,
         "offer": {
             "_id": "58a47bd88fdd83084b5c88a2",
@@ -113,7 +113,7 @@ export const MOCK_ORDERS: Order[] = [
     {
         "_id": "58ab0a3cd555c54fdb5ca7e4",
         "employee_id": "pbr",
-        "takeaway_Flag": true,
+        "takeaway_flag": true,
         "paid": false,
         "offer": {
             "_id": "58a47bd88fdd83084b5c88a2",

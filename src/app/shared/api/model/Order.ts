@@ -28,7 +28,7 @@ export interface Order {
     /**
      * Is takeaway
      */
-    takeaway_Flag: boolean;
+    takeaway_flag: boolean;
 
     /**
      * ...
