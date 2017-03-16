@@ -11,6 +11,8 @@ import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { ObjectToArrayPipe } from './pipes/object-to-array.pipe';
+import {VFeedbackService} from "./services/vfeedback.service";
+import { WorkingSpinnerComponent } from './components/working-spinner/working-spinner.component';
 
 @NgModule({
     imports: [
@@ -21,7 +23,8 @@ import { ObjectToArrayPipe } from './pipes/object-to-array.pipe';
         MaterialModule,
         RouterModule
     ],
-    declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent, ObjectToArrayPipe],
+    declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
+    providers: [PageTitleService, VFeedbackService],
     exports : [
         CommonModule,
         ApiModule,
@@ -29,11 +32,11 @@ import { ObjectToArrayPipe } from './pipes/object-to-array.pipe';
         MaterialModule,
         PageHeaderComponent,
         PageContentComponent,
+        WorkingSpinnerComponent,
         SidenavComponent,
         ObjectToArrayPipe,
         FlexLayoutModule
-    ],
-    providers: [PageTitleService]
+    ]
 })
 export class SharedModule {
 }
