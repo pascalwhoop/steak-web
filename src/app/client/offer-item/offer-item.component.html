@@ -10,7 +10,7 @@
         <p>Ordered: {{ooPair.orders.length}}</p>
     </div>
     <div class="offer-actions">
-        <button md-mini-fab>-</button>
+        <button md-mini-fab (click)="removeOrder(ooPair)" [disabled]="ooPair.orders.length < 1">-</button>
         <button md-mini-fab (click)="addOrder(ooPair.offer)">+</button>
     </div>
 </div>
