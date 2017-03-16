@@ -39,7 +39,6 @@ export class OrdersApi {
     public defaultHeaders: Headers = new Headers(environment.DEFAULT_HEADERS);
     public configuration: Configuration = new Configuration();
 
-    called= 0;
 
     constructor(protected http: Http, @Optional() configuration: Configuration, public vfeedback: VFeedbackService) {
         if (configuration) {
@@ -78,7 +77,7 @@ export class OrdersApi {
             .publish();
         obs.connect();
 
-        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs, 'undo');
+        this.vfeedback.showMessageOnAnswer('Order deleted!', 'Oops', obs);
         this.vfeedback.spinUntilCompleted(obs);
         return obs;
     }
@@ -102,7 +101,6 @@ export class OrdersApi {
 
 
     public orderPost(offerId: string, takeaway: boolean): Observable<Order> {
-        console.log(this.called++);
 
         const path = this.basePath + `/orders`;
         let headers = new Headers(this.defaultHeaders);
@@ -128,7 +126,7 @@ export class OrdersApi {
             .publish();
         obs.connect();
         
-        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs, 'undo');
+        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs);
         this.vfeedback.spinUntilCompleted(obs);
         return obs;
 

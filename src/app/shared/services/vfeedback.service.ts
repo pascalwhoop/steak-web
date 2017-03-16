@@ -41,23 +41,24 @@ export class VFeedbackService {
      * @param failMessage
      * @param observableRequest
      * @param actionText
-     * @returns {Observable|"../../../Observable".Observable|"../../Observable".Observable}
      */
     public showMessageOnAnswer(successMessage: string, failMessage: string, observableRequest: Observable<any>, actionText?: string): Observable<MdSnackBarRef<SimpleSnackBar>> {
-        return new Observable(sub => {
+        let obs = new Observable(sub => {
             observableRequest
                 .subscribe(
                     null,
                     err => {
-                        let snack = this.snackBar.open(failMessage);
+                        let snack = this.snackBar.open(failMessage, null, {duration: 1500});
                         sub.next(snack);
                         sub.complete()
                     },
                     () => {
-                        sub.next(this.snackBar.open(successMessage, actionText));
+                        sub.next(this.snackBar.open(successMessage, actionText, {duration: 1500}));
                         sub.complete()
                     })
-        })
+        }).publish();
+        obs.connect();
+        return obs;
     }
 
     private triggerAllListeners() {

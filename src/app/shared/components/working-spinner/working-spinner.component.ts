@@ -19,12 +19,10 @@ export class WorkingSpinnerComponent extends LoadingEventListener implements OnI
 
 
     onLoading() {
-        console.log('showing wheel');
         this._visible = true;
     }
 
     onLoadingComplete() {
-        console.log('hiding wheel');
         this._visible = false;
     }
 

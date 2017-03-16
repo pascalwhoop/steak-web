@@ -92,7 +92,7 @@ describe('VFeedbackService', () => {
         }))
         //inside observable subscription of service
             .subscribe(next => {
-                expect(snackSpy.open).toHaveBeenCalledWith('hooray!', undefined)
+                expect(snackSpy.open).toHaveBeenCalledWith('hooray!', undefined, {duration: 1500})
             }, null, done);
     });
 
@@ -104,7 +104,7 @@ describe('VFeedbackService', () => {
         }))
         //inside observable subscription of service
             .subscribe(next => {
-                expect(snackSpy.open).toHaveBeenCalledWith('fail :(');
+                expect(snackSpy.open).toHaveBeenCalledWith('fail :(', undefined, {duration: 1500});
             }, null, done);
     });
 
