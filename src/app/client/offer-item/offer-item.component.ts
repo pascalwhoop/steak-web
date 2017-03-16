@@ -19,17 +19,13 @@ export class OfferItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  /**
-   * Returns the number of orders that have been placed for this offer by the user. 
-   * @param offer
-   * @returns {number}
-   */
-  orderCount(offer: Offer) : number{
-    return 3;
-  }
 
 
   addOrder(offer: Offer) {
+    this.orderApi.orderPUT(offer._id, false).subscribe(order =>{
+      this.ooPair.orders.push(order);
+    });
+    console.log('order placed!');
 
   }
 
