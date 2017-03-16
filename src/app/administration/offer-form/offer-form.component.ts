@@ -15,18 +15,19 @@ export class OfferFormComponent implements OnInit {
     @Output()
     newOffer: EventEmitter<Offer> = new EventEmitter();
 
-    offerData: Offer = new OfferObj();
+    offer: Offer = new OfferObj();
 
     constructor(public offersApi: OffersApi) {
     }
 
     ngOnInit() {
-
     }
 
     onSubmit() {
-        this.offerData.date = this.date;
-        this.offersApi.offerPUT(this.offerData)
+        this.offer.date = this.date;
+
+
+        this.offersApi.offerPost(this.offer)
             .subscribe(offer => {
                 this.newOffer.emit(offer);
             })
@@ -53,8 +54,8 @@ class OfferObj implements Offer {
         this.price = price;
         this.date = date;
         this.time = time;
-        this.main_offer = main_offer;
-        this.vegetarian = vegetarian;
+        this.main_offer = !!main_offer;
+        this.vegetarian = !!vegetarian;
         this.heat = heat;
     }
 }

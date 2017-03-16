@@ -5,36 +5,39 @@
     <form (ngSubmit)="onSubmit()" #offerForm="ngForm">
 
         <!--DESCRIPTION-->
-        <md-input-container [dividerColor]="offerData.description? 'primary' : 'warn'">
-            <textarea mdInput placeholder="Description" name="description" [(ngModel)]="offerData.description"
+        <md-input-container [dividerColor]="offer.description? 'primary' : 'warn'">
+            <textarea mdInput placeholder="Description" name="description" [(ngModel)]="offer.description"
                       required></textarea>
         </md-input-container>
 
         <!--PRICE-->
-        <md-input-container [dividerColor]="offerData.price? 'primary' : 'warn'">
-            <input type="number" step="0.10" mdInput placeholder="Price" name="price" [(ngModel)]="offerData.price" required>
+        <md-input-container [dividerColor]="offer.price? 'primary' : 'warn'">
+            <input type="number" step="0.10" mdInput placeholder="Price" name="price" [(ngModel)]="offer.price" required>
         </md-input-container>
 
         <!--TIME-->
-        <md-radio-group class="example-radio-group" [(ngModel)]="offerData.time" required name="time">
-            <md-radio-button class="example-radio-button" value="breakfast">
+        <md-radio-group class="example-radio-group" [(ngModel)]="offer.time" required name="time">
+            <md-radio-button class="example-radio-button" value="Fruehstueck">
                 Breakfast
             </md-radio-button>
-            <md-radio-button class="example-radio-button" value="Lunch">
+            <md-radio-button class="example-radio-button" value="Mittag">
                 Lunch
             </md-radio-button>
         </md-radio-group>
 
         <!--main dish?-->
-        <md-checkbox [(ngModel)]="offerData.main_offer" name="main_offer">Main Dish</md-checkbox>
+        <md-checkbox [(ngModel)]="offer.main_offer" name="main_offer">Main Dish</md-checkbox>
         <!--vegetarian?-->
-        <md-checkbox [(ngModel)]="offerData.vegetarian" name="vegetarian">Vegetarian</md-checkbox>
+        <md-checkbox [(ngModel)]="offer.vegetarian" name="vegetarian">Vegetarian</md-checkbox>
+
         <!--heat-->
-        <md-input-container [dividerColor]="offerData.heat? 'primary' : 'warn'">
-            <input type="number" mdInput placeholder="Heat served" name="heat" [(ngModel)]="offerData.heat" required>
+        <md-input-container [dividerColor]="offer.heat? 'primary' : 'warn'">
+            <input type="number" mdInput placeholder="Heat served" name="heat" [(ngModel)]="offer.heat" required>
         </md-input-container>
 
 
         <button md-raised-button [disabled]="!offerForm.form.valid" color="primary">Submit</button>
     </form>
+
+    {{offer | json}}
 </div>

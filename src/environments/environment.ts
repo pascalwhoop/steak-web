@@ -10,5 +10,9 @@ export const environment = {
     HOST: 'http://localhost:8080',
     STEAK_BASE_URI: '/v0.2',
     AUTH_BASE_URI: '/auth'
+  },
+  DEFAULT_HEADERS: {
+    'Content-Type': "application/json",
+    'x-auth-username': 'bts'
   }
 };

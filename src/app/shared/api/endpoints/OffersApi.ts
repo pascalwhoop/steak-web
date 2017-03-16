@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Inject, Injectable, Optional} from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import {
     Http,
     Headers,
@@ -17,14 +17,14 @@ import {
     RequestMethod,
     RequestOptions,
     RequestOptionsArgs,
-    Response,
-    ResponseContentType
+    Response
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
 import {Offer} from "../model/Offer";
+import {toApiDate} from "../../../core/util/util.service";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -33,7 +33,7 @@ import {Offer} from "../model/Offer";
 @Injectable()
 export class OffersApi {
     public basePath = environment.endpoints.HOST + environment.endpoints.STEAK_BASE_URI;
-    public defaultHeaders: Headers = new Headers();
+    public defaultHeaders: Headers = new Headers(environment.DEFAULT_HEADERS);
     public configuration: Configuration = new Configuration();
 
     constructor(protected http: Http, @Optional() configuration: Configuration) {
@@ -49,8 +49,24 @@ export class OffersApi {
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerDelete(username: string, offerid: string): Observable<{}> {
-        return this.offerDeleteWithHttpInfo(username, offerid)
+    public offerDelete(offerid: string): Observable<{}> {
+        const path = this.basePath + `/offers/${offerid}`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+
+        // verify required parameter 'offerid' is not null or undefined
+        if (offerid === null || offerid === undefined) {
+            throw new Error('Required parameter offerid was null or undefined when calling offerDelete.');
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+            search: queryParameters
+        });
+
+
+        return this.http.delete(path, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -101,10 +117,30 @@ export class OffersApi {
      * Create new Offer
      * ...
      * @param username The username of the user that is performing the request
-     * @param offerData ...
+     * @param offer ...
      */
-    public offerPUT(offerData: Offer): Observable<Offer> {
-        return this.offerPUTWithHttpInfo(offerData)
+    public offerPost(offer: Offer): Observable<Offer> {
+        const path = this.basePath + `/offers`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders); // https://github.com/angular/angular/issues/6845
+
+        // verify required parameter 'offer' is not null or undefined
+        if (offer === null || offer === undefined) {
+            throw new Error('Required parameter offer was null or undefined when calling offerPUT.');
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+            search: queryParameters
+        });
+
+        let offerData = offer as any;
+        //simplify the date by capping of the time part
+        offerData.date = toApiDate(offerData.date);
+
+
+        return this.http.post(path, offerData, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -115,12 +151,12 @@ export class OffersApi {
     }
 
     /**
-     * OfferPOST
+     * OfferPut
      * Updates the Offer specified by the ID in the path
      * @param username The username of the user that is performing the request
      * @param offerid The ID for the offer, given by the DB
      */
-    public offerPost(offer: Offer): Observable<Offer> {
+    public offerPut(offer: Offer): Observable<Offer> {
         // return this.offerPostWithHttpInfo(username, offerid)
         //     .map((response: Response) => {
         //         if (response.status === 204) {
@@ -132,38 +168,6 @@ export class OffersApi {
         return null;
     }
 
-
-    /**
-     * OfferDELETE
-     * Deletes the Offer specified by the ID in the path
-     * @param username The username of the user that is performing the request
-     * @param offerid The ID for the offer, given by the DB
-     */
-    public offerDeleteWithHttpInfo(username: string, offerid: string): Observable<Response> {
-        const path = this.basePath + `/offers/${offerid}`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling offerDelete.');
-        }
-        // verify required parameter 'offerid' is not null or undefined
-        if (offerid === null || offerid === undefined) {
-            throw new Error('Required parameter offerid was null or undefined when calling offerDelete.');
-        }
-        headers.set('username', String(username));
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Delete,
-            headers: headers,
-            search: queryParameters
-        });
-
-
-        return this.http.request(path, requestOptions);
-    }
 
     /**
      * Offer[]
@@ -245,34 +249,6 @@ export class OffersApi {
         return this.http.request(path, requestOptions);
     }
 
-    /**
-     * Create new Offer
-     * ...
-     * @param username The username of the user that is performing the request
-     * @param offerData ...
-     */
-    public offerPUTWithHttpInfo(offerData: Offer): Observable<Response> {
-        const path = this.basePath + `/offers`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-        // verify required parameter 'offerData' is not null or undefined
-        if (offerData === null || offerData === undefined) {
-            throw new Error('Required parameter offerData was null or undefined when calling offerPUT.');
-        }
-        headers.set('Content-Type', 'application/json');
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
-            headers: headers,
-            body: offerData == null ? '' : JSON.stringify(offerData), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
-        });
-
-
-        return this.http.request(path, requestOptions);
-    }
 
     static inflateOfferFromJson(json): Offer {
         json.date = new Date(json.date);
