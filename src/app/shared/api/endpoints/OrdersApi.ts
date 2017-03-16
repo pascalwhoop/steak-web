@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Inject, Injectable, Optional} from "@angular/core";
+import {Injectable, Optional} from "@angular/core";
 import {
     Http,
     Headers,
@@ -26,6 +26,8 @@ import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
 import {OrderBooking} from "../model/OrderBooking";
 import {Order} from "../model/Order";
+import {toApiDate} from "../../../core/util/util.service";
+import {VFeedbackService} from "../../services/vfeedback.service";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -34,10 +36,12 @@ import {Order} from "../model/Order";
 @Injectable()
 export class OrdersApi {
     public basePath = environment.endpoints.HOST + environment.endpoints.STEAK_BASE_URI;
-    public defaultHeaders: Headers = new Headers();
+    public defaultHeaders: Headers = new Headers(environment.DEFAULT_HEADERS);
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional() configuration: Configuration) {
+    called= 0;
+
+    constructor(protected http: Http, @Optional() configuration: Configuration, public vfeedback: VFeedbackService) {
         if (configuration) {
             this.configuration = configuration;
         }
@@ -46,18 +50,37 @@ export class OrdersApi {
     /**
      * OrderDELETE
      * Deletes the Order specified by the ID in the path
-     * @param username The username of the user that is performing the request
      * @param orderid The ID for the order, given by the DB
      */
-    public orderDelete(username: string, orderid: string, extraHttpRequestParams?: any): Observable<{}> {
-        return this.orderDeleteWithHttpInfo(username, orderid, extraHttpRequestParams)
+    public orderDelete(orderid: string): Observable<{}> {
+        const path = this.basePath + `/orders/${orderid}`;
+
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+
+        // verify required parameter 'orderid' is not null or undefined
+        if (orderid === null || orderid === undefined) {
+            throw new Error('Required parameter orderid was null or undefined when calling orderDelete.');
+        }
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+        });
+
+        let obs = this.http.delete(path, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
                 } else {
                     return response.json();
                 }
-            });
+            })
+            .publish();
+        obs.connect();
+
+        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs, 'undo');
+        this.vfeedback.spinUntilCompleted(obs);
+        return obs;
     }
 
     /**
@@ -78,8 +101,11 @@ export class OrdersApi {
     }
 
 
-    public orderPUT(offerId: string, takeaway: boolean): Observable<Order> {
+    public orderPost(offerId: string, takeaway: boolean): Observable<Order> {
+        console.log(this.called++);
+
         const path = this.basePath + `/orders`;
+        let headers = new Headers(this.defaultHeaders);
         let orderBooking: OrderBooking = {offer_id: offerId, takeaway_flag: takeaway};
 
         // verify required parameter 'orderBooking' is not null or undefined
@@ -87,31 +113,35 @@ export class OrdersApi {
             throw new Error('Required parameter offerId was null or undefined when calling orderPUT.');
         }
 
-        return this.http.put(path, orderBooking)
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+        });
+
+        let obs = this.http.post(path, orderBooking, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
                 } else {
                     return response.json();
                 }
-            });
+            })
+            .publish();
+        obs.connect();
+        
+        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs, 'undo');
+        this.vfeedback.spinUntilCompleted(obs);
+        return obs;
+
+
     }
 
     /**
-     * OrderPOST
      * Updates the Order specified by the ID in the path
      * @param username The username of the user that is performing the request
      * @param orderid The ID for the order, given by the DB
      */
-    public orderPost(username: string, orderid: string, extraHttpRequestParams?: any): Observable<models.Order> {
-        return this.orderPostWithHttpInfo(username, orderid, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+    public orderPut(username: string, orderid: string, extraHttpRequestParams?: any): Observable<Order> {
+        return null;
     }
 
     /**
@@ -132,27 +162,19 @@ export class OrdersApi {
         let headers = new Headers(this.defaultHeaders.toJSON());
 
         if (startdate !== undefined) {
-            queryParameters.set('startdate', <any>startdate);
+            queryParameters.set('startdate', toApiDate(startdate));
         }
 
         if (date !== undefined) {
-            queryParameters.set('date', <any>date);
+            queryParameters.set('date', toApiDate(date));
         }
 
         if (enddate !== undefined) {
-            queryParameters.set('enddate', <any>enddate);
+            queryParameters.set('enddate', toApiDate(enddate));
         }
 
         if (userid !== undefined) {
             queryParameters.set('userid', <any>userid);
-        }
-
-        if (cursor !== undefined) {
-            queryParameters.set('cursor', <any>cursor);
-        }
-
-        if (limit !== undefined) {
-            queryParameters.set('limit', <any>limit);
         }
 
         if (openPayments !== undefined) {
@@ -174,50 +196,6 @@ export class OrdersApi {
             });
     }
 
-
-    /**
-     * OrderDELETE
-     * Deletes the Order specified by the ID in the path
-     * @param username The username of the user that is performing the request
-     * @param orderid The ID for the order, given by the DB
-     */
-    public orderDeleteWithHttpInfo(username: string, orderid: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/orders/${orderid}`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling orderDelete.');
-        }
-        // verify required parameter 'orderid' is not null or undefined
-        if (orderid === null || orderid === undefined) {
-            throw new Error('Required parameter orderid was null or undefined when calling orderDelete.');
-        }
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Delete,
-            headers: headers,
-            search: queryParameters
-        });
-
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
 
     /**
      * OrderGET
@@ -251,51 +229,6 @@ export class OrdersApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-
-    /**
-     * OrderPOST
-     * Updates the Order specified by the ID in the path
-     * @param username The username of the user that is performing the request
-     * @param orderid The ID for the order, given by the DB
-     */
-    public orderPostWithHttpInfo(username: string, orderid: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/orders/${orderid}`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling orderPost.');
-        }
-        // verify required parameter 'orderid' is not null or undefined
-        if (orderid === null || orderid === undefined) {
-            throw new Error('Required parameter orderid was null or undefined when calling orderPost.');
-        }
-        headers.set('username', String(username));
-
-        // to determine the Content-Type header
-        let consumes: string[] = [];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            'application/json'
-        ];
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
             headers: headers,
             search: queryParameters
         });
