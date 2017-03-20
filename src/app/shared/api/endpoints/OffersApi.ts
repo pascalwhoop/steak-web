@@ -25,6 +25,7 @@ import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
 import {Offer} from "../model/Offer";
 import {toApiDate} from "../../../core/util/util.service";
+import * as _ from 'lodash';
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -157,15 +158,31 @@ export class OffersApi {
      * @param offerid The ID for the offer, given by the DB
      */
     public offerPut(offer: Offer): Observable<Offer> {
-        // return this.offerPostWithHttpInfo(username, offerid)
-        //     .map((response: Response) => {
-        //         if (response.status === 204) {
-        //             return undefined;
-        //         } else {
-        //             return response.json();
-        //         }
-        //     });
-        return null;
+        // verify required parameter 'offer' is not null or undefined
+        if (offer === null || offer === undefined) {
+            throw new Error('Required parameter offer was null or undefined when calling offerPUT.');
+        }
+
+        const path = this.basePath + `/offers/${offer._id}`;
+        let headers = new Headers(this.defaultHeaders);
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            headers: headers,
+        });
+
+        let offerData = _.cloneDeep(offer);
+        //simplify the date by capping of the time part
+        offerData.date = toApiDate(offerData.date);
+
+
+        return this.http.put(path, offerData, requestOptions)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return OffersApi.inflateOfferFromJson(response.json());
+                }
+            });
     }
 
 
