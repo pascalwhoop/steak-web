@@ -6,12 +6,9 @@ import {Subscribable} from "rxjs/Observable";
 import {AnonymousSubscription} from "rxjs/Subscription";
 
 @Injectable()
-export class XhrVisualFeedbackService implements Subscribable<XhrEvent>{
+export class AjaxVisualFeedbackService implements Subscribable<XhrEvent>{
 
-
-
-    constructor(private snackBar: MdSnackBar, private browserXhr: CustomBrowserXhr) {
-    }
+    constructor(private snackBar: MdSnackBar, private browserXhr: CustomBrowserXhr) {}
 
     /**
      * Subscribe to XhrEvents triggered by http and perform action based on them

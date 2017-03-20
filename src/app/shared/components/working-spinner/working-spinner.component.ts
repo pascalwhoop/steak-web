@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
 import {AnonymousSubscription} from "rxjs/Subscription";
-import {XhrVisualFeedbackService} from "../../../xhr-visual-feedback/vfeedback.service";
+import {AjaxVisualFeedbackService} from "../../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 @Component({
     selector: 'steak-working-spinner',
@@ -14,12 +14,11 @@ export class WorkingSpinnerComponent implements OnInit, OnDestroy {
     private _subscription: AnonymousSubscription;
     private _connectionCounter = 0;
 
-    constructor(public vfeedbackService: XhrVisualFeedbackService) {
+    constructor(public vfeedbackService: AjaxVisualFeedbackService) {
     }
 
     ngOnInit() {
         this._subscription = this.vfeedbackService.subscribe(next => {
-            console.log(next.type + ' next received in spinner');
             switch (next.type) {
                 case 'open':
                     this._connectionCounter++;

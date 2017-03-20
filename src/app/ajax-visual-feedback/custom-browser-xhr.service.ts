@@ -1,7 +1,7 @@
 import {Injectable, SkipSelf, Optional} from "@angular/core";
 import {BrowserXhr} from "@angular/http";
 import {Observable, Subscriber} from "rxjs";
-import {XhrEvent} from "./vfeedback.service";
+import {XhrEvent} from "./ajax-visual-feedback.service";
 import {CoreModule} from "../core/core.module";
 
 @Injectable()
