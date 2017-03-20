@@ -1,9 +1,9 @@
 @import './styles/app-theme';
 
 //include components
-@import 'app/shared/components/sidenav/sidenav.component';
 @import "app/client/index";
 @import "app/shared/index";
+@import "app/administration/index";
 
 
 
