@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {Offer} from "../../shared/api/model/Offer";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {makeDayTitle, makeDaySubtitle, toApiDate} from "../../core/util/util.service";
-import {MdDialog, MdDialogRef} from "@angular/material";
+import {toApiDate, EditMode} from "../../core/util/util.service";
+import {MdDialog} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
 
 
@@ -16,9 +16,8 @@ export class AdminHomeComponent implements OnInit {
 
     dates: Date[];
     offers: Offer[];
-    editingForDate: Date;
 
-    constructor(public title: PageTitleService, public dialog: MdDialog, public offerApi: OffersApi) {
+    constructor(public title: PageTitleService, public offerApi: OffersApi, public dialog: MdDialog) {
         this.dates = this.generateNextDays();
     }
 
@@ -43,9 +42,21 @@ export class AdminHomeComponent implements OnInit {
         return dates;
     }
 
+    /**
+     * create a new offer and add it to the list when it has been created
+     * @param date
+     */
     createNewFor(date: Date) {
-        this.dialog.open(OfferFormDialogComponent, {data: {date: date}});
-        this.editingForDate = date;
+        let ref = this.dialog.open(OfferFormDialogComponent);
+        ref.componentInstance.date = date;
+
+        let instance = ref.componentInstance;
+        instance.editMode = EditMode.CREATE;
+
+        instance.offerEventEmitter.subscribe(next => {
+            ref.close();
+            if (next) this.offers.push(next);
+        });
     }
 
     filterOffersForDate(offers: Offer[], date: Date): Offer[] {
@@ -53,12 +64,23 @@ export class AdminHomeComponent implements OnInit {
         return offers.filter(offer => toApiDate(offer.date) == toApiDate(date));
     }
 
-    makeDaySubtitle(date: Date): string {
-        return makeDaySubtitle(date)
+    /**
+     * method that gets called when a child has been changed and it needs to be changed in the array
+     * @param offer
+     */
+    onOfferChange(offer: Offer) {
+        let changedIndex = this.offers.findIndex(_offer => _offer._id == offer._id);
+        if (changedIndex > -1) {
+            this.offers[changedIndex] = offer;
+        }
     }
 
-    makeDayTitle(date: Date): string {
-        return makeDayTitle(date)
+    /**
+     * method to call when a child has been deleted and we need to remove it from the array of offers
+     * @param offer
+     */
+    onOfferDelete(offer: Offer) {
+        this.offers = this.offers.filter(_offer => _offer._id != offer._id);
     }
 
 

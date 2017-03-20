@@ -1,7 +1,8 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input, EventEmitter} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Offer} from "../../shared/api/model/Offer";
-import {MdDialogRef} from "@angular/material";
+import {EditMode} from "../../core/util/util.service";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
     selector: 'steak-offer-form-dialog',
@@ -13,29 +14,63 @@ export class OfferFormDialogComponent implements OnInit {
     @Input()
     date: Date;
 
-    @Output()
-    newOffer: EventEmitter<Offer> = new EventEmitter();
+
+    offerEventEmitter: EventEmitter<Offer> = new EventEmitter();
+
+    editMode: EditMode = EditMode.CREATE;
 
     offer: Offer = new OfferObj();
 
-    constructor(public offersApi: OffersApi, public dialogRef: MdDialogRef<OfferFormDialogComponent>) {
+    constructor(public offersApi: OffersApi, public snackBar: MdSnackBar) {
     }
 
     ngOnInit() {
     }
 
-    onSubmit() {
-        this.offer.date = this.date;
-
+    createOffer(offer: Offer) {
+        offer.date = this.date;
 
         this.offersApi.offerPost(this.offer)
             .subscribe(offer => {
-                this.newOffer.emit(offer);
+                this.snackBar.open('Create successful', null, {duration: 1500});
+                this.offerEventEmitter.emit(offer);
             })
     }
 
-}
+    updateOffer(offer: Offer){
+        this.offersApi.offerPut(offer).subscribe(
+            offer =>{
+                this.snackBar.open('Update successful', null, {duration: 1500});
+                this.offerEventEmitter.emit(offer);
+            },
+            error =>{
+                this.snackBar.open('Update not successful', null, {duration: 1500});
+            }
+        )
+    }
 
+    deleteOffer(offer: Offer) {
+        this.offersApi.offerDelete(offer._id)
+            .subscribe(next => {
+                this.snackBar.open('Delete successful', null, {duration: 1500});
+                this.offerEventEmitter.emit(null);
+
+            })
+    }
+
+    canBeCreate(): boolean {
+        return (this.editMode == EditMode.CREATE);
+    }
+
+    canBeUpdate(): boolean {
+        return (this.editMode == EditMode.UPDATE);
+    }
+
+    canBeDelete(): boolean {
+        return (this.editMode == EditMode.UPDATE);
+    }
+
+}
 
 
 class OfferObj implements Offer {
@@ -60,3 +95,4 @@ class OfferObj implements Offer {
         this.heat = heat;
     }
 }
+

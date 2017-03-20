@@ -5,18 +5,14 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="start stretch">
             <div fxFlex="1 2 calc(30em + 20px)" *ngFor="let date of dates" class="day-box">
                 <md-card>
-                    <md-card-title>{{makeDayTitle(date)}}</md-card-title>
+                    <md-card-title>{{date | date:"EEEE"}}</md-card-title>
                     <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
 
 
                     <md-card-content class="offers-list">
                         <md-list>
                             <!--<h3 md-subheader>Folders</h3>-->
-                            <md-list-item *ngFor="let offer of filterOffersForDate(offers, date)">
-                                <!--<md-icon md-list-avatar>folder</md-icon>-->
-                                <h4 md-line>{{offer.description}}</h4>
-                                <p md-line> {{offer.price}} €</p>
-                            </md-list-item>
+                            <steak-admin-offer-item (offerChange)="onOfferChange($event)" (offerDelete)="onOfferDelete($event)" [offer]="offer" *ngFor="let offer of filterOffersForDate(offers, date)"></steak-admin-offer-item>
                             <md-divider></md-divider>
                             <!--<h3 md-subheader>Notes</h3>-->
 

@@ -24,3 +24,8 @@ export function makeDayTitle(date: Date): string {
     weekday[6] = "Saturday";
     return weekday[date.getDay()];
 }
+
+export enum EditMode {
+    CREATE, UPDATE, DELETE
+}
+

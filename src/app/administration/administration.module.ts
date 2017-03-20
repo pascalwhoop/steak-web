@@ -4,6 +4,7 @@ import {AdminHomeComponent} from "./admin-home/admin-home.component";
 import {AdministrationRoutingModule} from "./administration-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.component";
+import { AdminOfferItemComponent } from './admin-offer-item/admin-offer-item.component';
 
 @NgModule({
     imports: [
@@ -11,7 +12,7 @@ import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.co
         SharedModule,
         AdministrationRoutingModule
     ],
-    declarations: [AdminHomeComponent, OfferFormDialogComponent],
+    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent],
     entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {
