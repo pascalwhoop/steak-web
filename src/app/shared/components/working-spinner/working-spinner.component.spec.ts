@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {WorkingSpinnerComponent} from "./working-spinner.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {VFeedbackService} from "../../services/vfeedback.service";
+import {XhrVisualFeedbackService} from "../../../xhr-visual-feedback/vfeedback.service";
 
 describe('WorkingSpinnerComponent', () => {
     let component: WorkingSpinnerComponent;
@@ -12,8 +12,8 @@ describe('WorkingSpinnerComponent', () => {
         TestBed.configureTestingModule({
             declarations: [WorkingSpinnerComponent],
             providers: [{
-                provide: VFeedbackService,
-                useValue: jasmine.createSpyObj('vfeedbackService', ['addListener', 'removeListener'])
+                provide: XhrVisualFeedbackService,
+                useValue: jasmine.createSpyObj('vfeedbackService', ['subscribe'])
             }],
             schemas: [NO_ERRORS_SCHEMA]
         })

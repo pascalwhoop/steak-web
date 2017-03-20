@@ -25,8 +25,6 @@ export class OfferItemComponent implements OnInit {
         this.orderApi.orderPost(offer._id, false).subscribe(order => {
             this.ooPair.orders.push(order);
         });
-        console.log('order placed!');
-
     }
 
     removeOrder(ooPair: OfferOrdersPair) {

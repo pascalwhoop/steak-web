@@ -1,5 +1,5 @@
 import {TestBed, inject, fakeAsync, tick} from "@angular/core/testing";
-import {VFeedbackService} from "./vfeedback.service";
+import {XhrVisualFeedbackService} from "./vfeedback.service";
 import {MdSnackBar} from "@angular/material";
 import {Observable} from "rxjs";
 
@@ -7,23 +7,23 @@ describe('VFeedbackService', () => {
 
 
     let snackSpy = jasmine.createSpyObj('snackBar', ['open']);
-    let service: VFeedbackService;
+    let service: XhrVisualFeedbackService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                VFeedbackService,
+                XhrVisualFeedbackService,
                 {provide: MdSnackBar, useValue: snackSpy}
             ]
         });
 
     });
 
-    beforeEach(inject([VFeedbackService], (_service: VFeedbackService) => {
+    beforeEach(inject([XhrVisualFeedbackService], (_service: XhrVisualFeedbackService) => {
         service = _service;
     }));
 
-    it('should inject the service', inject([VFeedbackService], (_service: VFeedbackService) => {
+    it('should inject the service', inject([XhrVisualFeedbackService], (_service: XhrVisualFeedbackService) => {
         expect(_service).toBeTruthy();
         expect(service).toBeTruthy();
     }));

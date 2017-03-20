@@ -1,38 +1,48 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
-import {LoadingEventListener} from "../../services/LoadingEventListener";
-import {VFeedbackService} from "../../services/vfeedback.service";
-import {_keyValueDiffersFactory} from "@angular/core/src/application_module";
+import {AnonymousSubscription} from "rxjs/Subscription";
+import {XhrVisualFeedbackService} from "../../../xhr-visual-feedback/vfeedback.service";
 
 @Component({
     selector: 'steak-working-spinner',
-    templateUrl: 'working-spinner.component.html',
+    template: `<md-progress-spinner mode="indeterminate" *ngIf="_visible"></md-progress-spinner>`,
     styleUrls: ['working-spinner.component.scss']
 })
-export class WorkingSpinnerComponent extends LoadingEventListener implements OnInit, OnDestroy {
+export class WorkingSpinnerComponent implements OnInit, OnDestroy {
 
 
     private _visible: boolean;
+    private _subscription: AnonymousSubscription;
+    private _connectionCounter = 0;
 
-    constructor(public vfeedbackService: VFeedbackService) {
-        super();
-    }
-
-
-    onLoading() {
-        this._visible = true;
-    }
-
-    onLoadingComplete() {
-        this._visible = false;
+    constructor(public vfeedbackService: XhrVisualFeedbackService) {
     }
 
     ngOnInit() {
-        this.vfeedbackService.addListener(this);
+        this._subscription = this.vfeedbackService.subscribe(next => {
+            console.log(next.type + ' next received in spinner');
+            switch (next.type) {
+                case 'open':
+                    this._connectionCounter++;
+                    break;
+                case 'load':
+                    this._connectionCounter--;
+                    break;
+                case 'abort':
+                    this._connectionCounter--;
+                    break;
+                case 'error':
+                    this._connectionCounter--;
+                    break;
+            }
+            this._visible = this._connectionCounter > 0; //if larger 0, its visible! otherwise hide us
+
+        });
     }
 
     ngOnDestroy(): void {
-        this.vfeedbackService.removeListener(this);
+        if (!this._subscription) return;
+        this._subscription.unsubscribe();
+        this._subscription = null;
     }
-
 
 }

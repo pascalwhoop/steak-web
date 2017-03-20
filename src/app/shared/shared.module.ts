@@ -5,14 +5,15 @@ import {MaterialModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {PageHeaderComponent} from "./components/page-header/page-header.component";
-import { PageContentComponent } from './components/page-content/page-content.component';
+import {PageContentComponent} from "./components/page-content/page-content.component";
 import {PageTitleService} from "./services/page-title.service";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
-import { FlexLayoutModule } from '@angular/flex-layout';
-import 'hammerjs';
-import { ObjectToArrayPipe } from './pipes/object-to-array.pipe';
-import {VFeedbackService} from "./services/vfeedback.service";
-import { WorkingSpinnerComponent } from './components/working-spinner/working-spinner.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import "hammerjs";
+import {ObjectToArrayPipe} from "./pipes/object-to-array.pipe";
+import {WorkingSpinnerComponent} from "./components/working-spinner/working-spinner.component";
+import {CustomBrowserXhr} from "../xhr-visual-feedback/custom-browser-xhr.service";
+import {BrowserXhr} from "@angular/http";
 
 @NgModule({
     imports: [
@@ -21,11 +22,11 @@ import { WorkingSpinnerComponent } from './components/working-spinner/working-sp
         FormsModule,
         FlexLayoutModule,
         MaterialModule,
-        RouterModule
+        RouterModule,
     ],
     declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
-    providers: [PageTitleService, VFeedbackService],
-    exports : [
+    providers: [PageTitleService, {provide: BrowserXhr, useExisting: CustomBrowserXhr}],
+    exports: [
         CommonModule,
         ApiModule,
         FormsModule,
@@ -35,7 +36,7 @@ import { WorkingSpinnerComponent } from './components/working-spinner/working-sp
         WorkingSpinnerComponent,
         SidenavComponent,
         ObjectToArrayPipe,
-        FlexLayoutModule
+        FlexLayoutModule,
     ]
 })
 export class SharedModule {
