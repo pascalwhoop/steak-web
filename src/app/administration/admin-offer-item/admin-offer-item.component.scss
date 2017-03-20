@@ -1,0 +1,24 @@
+@import '~@angular/material/core/style/_variables';
+@import "../../../styles/variables";
+
+
+steak-admin-offer-item{
+  display: block;
+
+  .mat-list-item-content:hover{
+    cursor: pointer;
+
+    // The button spec calls for focus on raised buttons (and FABs) to be indicated with a
+    // black, 12% opacity shade over the normal color (for both light and dark themes).
+    background-color: rgba(black, 0.12);
+
+    transition: opacity 200ms $swift-ease-in-out-timing-function;
+
+    @include cdk-high-contrast {
+      // Note that IE will render this in the same way, no
+      // matter whether the theme is light or dark. This helps
+      // with the readability of focused buttons.
+      background-color: rgba(white, 0.5);
+    }
+  }
+}

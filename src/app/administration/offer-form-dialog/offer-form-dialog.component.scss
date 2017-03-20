@@ -1,12 +1,13 @@
 @import "../../../styles/variables";
 
-.offer-form-container {
-  width: 400px;
-  margin: auto;
-  display: block;
+steak-offer-form-dialog{
+  //width: 400px;
+  //margin: auto;
+  //display: block;
   form {
     md-input-container, md-checkbox, md-radio-group {
       display: block;
+      width:100%;
       margin: $padding-s 0;
     }
   }
