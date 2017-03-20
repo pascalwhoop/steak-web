@@ -27,7 +27,6 @@ import {environment} from "../../../../environments/environment";
 import {OrderBooking} from "../model/OrderBooking";
 import {Order} from "../model/Order";
 import {toApiDate} from "../../../core/util/util.service";
-import {VFeedbackService} from "../../services/vfeedback.service";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -40,7 +39,7 @@ export class OrdersApi {
     public configuration: Configuration = new Configuration();
 
 
-    constructor(protected http: Http, @Optional() configuration: Configuration, public vfeedback: VFeedbackService) {
+    constructor(protected http: Http, @Optional() configuration: Configuration) {
         if (configuration) {
             this.configuration = configuration;
         }
@@ -77,8 +76,7 @@ export class OrdersApi {
             .publish();
         obs.connect();
 
-        this.vfeedback.showMessageOnAnswer('Order deleted!', 'Oops', obs);
-        this.vfeedback.spinUntilCompleted(obs);
+        //this.vfeedback.showMessageOnAnswer('Order deleted!', 'Oops', obs);
         return obs;
     }
 
@@ -126,8 +124,8 @@ export class OrdersApi {
             .publish();
         obs.connect();
         
-        this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs);
-        this.vfeedback.spinUntilCompleted(obs);
+        //this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs);
+        //this.vfeedback.spinUntilCompleted(obs);
         return obs;
 
 
