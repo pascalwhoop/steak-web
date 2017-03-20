@@ -1,5 +1,5 @@
 <div class="offer-form-container">
-    <h2>Dish for {{date | date: 'EEE, dd-MM'}}</h2>
+    <h2>Dish for {{date | date: 'EEE., dd.MM'}}</h2>
     <br>
 
     <form (ngSubmit)="onSubmit()" #offerForm="ngForm">
@@ -16,7 +16,7 @@
         </md-input-container>
 
         <!--TIME-->
-        <md-radio-group class="example-radio-group" [(ngModel)]="offer.time" required name="time">
+        <md-radio-group class="example-radio-group" [(ngModel)]="offer.time" required name="time" ngDefaultControl>
             <md-radio-button class="example-radio-button" value="Fruehstueck">
                 Breakfast
             </md-radio-button>
@@ -26,9 +26,9 @@
         </md-radio-group>
 
         <!--main dish?-->
-        <md-checkbox [(ngModel)]="offer.main_offer" name="main_offer">Main Dish</md-checkbox>
+        <md-checkbox [(ngModel)]="offer.main_offer" name="main_offer" ngDefaultControl>Main Dish</md-checkbox>
         <!--vegetarian?-->
-        <md-checkbox [(ngModel)]="offer.vegetarian" name="vegetarian">Vegetarian</md-checkbox>
+        <md-checkbox [(ngModel)]="offer.vegetarian" name="vegetarian" ngDefaultControl>Vegetarian</md-checkbox>
 
         <!--heat-->
         <md-input-container [dividerColor]="offer.heat? 'primary' : 'warn'">

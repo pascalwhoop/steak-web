@@ -1,13 +1,14 @@
 import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Offer} from "../../shared/api/model/Offer";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
-    selector: 'steak-offer-form',
-    templateUrl: './offer-form.component.html',
-    styleUrls: ['./offer-form.component.scss']
+    selector: 'steak-offer-form-dialog',
+    templateUrl: 'offer-form-dialog.component.html',
+    styleUrls: ['offer-form-dialog.component.scss']
 })
-export class OfferFormComponent implements OnInit {
+export class OfferFormDialogComponent implements OnInit {
 
     @Input()
     date: Date;
@@ -17,7 +18,7 @@ export class OfferFormComponent implements OnInit {
 
     offer: Offer = new OfferObj();
 
-    constructor(public offersApi: OffersApi) {
+    constructor(public offersApi: OffersApi, public dialogRef: MdDialogRef<OfferFormDialogComponent>) {
     }
 
     ngOnInit() {

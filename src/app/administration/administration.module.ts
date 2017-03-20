@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {AdminHomeComponent} from "./admin-home/admin-home.component";
 import {AdministrationRoutingModule} from "./administration-routing.module";
 import {SharedModule} from "../shared/shared.module";
-import { OfferFormComponent } from './offer-form/offer-form.component';
+import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.component";
 
 @NgModule({
     imports: [
@@ -11,7 +11,8 @@ import { OfferFormComponent } from './offer-form/offer-form.component';
         SharedModule,
         AdministrationRoutingModule
     ],
-    declarations: [AdminHomeComponent, OfferFormComponent]
+    declarations: [AdminHomeComponent, OfferFormDialogComponent],
+    entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {
 }
