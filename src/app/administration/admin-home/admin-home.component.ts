@@ -41,7 +41,7 @@ export class AdminHomeComponent implements OnInit {
 
 
     private fetchOffers() {
-        this.offerApi.offersGet()
+        this.offerApi.offersGet(null, new Date())
             .subscribe(offers => this.offers = offers);
     }
 }
