@@ -4,13 +4,13 @@
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <md-input-container [dividerColor]="loginData.username ? 'primary' : 'warn'">
-            <input mdInput placeholder="Username (Kürzel)" name="username" [(ngModel)]="loginData.username" required #username>
+            <input mdInput placeholder="Username (Kürzel)" name="username" [(ngModel)]="loginData.username" required #username id="UsernameInput">
         </md-input-container>
         <!--{{username.className}}-->
 
         <md-input-container [dividerColor]="loginData.password ? 'primary' : 'warn'">
             
-            <input mdInput placeholder="Password" name="password" [(ngModel)]="loginData.password" type="password" required #password>
+            <input mdInput placeholder="Password" name="password" [(ngModel)]="loginData.password" type="password" required #password id="PasswordInput">
         </md-input-container>
         <!--{{password.className}}-->
 
