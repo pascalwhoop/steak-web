@@ -12,8 +12,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import "hammerjs";
 import {ObjectToArrayPipe} from "./pipes/object-to-array.pipe";
 import {WorkingSpinnerComponent} from "./components/working-spinner/working-spinner.component";
-import {CustomBrowserXhr} from "../xhr-visual-feedback/custom-browser-xhr.service";
 import {BrowserXhr} from "@angular/http";
+import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.service";
 
 @NgModule({
     imports: [

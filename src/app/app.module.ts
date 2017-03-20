@@ -5,9 +5,9 @@ import {ClientModule} from "./client/client.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {SharedModule} from "./shared/shared.module";
 import {LoginModule} from "./login/login.module";
-import {XhrVisualFeedbackModule} from "./xhr-visual-feedback/xhr-visual-feedback.module";
 import {BrowserXhr} from "@angular/http";
-import {CustomBrowserXhr} from "./xhr-visual-feedback/custom-browser-xhr.service";
+import {AjaxVisualFeedbackModule} from "./ajax-visual-feedback/ajax-visual-feedback.module";
+import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.service";
 
 
 
@@ -21,7 +21,7 @@ import {CustomBrowserXhr} from "./xhr-visual-feedback/custom-browser-xhr.service
         AppRoutingModule,
         ClientModule,
         LoginModule,
-        XhrVisualFeedbackModule
+        AjaxVisualFeedbackModule
     ],
     providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
     bootstrap: [AppComponent]
