@@ -63,7 +63,7 @@ export class OffersPageComponent implements OnInit {
                     offerOrderPairs: pairings.filter(pair => dateString == pair.offer.date.toString())
                 });
         });
-        return results;
+        return results.sort((a, b) => (a.date.getTime() - b.date.getTime()));
     }
 
     makeDaySubtitle(offer: Offer): string {
