@@ -86,7 +86,43 @@ export class OffersApi {
      * @param enddate
      */
     public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
-        return this.offerGetWithHttpInfo(date, startdate, enddate)
+        const path = this.basePath + `/offers`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders);
+        if (date !== undefined) {
+            if (date instanceof Date) {
+                queryParameters.set('date', <any>toApiDate(date));
+            } else {
+                queryParameters.set('date', <any>date);
+            }
+        }
+
+        if (startdate !== undefined) {
+            if (startdate instanceof Date) {
+                queryParameters.set('startdate', <any>toApiDate(startdate));
+            } else {
+                queryParameters.set('startdate', <any>startdate);
+            }
+        }
+
+        if (enddate !== undefined) {
+            if (enddate instanceof Date) {
+                queryParameters.set('enddate', <any>toApiDate(enddate));
+            } else {
+                queryParameters.set('enddate', <any>enddate);
+            }
+        }
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
+            search: queryParameters
+        });
+
+
+        return this.http.request(path, requestOptions)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -189,53 +225,6 @@ export class OffersApi {
     }
 
 
-    /**
-     * Offer[]
-     * ...
-     * @param username The username of the user that is performing the request
-     * @param date
-     * @param startdate
-     * @param enddate
-     */
-    public offerGetWithHttpInfo(date?: Date, startdate?: Date, enddate?: Date): Observable<Response> {
-        const path = this.basePath + `/offers`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        if (date !== undefined) {
-            if (date instanceof Date) {
-                queryParameters.set('date', <any>date.toISOString());
-            } else {
-                queryParameters.set('date', <any>date);
-            }
-        }
-
-        if (startdate !== undefined) {
-            if (startdate instanceof Date) {
-                queryParameters.set('startdate', <any>startdate.toISOString());
-            } else {
-                queryParameters.set('startdate', <any>startdate);
-            }
-        }
-
-        if (enddate !== undefined) {
-            if (enddate instanceof Date) {
-                queryParameters.set('enddate', <any>enddate.toISOString());
-            } else {
-                queryParameters.set('enddate', <any>enddate);
-            }
-        }
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-
-
-        return this.http.request(path, requestOptions);
-    }
 
     /**
      * Offer
