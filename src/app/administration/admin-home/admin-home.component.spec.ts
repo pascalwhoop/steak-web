@@ -6,18 +6,22 @@ import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {By} from "@angular/platform-browser";
 import {MOCK_OFFERS} from "../../../testing/mock-data";
-
+import {MdDialog} from "@angular/material";
+import * as _ from 'lodash';
+import {AdminOfferItemComponent} from "../admin-offer-item/admin-offer-item.component";
 
 describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
     let fixture: ComponentFixture<AdminHomeComponent>;
     let titleService: PageTitleService;
+    let dialogSpy = jasmine.createSpyObj('mdDialog', ['open']);
 
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [PageTitleService,
-                {provide: OffersApi, useClass: OffersApiStub}],
+                {provide: OffersApi, useClass: OffersApiStub},
+                {provide: MdDialog, useValue: dialogSpy}],
             declarations: [AdminHomeComponent],
             schemas: [NO_ERRORS_SCHEMA]
         })
@@ -45,17 +49,23 @@ describe('AdminHomeComponent', () => {
         expect(component.dates.length > 10).toBeTruthy()
     });
 
+    // it('should call the filterOffersForDate method as often as there are days', () => {
+    //
+    // });
+
     it('should list all offers under the right date', fakeAsync(() => {
-        let mockOffers = JSON.parse(JSON.stringify(MOCK_OFFERS));
-        mockOffers = mockOffers.forEach(offer => offer.date = new Date(new Date().getTime() + 1000 * 3600 * 24));
-        component.offers = mockOffers;
+        component.offers = makeFourMockOffersForTomorrow();
+        expect(component.offers.length).toBe(4);
+        expect(component.dates.length).toBe(21);
+        fixture.detectChanges();
         tick(); //let the templates filters run through
-        let tomorrowList = fixture.debugElement.queryAll(By.css('.offers-list'))[0];
-        let tomorrowItems = tomorrowList.queryAll(By.css('md-list-item'));
+
+        let tomorrowList = fixture.debugElement.queryAll(By.css('.offers-list'))[1];
+        let tomorrowItems = tomorrowList.queryAll(By.css('steak-admin-offer-item'));
         expect(tomorrowItems.length).toBe(4);
         //day after tomorrow
-        let daTomorrow = fixture.debugElement.queryAll(By.css('.offers-list'))[1];
-        let daTomorrowItems = tomorrowList.queryAll(By.css('md-list-item'));
+        let daTomorrow = fixture.debugElement.queryAll(By.css('.offers-list'))[2];
+        let daTomorrowItems = daTomorrow.queryAll(By.css('steak-admin-offer-item'));
         expect(daTomorrowItems.length).toBe(0);
     }));
 
@@ -67,3 +77,12 @@ describe('AdminHomeComponent', () => {
         expect(true).toBeFalsy();
     })
 });
+
+
+let makeFourMockOffersForTomorrow = function () {
+    //create a copy of mock offers
+    let mockOffers = _.cloneDeep(MOCK_OFFERS);
+    //set all dates to tomorrow
+    mockOffers.forEach(offer => offer.date = new Date(new Date().getTime() + 1000 * 3600 * 24));
+    return mockOffers;
+};
