@@ -6,26 +6,37 @@ import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {By} from "@angular/platform-browser";
 import {MOCK_OFFERS} from "../../../testing/mock-data";
-import {MdDialog} from "@angular/material";
-import * as _ from 'lodash';
-import {AdminOfferItemComponent} from "../admin-offer-item/admin-offer-item.component";
+import {MdDialog, MdDialogModule, MdDialogRef, OverlayRef} from "@angular/material";
+import * as _ from "lodash";
+import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
+import {FormsModule} from "@angular/forms";
+import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
+import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
     let fixture: ComponentFixture<AdminHomeComponent>;
     let titleService: PageTitleService;
-    let dialogSpy = jasmine.createSpyObj('mdDialog', ['open']);
+    let ajaxSpy = jasmine.createSpyObj('feedback', ['showMessageOnAnswer']);
 
+    //mocking a dialogRef for when we open our Md dialog with a button
+    let mockDialogRef = new MdDialogRef(new OverlayRef(null,null,null,null),{});
+    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            providers: [PageTitleService,
+            imports: [MdDialogModule, FormsModule],
+            providers: [
+                PageTitleService,
+                MdDialog,
                 {provide: OffersApi, useClass: OffersApiStub},
-                {provide: MdDialog, useValue: dialogSpy}],
-            declarations: [AdminHomeComponent],
+                {provide: AjaxVisualFeedbackService, useValue: ajaxSpy}
+            ],
+            declarations: [AdminHomeComponent, OfferFormDialogComponent],
             schemas: [NO_ERRORS_SCHEMA]
-        })
-            .compileComponents();
+        });
+
+        TestBed.configureTestingModule({}).compileComponents();
     }));
 
     beforeEach(() => {
@@ -33,6 +44,7 @@ describe('AdminHomeComponent', () => {
         component = fixture.componentInstance;
 
         titleService = fixture.debugElement.injector.get(PageTitleService);
+        spyOn(component.dialog, 'open').and.returnValue(mockDialogRef);
 
         fixture.detectChanges();
     });
@@ -69,14 +81,25 @@ describe('AdminHomeComponent', () => {
         expect(daTomorrowItems.length).toBe(0);
     }));
 
-    it('should filter offers for a date given', ()=>{
+    it('should filter offers for a date given', () => {
         expect(component.filterOffersForDate(MOCK_OFFERS, new Date('2013-05-11T00:45:00.000Z')).length).toBe(3);
     });
 
-    it('should open offer dialog to open on clicking "add new" for date', ()=>{
-        expect(true).toBeFalsy();
-    })
+
+    it('should open the dialog on clicking the button', fakeAsync(() => {
+        expect(component.dialog.open).toHaveBeenCalledTimes(0);
+        clickAddNewButton(component, fixture);
+        fixture.detectChanges();
+        tick();
+        expect(component.dialog.open).toHaveBeenCalled();
+    }));
+
 });
+
+let clickAddNewButton = function (component: AdminHomeComponent, fixture: ComponentFixture<AdminHomeComponent>) {
+    let button = <HTMLElement> fixture.debugElement.queryAll(By.css('.add-new-button'))[0].nativeElement;
+    button.click();
+};
 
 
 let makeFourMockOffersForTomorrow = function () {
