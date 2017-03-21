@@ -68,6 +68,7 @@ export class OffersApi {
 
 
         return this.http.delete(path, requestOptions)
+            .share()
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
