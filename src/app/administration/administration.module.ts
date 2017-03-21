@@ -6,6 +6,7 @@ import {SharedModule} from "../shared/shared.module";
 import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.component";
 import { AdminOfferItemComponent } from './admin-offer-item/admin-offer-item.component';
 import {CacheModule} from "../cache/cache.module";
+import { OfferDescriptionAutoCompleteComponent } from './offer-description-auto-complete/offer-description-auto-complete.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import {CacheModule} from "../cache/cache.module";
         AdministrationRoutingModule,
         CacheModule
     ],
-    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent],
+    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent],
     entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {

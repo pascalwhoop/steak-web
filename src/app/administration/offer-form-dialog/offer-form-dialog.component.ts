@@ -3,6 +3,8 @@ import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Offer} from "../../shared/model/Offer";
 import {EditMode} from "../../core/util/util.service";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
+import {FormControl, Validators, Form} from "@angular/forms";
+import {OfferCacheService} from "../../cache/offer-cache.service";
 
 @Component({
     selector: 'steak-offer-form-dialog',
@@ -13,19 +15,24 @@ export class OfferFormDialogComponent implements OnInit {
 
     @Input()
     date: Date;
-
-
     offerEventEmitter: EventEmitter<Offer> = new EventEmitter();
-
     editMode: EditMode = EditMode.CREATE;
-
     offer: Offer = new OfferObj();
+    offerForm: FormControl;
 
-    constructor(public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService) {
+
+    constructor(public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService, public offerCache: OfferCacheService) {
         this.offer.heat = 20; //default to 20 degrees
+        this.offer.description = '';
     }
 
     ngOnInit() {
+    }
+
+    applyOldOfferAsTemplate(offer: Offer){
+        delete offer._id;
+        offer.date = this.date;
+        this.offer = offer;
     }
 
     createOffer(offer: Offer) {

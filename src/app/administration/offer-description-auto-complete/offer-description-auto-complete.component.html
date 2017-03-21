@@ -1,0 +1,9 @@
+<md-input-container>
+  <input type="text" (keyup)="filterOffers($event)" [mdAutocomplete]="auto" mdInput placeholder="Meal description"
+         name="description" [(ngModel)]="offer" (ngModelChange)="onDescriptionChange($event)" required value="">
+</md-input-container>
+<md-autocomplete #auto="mdAutocomplete" [displayWith]="getOfferDescription">
+  <md-option *ngFor="let offer of _filteredOffers" [value]="offer">
+    {{ offer.description }}
+  </md-option>
+</md-autocomplete>

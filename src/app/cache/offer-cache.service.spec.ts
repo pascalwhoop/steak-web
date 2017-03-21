@@ -15,6 +15,7 @@ describe('OfferCacheService', () => {
     //instead of having to inject it into every spec
     beforeEach(inject([OfferCacheService], (_service: OfferCacheService) => {
         service = _service;
+        setMockOffersToLocalStorage();
     }));
 
     it('should ...', inject([OfferCacheService], (service: OfferCacheService) => {
@@ -39,7 +40,7 @@ describe('OfferCacheService', () => {
         service.putMany(moreOffers);
         //and suddenly there were 8
         let them = JSON.parse(localStorage.getItem('offers'));
-        expect(them.length).toBe(4);
+        expect(them.length).toBe(8);
     });
 });
 

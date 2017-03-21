@@ -1,12 +1,9 @@
-<form #offerForm="ngForm">
+<form #offerForm="ngForm" (keydown.enter)="$event.preventDefault()">
     <h1 md-dialog-title>Dish for {{date | date: 'EEE., dd.MM'}}</h1>
 
     <md-dialog-content>
         <!--DESCRIPTION-->
-        <md-input-container [dividerColor]="offer.description? 'primary' : 'warn'">
-            <textarea mdInput placeholder="Description" name="description" [(ngModel)]="offer.description"
-                      required></textarea>
-        </md-input-container>
+        <steak-offer-description-auto-complete [offer]="offer" (onDescription)="offer.description = $event" (onOffer)="applyOldOfferAsTemplate($event)"></steak-offer-description-auto-complete>
 
         <!--PRICE-->
         <md-input-container [dividerColor]="offer.price? 'primary' : 'warn'">
@@ -34,12 +31,16 @@
             <input type="number" mdInput placeholder="Heat served" name="heat" [(ngModel)]="offer.heat" required>
         </md-input-container>
 
-
+        
     </md-dialog-content>
 
     <md-dialog-actions>
-        <button md-raised-button [disabled]="!offerForm.form.valid" color="primary" (click)="createOffer(offer)" *ngIf="canBeCreate()">Create</button>
-        <button md-raised-button [disabled]="!offerForm.form.valid" color="primary" (click)="updateOffer(offer)"type="submit" *ngIf="canBeUpdate()">Update</button>
+        <button md-raised-button [disabled]="!offerForm.form.valid" color="primary" (click)="createOffer(offer)"
+                *ngIf="canBeCreate()">Create
+        </button>
+        <button md-raised-button [disabled]="!offerForm.form.valid" color="primary" (click)="updateOffer(offer)"
+                type="submit" *ngIf="canBeUpdate()">Update
+        </button>
         <button md-raised-button color="warn" *ngIf="canBeDelete()" (click)="deleteOffer(offer)">Delete</button>
     </md-dialog-actions>
 </form>

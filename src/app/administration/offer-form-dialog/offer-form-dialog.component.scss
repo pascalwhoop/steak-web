@@ -1,9 +1,8 @@
 @import "../../../styles/variables";
 
 steak-offer-form-dialog{
-  //width: 400px;
-  //margin: auto;
-  //display: block;
+  min-width: 300px;
+  display: block;
   form {
     md-input-container, md-checkbox, md-radio-group {
       display: block;
