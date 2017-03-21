@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {MOCK_USERS, MOCK_OFFER_ORDER_PAIR} from "./mock-data";
-import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
-import {User} from "../app/shared/api/model/User";
+import {OfferOrdersPair} from "../app/shared/model/OfferOrdersPair";
+import {User} from "../app/shared/model/User";
 
 @Injectable()
 export class UsersApiStub {

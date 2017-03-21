@@ -1,4 +1,4 @@
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 export function toApiDate(date: Date | string): string {
     date = new Date(date.toString());
     return date.toISOString().slice(0, 10);

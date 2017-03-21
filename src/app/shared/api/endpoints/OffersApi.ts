@@ -23,9 +23,9 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
-import {Offer} from "../model/Offer";
+import {Offer} from "../../model/Offer";
 import {toApiDate} from "../../../core/util/util.service";
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -94,7 +94,8 @@ export class OffersApi {
                     let offers = response.json();
                     return offers.map(o => OffersApi.inflateOfferFromJson(o));
                 }
-            });
+            })
+            .share();
     }
 
     /**
@@ -142,6 +143,7 @@ export class OffersApi {
 
 
         return this.http.post(path, offerData, requestOptions)
+            .share()
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -176,6 +178,7 @@ export class OffersApi {
 
 
         return this.http.put(path, offerData, requestOptions)
+            .share()
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;

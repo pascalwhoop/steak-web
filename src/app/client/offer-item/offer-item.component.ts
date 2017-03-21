@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import {OfferOrdersPair} from "../../shared/api/model/OfferOrdersPair";
+import {OfferOrdersPair} from "../../shared/model/OfferOrdersPair";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 
 @Component({

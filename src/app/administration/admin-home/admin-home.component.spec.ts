@@ -12,12 +12,14 @@ import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.c
 import {FormsModule} from "@angular/forms";
 import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
+import {OfferCacheService} from "../../cache/offer-cache.service";
 
 describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
     let fixture: ComponentFixture<AdminHomeComponent>;
     let titleService: PageTitleService;
     let ajaxSpy = jasmine.createSpyObj('feedback', ['showMessageOnAnswer']);
+    let offerCacheSpy = jasmine.createSpyObj('offerCacheSpy', ['putMany', 'put', 'find']);
 
     //mocking a dialogRef for when we open our Md dialog with a button
     let mockDialogRef = new MdDialogRef(new OverlayRef(null,null,null,null),{});
@@ -30,7 +32,8 @@ describe('AdminHomeComponent', () => {
                 PageTitleService,
                 MdDialog,
                 {provide: OffersApi, useClass: OffersApiStub},
-                {provide: AjaxVisualFeedbackService, useValue: ajaxSpy}
+                {provide: AjaxVisualFeedbackService, useValue: ajaxSpy},
+                {provide: OfferCacheService , useValue: offerCacheSpy}
             ],
             declarations: [AdminHomeComponent, OfferFormDialogComponent],
             schemas: [NO_ERRORS_SCHEMA]

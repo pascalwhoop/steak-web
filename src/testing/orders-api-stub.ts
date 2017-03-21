@@ -11,8 +11,8 @@ import {
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
-import {Order} from "../app/shared/api/model/Order";
-import {OrderBooking} from "../app/shared/api/model/OrderBooking";
+import {Order} from "../app/shared/model/Order";
+import {OrderBooking} from "../app/shared/model/OrderBooking";
 import {MOCK_ORDERS} from "./mock-data";
 
 

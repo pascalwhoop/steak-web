@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 import {MdDialog} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
 import {EditMode} from "../../core/util/util.service";

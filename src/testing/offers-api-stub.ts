@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
-import {Offer} from "../app/shared/api/model/Offer";
+import {Offer} from "../app/shared/model/Offer";
 import {MOCK_OFFERS} from "./mock-data";
 
 

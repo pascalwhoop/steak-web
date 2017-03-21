@@ -21,9 +21,9 @@ import {
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
-import * as models from "../model/models";
+import * as models from "../../model/models";
 import {environment} from "../../../../environments/environment";
-import {User} from "../model/User";
+import {User} from "../../model/User";
 
 /* tslint:disable:no-unused-variable member-ordering */
 

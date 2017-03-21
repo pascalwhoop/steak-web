@@ -5,12 +5,14 @@ import {AdministrationRoutingModule} from "./administration-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.component";
 import { AdminOfferItemComponent } from './admin-offer-item/admin-offer-item.component';
+import {CacheModule} from "../cache/cache.module";
 
 @NgModule({
     imports: [
         CommonModule,
         SharedModule,
-        AdministrationRoutingModule
+        AdministrationRoutingModule,
+        CacheModule
     ],
     declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent],
     entryComponents: [OfferFormDialogComponent]

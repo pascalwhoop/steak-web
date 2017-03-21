@@ -1,10 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {PageTitleService} from "../../shared/services/page-title.service";
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {toApiDate, EditMode} from "../../core/util/util.service";
 import {MdDialog} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
+import {Observable} from "rxjs";
+import {OfferCacheService} from "../../cache/offer-cache.service";
 
 
 @Component({
@@ -17,12 +19,13 @@ export class AdminHomeComponent implements OnInit {
     dates: Date[];
     offers: Offer[];
 
-    constructor(public title: PageTitleService, public offerApi: OffersApi, public dialog: MdDialog) {
+    constructor(public title: PageTitleService, public offerApi: OffersApi, public dialog: MdDialog, public offerCache: OfferCacheService) {
         this.dates = this.generateNextDays();
     }
 
     ngOnInit() {
-        this.fetchOffers();
+        this.fetchOffers()
+            .subscribe(offers => this.offerCache.putMany(offers));
         this.title.title = "Administration";
     }
 
@@ -84,8 +87,9 @@ export class AdminHomeComponent implements OnInit {
     }
 
 
-    private fetchOffers() {
-        this.offerApi.offersGet(null, new Date())
-            .subscribe(offers => this.offers = offers);
+    private fetchOffers(): Observable<Array<Offer>> {
+        let obs = this.offerApi.offersGet(null, new Date());
+        obs.subscribe(offers => this.offers = offers);
+        return obs;
     }
 }

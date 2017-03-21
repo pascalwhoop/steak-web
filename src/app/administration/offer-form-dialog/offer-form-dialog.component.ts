@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, EventEmitter} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 import {EditMode} from "../../core/util/util.service";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 

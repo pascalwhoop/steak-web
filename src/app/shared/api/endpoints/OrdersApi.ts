@@ -21,11 +21,11 @@ import {
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
-import * as models from "../model/models";
+import * as models from "../../model/models";
 import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
-import {OrderBooking} from "../model/OrderBooking";
-import {Order} from "../model/Order";
+import {OrderBooking} from "../../model/OrderBooking";
+import {Order} from "../../model/Order";
 import {toApiDate} from "../../../core/util/util.service";
 
 
@@ -113,7 +113,8 @@ export class OrdersApi {
             headers: headers,
         });
 
-        let obs = this.http.post(path, orderBooking, requestOptions)
+        return this.http.post(path, orderBooking, requestOptions)
+            .share()
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -121,14 +122,6 @@ export class OrdersApi {
                     return response.json();
                 }
             })
-            .publish();
-        obs.connect();
-        
-        //this.vfeedback.showMessageOnAnswer('Order placed!', 'Oops', obs);
-        //this.vfeedback.spinUntilCompleted(obs);
-        return obs;
-
-
     }
 
     /**

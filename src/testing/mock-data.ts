@@ -1,7 +1,7 @@
-import {Offer} from "../app/shared/api/model/Offer";
-import {OfferOrdersPair} from "../app/shared/api/model/OfferOrdersPair";
-import {Order} from "../app/shared/api/model/Order";
-import {User} from "../app/shared/api/model/User";
+import {Offer} from "../app/shared/model/Offer";
+import {OfferOrdersPair} from "../app/shared/model/OfferOrdersPair";
+import {Order} from "../app/shared/model/Order";
+import {User} from "../app/shared/model/User";
 
 
 export const MOCK_OFFERS: Offer[] = [

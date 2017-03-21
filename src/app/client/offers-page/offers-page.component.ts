@@ -1,13 +1,13 @@
 import {Component, OnInit} from "@angular/core";
-import {Offer} from "../../shared/api/model/Offer";
+import {Offer} from "../../shared/model/Offer";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
-import {OfferOrdersPair} from "../../shared/api/model/OfferOrdersPair";
+import {OfferOrdersPair} from "../../shared/model/OfferOrdersPair";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/forkJoin";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import {Order} from "../../shared/api/model/Order";
+import {Order} from "../../shared/model/Order";
 import * as _ from "lodash";
 import {makeDayTitle, makeDaySubtitle} from "../../core/util/util.service";
 
