@@ -2,7 +2,7 @@ import {Component, OnInit, Input, EventEmitter} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Offer} from "../../shared/api/model/Offer";
 import {EditMode} from "../../core/util/util.service";
-import {MdSnackBar} from "@angular/material";
+import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 @Component({
     selector: 'steak-offer-form-dialog',
@@ -21,7 +21,8 @@ export class OfferFormDialogComponent implements OnInit {
 
     offer: Offer = new OfferObj();
 
-    constructor(public offersApi: OffersApi, public snackBar: MdSnackBar) {
+    constructor(public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService) {
+        this.offer.heat = 20; //default to 20 degrees
     }
 
     ngOnInit() {
@@ -30,32 +31,28 @@ export class OfferFormDialogComponent implements OnInit {
     createOffer(offer: Offer) {
         offer.date = this.date;
 
-        this.offersApi.offerPost(this.offer)
-            .subscribe(offer => {
-                this.snackBar.open('Create successful', null, {duration: 1500});
-                this.offerEventEmitter.emit(offer);
-            })
+        let obs = this.offersApi.offerPost(this.offer);
+        obs.subscribe(offer => {
+            this.offerEventEmitter.emit(offer);
+        });
+        this.vFeedback.showMessageOnAnswer('Create successful', 'Create failed', obs);
     }
 
-    updateOffer(offer: Offer){
-        this.offersApi.offerPut(offer).subscribe(
-            offer =>{
-                this.snackBar.open('Update successful', null, {duration: 1500});
+    updateOffer(offer: Offer) {
+        let obs = this.offersApi.offerPut(offer);
+        obs.subscribe(
+            offer => {
+
                 this.offerEventEmitter.emit(offer);
-            },
-            error =>{
-                this.snackBar.open('Update not successful', null, {duration: 1500});
             }
-        )
+        );
+        this.vFeedback.showMessageOnAnswer('Update successful', 'Update failed', obs);
     }
 
     deleteOffer(offer: Offer) {
-        this.offersApi.offerDelete(offer._id)
-            .subscribe(next => {
-                this.snackBar.open('Delete successful', null, {duration: 1500});
-                this.offerEventEmitter.emit(null);
-
-            })
+        let obs = this.offersApi.offerDelete(offer._id);
+        obs.subscribe(next => this.offerEventEmitter.emit(null));
+        this.vFeedback.showMessageOnAnswer('Delete successful', 'Delete failed', obs);
     }
 
     canBeCreate(): boolean {
