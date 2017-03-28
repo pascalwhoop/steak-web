@@ -10,6 +10,7 @@ import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {Order} from "../../shared/model/Order";
 import * as _ from "lodash";
 import {makeDayTitle, makeDaySubtitle} from "../../core/util/util.service";
+import {UserService} from "../../login/user.service";
 
 @Component({
     selector: 'steak-offers-page',
@@ -20,7 +21,7 @@ export class OffersPageComponent implements OnInit {
 
     offerOrderData: IDayPack[];
 
-    constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi) {
+    constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi, public userService: UserService) {
 
     }
 
@@ -32,14 +33,13 @@ export class OffersPageComponent implements OnInit {
             .subscribe((pairs) => {
                 this.offerOrderData = this.mapPairsToDays(pairs);
             })
-
     }
 
 
     fetchData(): Observable<OfferOrdersPair[]> {
         return new Observable(observer => {
             let offerObs = this.offersApi.offersGet(null, new Date());
-            let orderObs = this.ordersApi.ordersGET(new Date());
+            let orderObs = this.ordersApi.ordersGET(new Date(), null, null, this.userService.username);
 
             Observable.forkJoin(offerObs, orderObs)
                 .subscribe(results => {

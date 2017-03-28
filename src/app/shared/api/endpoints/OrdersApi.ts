@@ -26,7 +26,7 @@ import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
 import {OrderBooking} from "../../model/OrderBooking";
 import {Order} from "../../model/Order";
-import {toApiDate} from "../../../core/util/util.service";
+import {toApiDate, isNullOrUndefined} from "../../../core/util/util.service";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -140,33 +140,31 @@ export class OrdersApi {
      * @param date
      * @param enddate
      * @param userid The user id for which to fetch data
-     * @param cursor Pagination cursor. If there is not a limit defined, each cursor result gives back 30 results
-     * @param limit Result limiter.
      * @param openPayments A flag that can be set to true to only get employees with open payments
      */
-    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, cursor?: string, limit?: number, openPayments?: boolean, extraHttpRequestParams?: any): Observable<Array<models.Order>> {
+    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Array<models.Order>> {
         const path = this.basePath + `/orders`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON());
 
-        if (startdate !== undefined) {
+        if (startdate) {
             queryParameters.set('startdate', toApiDate(startdate));
         }
 
-        if (date !== undefined) {
+        if (date) {
             queryParameters.set('date', toApiDate(date));
         }
 
-        if (enddate !== undefined) {
+        if (enddate) {
             queryParameters.set('enddate', toApiDate(enddate));
         }
 
-        if (userid !== undefined) {
+        if (userid) {
             queryParameters.set('userid', <any>userid);
         }
 
-        if (openPayments !== undefined) {
+        if (!isNullOrUndefined(openPayments)) {
             queryParameters.set('open_payments', <any>openPayments);
         }
 

@@ -4,7 +4,6 @@ import {PageTitleService} from "../../shared/services/page-title.service";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {MOCK_OFFERS, MOCK_OFFER_ORDER_PAIR, MOCK_ORDERS} from "../../../testing/mock-data";
-import {Observable, Subscriber} from "rxjs";
 import {By} from "@angular/platform-browser";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
@@ -12,6 +11,7 @@ import {UsersApiStub} from "../../../testing/users-api-stub";
 import {OrdersApiStub} from "../../../testing/orders-api-stub";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import Spy = jasmine.Spy;
+import {UserService} from "../../login/user.service";
 
 describe('OffersPageComponent', () => {
     let component: OffersPageComponent;
@@ -26,7 +26,8 @@ describe('OffersPageComponent', () => {
             providers: [PageTitleService,
                 {provide: OffersApi, useClass: OffersApiStub},
                 {provide: OrdersApi, useClass: OrdersApiStub},
-                {provide: UsersApi, useClass: UsersApiStub}
+                {provide: UsersApi, useClass: UsersApiStub},
+                {provide: UserService, useValue: {username: 'xxx'}}
             ],
             declarations: [OffersPageComponent],
             schemas: [NO_ERRORS_SCHEMA]

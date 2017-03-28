@@ -24,10 +24,10 @@ export class AdminHomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.title.title = "Administration";
         this.offers = this.offerCache.offers;
         this.fetchOffers()
             .subscribe(offers => this.offerCache.putMany(offers));
-        this.title.title = "Administration";
     }
 
     /**
