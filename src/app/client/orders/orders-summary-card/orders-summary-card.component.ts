@@ -33,7 +33,7 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
     private calcExpectedBill(orders: Order[]): number {
 
         let sum = this.calcOpenSum(orders);
-        return sum / this.getPercentageOfMonthComplete();
+        return this.roundToTwoAfterDecimal(sum / this.getPercentageOfMonthComplete());
     }
 
     private calcVegetarianScore(orders: Order[]): number {
@@ -66,5 +66,9 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
      */
     private daysInMonth(month, year) {
         return new Date(year, month+1, 0).getDate();
+    }
+
+    private roundToTwoAfterDecimal(num: number){
+        return Math.round(num *100)/100;
     }
 }

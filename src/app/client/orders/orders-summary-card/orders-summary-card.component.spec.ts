@@ -4,7 +4,7 @@ import {NO_ERRORS_SCHEMA, ViewChild, Component, SimpleChanges} from "@angular/co
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {Order} from "../../../shared/model/Order";
 
-describe('OrdersSummaryCardComponent', () => {
+fdescribe('OrdersSummaryCardComponent', () => {
     let component: OrdersSummaryCardComponent;
     let fixture: ComponentFixture<OrdersSummaryCardComponent>;
 
@@ -45,7 +45,7 @@ describe('OrdersSummaryCardComponent', () => {
     it('should calc sum of orders properly', () => {
         expect(component.openSum).toBe(0);
         callOnChangesWithMockOrders(component);
-        expect(component.openSum).toBe(10);
+        expect(component.openSum).toBe(12.25);
     });
 
     it('should calc vegetarian stats properly', () => {
@@ -55,9 +55,9 @@ describe('OrdersSummaryCardComponent', () => {
     });
 
     it('should calc the expected end of month costs properly', () => {
-        spyOn(component, 'getPercentageOfMonthComplete').and.returnValue(0.5);
+        spyOn(component, 'getPercentageOfMonthComplete').and.returnValue(0.743);
         callOnChangesWithMockOrders(component);
-        expect(component.expectedBill).toBe(20);
+        expect(component.expectedBill).toBe(16.49);
     });
 
 });

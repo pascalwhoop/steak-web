@@ -102,13 +102,13 @@ export const MOCK_ORDERS: Order[] = [
             "_id": "58a47bd88fdd83084b5c88a2",
             "description": "Backfisch mit Remoulade, Bratkartoffeln und Salatteller",
             "vegetarian": false,
-            "price": 5,
+            "price": 7.25,
             "time": "Fruehstueck",
             "date": new Date("2017-02-22T00:00:00.000Z"),
             "main_offer": true,
             "heat": -40
         },
-        "amount": 5
+        "amount": 7.25
     },
     {
         "_id": "58ab0a3cd555c54fdb5ca7e4",
