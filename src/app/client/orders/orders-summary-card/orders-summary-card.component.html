@@ -1,14 +1,10 @@
-<md-card class="orders-summary-card">
-  <md-card-header>
-    <md-card-title>Summary</md-card-title>
-  </md-card-header>
+<md-card>
   <md-card-content>
-    <p>Open Positions: 55 €</p>
-    <p>Vegetarian Score: 55 €</p>
-    <p>Expected Bill: 55 €</p>
+    <h2>Summary</h2>
+    <p>Open Positions: {{openSum}} €</p>
+    <p>Vegetarian Score: {{vegetarianScore}} %</p>
+    <p>Expected Bill: {{expectedBill}} €</p>
   </md-card-content>
   <md-card-actions>
-    <button md-button>LIKE</button>
-    <button md-button>SHARE</button>
   </md-card-actions>
 </md-card>
