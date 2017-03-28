@@ -1,10 +1,17 @@
 @import "../../../styles/app-theme";
 @import "../../../styles/variables";
 
-.day-box{
-  margin: $padding-s;
+.day-card{
+  margin-bottom: $padding-l;
 
-  .offers-list{
-
+  @media ($mat-small) {
+    .day-card{
+      margin-bottom: $padding-m;
+    }
+  }
+  @media ($mat-xsmall) {
+    .day-card{
+      margin-bottom: $padding-s;
+    }
   }
 }

@@ -1,7 +1,6 @@
 @import '~@angular/material/core/style/_variables';
 @import "./app-theme";
 
-
 $small-breakpoint-width: 840px;
 
 $padding-s: 16px;
@@ -9,3 +8,19 @@ $padding-m: 32px;
 $padding-l: 40px;
 
 $hover-background: mat-color($steak-app-grey, 0.1);
+
+[padding] {
+  padding: $padding-l;
+}
+
+@media ($mat-small) {
+  [padding] {
+    padding: $padding-m;
+  }
+}
+
+@media ($mat-xsmall) {
+  [padding] {
+    padding: $padding-s;
+  }
+}

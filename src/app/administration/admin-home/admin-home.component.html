@@ -1,37 +1,31 @@
-<div fxLayout="row">
+<steak-page-content padding>
 
-    <!--the list of elements-->
-    <div fxFlex="grow">
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="start stretch">
-            <div fxFlex="1 2 calc(30em + 20px)" *ngFor="let date of dates" class="day-box">
-                <md-card>
-                    <md-card-title>{{date | date:"EEEE"}}</md-card-title>
-                    <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
+    <div fxLayout="row" fxLayoutWrap fxLayoutGap="16px" fxLayoutAlign="space-between start">
+        <!--the list of elements-->
+        <md-card fxFlex="1 1 350px" *ngFor="let date of dates" class="day-card">
+            <md-card-title>{{date | date:"EEEE"}}</md-card-title>
+            <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
 
 
-                    <md-card-content class="offers-list">
-                        <md-list>
-                            <!--<h3 md-subheader>Folders</h3>-->
-                            <steak-admin-offer-item (offerChange)="onOfferChange($event)" (offerDelete)="onOfferDelete($event)" [offer]="offer" *ngFor="let offer of filterOffersForDate(offers, date)"></steak-admin-offer-item>
-                            <md-divider></md-divider>
-                            <!--<h3 md-subheader>Notes</h3>-->
+            <md-card-content class="offers-list">
+                <md-list>
+                    <!--<h3 md-subheader>Folders</h3>-->
+                    <steak-admin-offer-item (offerChange)="onOfferChange($event)"
+                                            (offerDelete)="onOfferDelete($event)"
+                                            [offer]="offer"
+                                            *ngFor="let offer of filterOffersForDate(offers, date)"></steak-admin-offer-item>
+                    <md-divider></md-divider>
+                    <!--<h3 md-subheader>Notes</h3>-->
 
-                        </md-list>
-                    </md-card-content>
-                    <md-card-actions>
-                        <button md-button (click)="createNewFor(date)" class="add-new-button">+ Add new entry</button>
+                </md-list>
+            </md-card-content>
+            <md-card-actions>
+                <button md-button (click)="createNewFor(date)" class="add-new-button">+ Add new entry</button>
 
-                    </md-card-actions>
-                </md-card>
-            </div>
-        </div>
+            </md-card-actions>
+        </md-card>
     </div>
+</steak-page-content>
 
-    <!--the create new dialog space-->
-    <div fxFlex="grow" *ngIf="editingForDate">
-        <steak-offer-form-dialog [date]="editingForDate"></steak-offer-form-dialog>
-    </div>
-
-</div>
 
 

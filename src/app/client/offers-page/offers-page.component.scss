@@ -1,17 +1,16 @@
 @import "../../../styles/variables";
-.day-grid-container {
-  display: flex;
-  
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  
-  .day-tile {
-    margin: $padding-s;
-    display: block;
-    flex-grow: 1;
 
-    min-width:256px;
-    max-width: 500px;
-    
+.day-card{
+  margin-bottom: $padding-l;
+
+  @media ($mat-small) {
+    .day-card{
+      margin-bottom: $padding-m;
+    }
+  }
+  @media ($mat-xsmall) {
+    .day-card{
+      margin-bottom: $padding-s;
+    }
   }
 }
