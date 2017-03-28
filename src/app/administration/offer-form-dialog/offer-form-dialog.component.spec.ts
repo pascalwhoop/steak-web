@@ -5,17 +5,20 @@ import {FormsModule} from "@angular/forms";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
+import {OfferCacheService} from "../../cache/offer-cache.service";
 
 describe('OfferFormDialogComponent', () => {
     let component: OfferFormDialogComponent;
     let fixture: ComponentFixture<OfferFormDialogComponent>;
     let feedbackSpy = jasmine.createSpyObj('vfeedbackSpy', ['showMessageOnAnswer']);
+    let cacheSpy = jasmine.createSpyObj('offerCache', ['find']);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             providers: [
                 {provide: AjaxVisualFeedbackService, useValue: feedbackSpy},
+                {provide: OfferCacheService, useValue: cacheSpy},
                 {provide: OffersApi, useClass: OffersApiStub}
             ],
             declarations: [OfferFormDialogComponent],
