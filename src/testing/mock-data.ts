@@ -62,7 +62,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
         "orders": [
             {
                 "_id": "58ab03d320f496430c230559",
-                "employee_id": "pbr",
+                "employee_id": "xxx",
                 "takeaway_flag": true,
                 "paid": false,
                 "amount": 5
@@ -83,7 +83,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
         "orders": [
             {
                 "_id": "58ab03d320f493430c230949",
-                "employee_id": "pbr",
+                "employee_id": "xxx",
                 "takeaway_flag": true,
                 "paid": false,
                 "amount": 5
@@ -95,7 +95,7 @@ export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
 export const MOCK_ORDERS: Order[] = [
     {
         "_id": "58ab03d320f496430c230559",
-        "employee_id": "pbr",
+        "employee_id": "xxx",
         "takeaway_flag": true,
         "paid": false,
         "offer": {
@@ -112,13 +112,13 @@ export const MOCK_ORDERS: Order[] = [
     },
     {
         "_id": "58ab0a3cd555c54fdb5ca7e4",
-        "employee_id": "pbr",
+        "employee_id": "xxx",
         "takeaway_flag": true,
         "paid": false,
         "offer": {
             "_id": "58a47bd88fdd83084b5c88a2",
             "description": "Pudding alla schwarzes Loch",
-            "vegetarian": false,
+            "vegetarian": true,
             "price": 5,
             "time": "lunch",
             "date": new Date("2017-02-21T00:00:00.000Z"),

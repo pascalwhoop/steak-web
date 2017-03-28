@@ -13,6 +13,6 @@ export const environment = {
   },
   DEFAULT_HEADERS: {
     'Content-Type': "application/json",
-    'x-auth-username': 'bts'
+    'x-auth-username': 'xxx'      //Only for testing locally
   }
 };
