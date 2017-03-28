@@ -23,7 +23,7 @@ describe('AdminHomeComponent', () => {
 
     //mocking a dialogRef for when we open our Md dialog with a button
     let mockDialogRef = new MdDialogRef(new OverlayRef(null,null,null,null),{});
-    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null);
+    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null, null);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
