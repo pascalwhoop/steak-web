@@ -29,3 +29,6 @@ export enum EditMode {
     CREATE, UPDATE, DELETE
 }
 
+export function isNullOrUndefined(test){
+    return test === null || test === undefined;
+}

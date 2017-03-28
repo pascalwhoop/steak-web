@@ -8,11 +8,11 @@ import {PageTitleService} from "../../services/page-title.service";
   styleUrls: ['page-header.component.scss']
 })
 export class PageHeaderComponent {
-  constructor(private _componentPageTitle: PageTitleService) { }
+  constructor(private titleService: PageTitleService) { }
 
   @Output() toggleSidenav = new EventEmitter<void>();
 
   getTitle() {
-    return this._componentPageTitle.title;
+    return this.titleService.title;
   }
 }
