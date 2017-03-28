@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 import {OrdersPageComponent} from "./orders-page/orders-page.component";
 import {RouterModule} from "@angular/router";
-import {LoggedInGuard} from "../../login/logged-in.guard";
+import {OrdersSummaryCardComponent} from "./orders-summary-card/orders-summary-card.component";
+import {OrdersHistoryTableComponent} from "./orders-history-table/orders-history-table.component";
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([{path: '', component: OrdersPageComponent}])
-  ],
-  declarations: [OrdersPageComponent]
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild([{path: '', component: OrdersPageComponent}])
+    ],
+    declarations: [OrdersPageComponent, OrdersSummaryCardComponent, OrdersHistoryTableComponent]
 })
-export class OrdersModule { }
+export class OrdersModule {
+}
