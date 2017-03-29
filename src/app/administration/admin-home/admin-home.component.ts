@@ -28,6 +28,7 @@ export class AdminHomeComponent implements OnInit {
         this.offers = this.offerCache.offers;
         this.fetchOffers()
             .subscribe(offers => this.offerCache.putMany(offers));
+        this.ensureOffersCached()
     }
 
     /**
@@ -92,5 +93,15 @@ export class AdminHomeComponent implements OnInit {
         let obs = this.offerApi.offersGet(null, new Date());
         obs.subscribe(offers => this.offers = offers);
         return obs;
+    }
+
+    ensureOffersCached() {
+        if(this.offerCache.offers.length == 0){
+            this.fetchAllOffersAndCache();
+        }
+    }
+
+    private fetchAllOffersAndCache (): void{
+        this.offerApi.offersGet().subscribe(offers =>this.offerCache.putMany(offers));
     }
 }

@@ -10,6 +10,7 @@ export class OfferCacheService {
         this._offers = new Map<string, Offer>();
         let offers = <Offer[]>JSON.parse(localStorage.getItem('offers'));
         if (offers) this._putManyInMemory(offers);
+        console.log("we have " + this.offers.length + " cached offers to use.")
     }
 
 
