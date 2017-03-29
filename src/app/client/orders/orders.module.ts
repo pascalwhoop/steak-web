@@ -5,10 +5,14 @@ import {RouterModule} from "@angular/router";
 import {OrdersSummaryCardComponent} from "./orders-summary-card/orders-summary-card.component";
 import {OrdersHistoryTableComponent} from "./orders-history-table/orders-history-table.component";
 import {SharedModule} from "../../shared/shared.module";
-import {CovalentCoreModule, CovalentCommonModule} from "@covalent/core";
+import {
+    CovalentCoreModule, CovalentCommonModule, CovalentDataTableModule, CovalentSearchModule,
+    TdDataTableService
+} from "@covalent/core";
 
 @NgModule({
     imports: [
+        CovalentCoreModule,
         SharedModule,
         RouterModule.forChild([{path: '', component: OrdersPageComponent}])
     ],

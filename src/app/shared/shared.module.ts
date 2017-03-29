@@ -33,7 +33,6 @@ import {NoopAnimationsModule} from "@angular/platform-browser/animations";
         ApiModule,
         FormsModule,
         MaterialModule,
-        CovalentCoreModule,
         PageHeaderComponent,
         PageContentComponent,
         WorkingSpinnerComponent,
