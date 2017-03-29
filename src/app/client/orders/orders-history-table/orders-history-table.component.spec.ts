@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrdersHistoryTableComponent } from './orders-history-table.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('OrdersHistoryTableComponent', () => {
   let component: OrdersHistoryTableComponent;
@@ -8,7 +9,8 @@ describe('OrdersHistoryTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrdersHistoryTableComponent ]
+      declarations: [ OrdersHistoryTableComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

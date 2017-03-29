@@ -27,6 +27,7 @@ import {environment} from "../../../../environments/environment";
 import {OrderBooking} from "../../model/OrderBooking";
 import {Order} from "../../model/Order";
 import {toApiDate, isNullOrUndefined} from "../../../core/util/util.service";
+import {OffersApi} from "./OffersApi";
 
 
 /* tslint:disable:no-unused-variable member-ordering */
@@ -92,7 +93,7 @@ export class OrdersApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return OrdersApi.inflateOrderFromJson(response.json());
                 }
             });
     }
@@ -178,7 +179,7 @@ export class OrdersApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json().map(oJson => OrdersApi.inflateOrderFromJson(oJson));
                 }
             });
     }
@@ -228,5 +229,11 @@ export class OrdersApi {
         return this.http.request(path, requestOptions);
     }
 
+    static inflateOrderFromJson(json): Order {
+        if(json.date) json.date = new Date(json.date);
+        if(json.offer.date) json.offer.date = new Date(json.offer.date);
+        return json as Order;
+    }
 
 }
+

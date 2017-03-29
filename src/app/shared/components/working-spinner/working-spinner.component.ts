@@ -10,7 +10,7 @@ import {AjaxVisualFeedbackService} from "../../../ajax-visual-feedback/ajax-visu
 export class WorkingSpinnerComponent implements OnInit, OnDestroy {
 
 
-    private _visible: boolean;
+    public _visible: boolean;
     private _subscription: AnonymousSubscription;
     private _connectionCounter = 0;
 
