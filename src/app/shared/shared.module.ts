@@ -14,6 +14,8 @@ import {ObjectToArrayPipe} from "./pipes/object-to-array.pipe";
 import {WorkingSpinnerComponent} from "./components/working-spinner/working-spinner.component";
 import {BrowserXhr} from "@angular/http";
 import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.service";
+import {CovalentCoreModule} from "@covalent/core";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     imports: [
@@ -31,6 +33,7 @@ import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.servi
         ApiModule,
         FormsModule,
         MaterialModule,
+        CovalentCoreModule,
         PageHeaderComponent,
         PageContentComponent,
         WorkingSpinnerComponent,

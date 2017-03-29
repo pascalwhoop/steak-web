@@ -8,7 +8,7 @@ import {LoginModule} from "./login/login.module";
 import {BrowserXhr} from "@angular/http";
 import {AjaxVisualFeedbackModule} from "./ajax-visual-feedback/ajax-visual-feedback.module";
 import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.service";
-
+import {CoreModule} from "./core/core.module";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.servic
         AppComponent
     ],
     imports: [
-        BrowserModule,
+        CoreModule,
         SharedModule,
         AppRoutingModule,
         ClientModule,
