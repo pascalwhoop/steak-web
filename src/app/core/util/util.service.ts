@@ -32,3 +32,7 @@ export enum EditMode {
 export function isNullOrUndefined(test){
     return test === null || test === undefined;
 }
+
+export function roundToTwoAfterDecimal(num: number){
+    return Math.round(num *100)/100;
+}

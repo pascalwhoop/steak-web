@@ -20,7 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "steak",
       "styles": [
-        "main.scss"
+        "main.scss",
+        "../node_modules/@covalent/core/common/platform.scss"
+
       ],
       "scripts": ["../node_modules/lodash/lodash.js"],
       "environmentSource": "environments/environment.ts",

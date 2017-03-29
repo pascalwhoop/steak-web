@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
+import {roundToTwoAfterDecimal} from "../../../core/util/util.service";
 
 @Component({
     selector: 'steak-orders-summary-card',
@@ -33,16 +34,17 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
     private calcExpectedBill(orders: Order[]): number {
 
         let sum = this.calcOpenSum(orders);
-        return this.roundToTwoAfterDecimal(sum / this.getPercentageOfMonthComplete());
+        return roundToTwoAfterDecimal(sum / this.getPercentageOfMonthComplete());
     }
 
     private calcVegetarianScore(orders: Order[]): number {
-        let vegCount = orders.map(o => o.offer.vegetarian? 1 : 0).reduce((prev, curr) => prev+curr);
+        let vegCount = orders.map(o => <number> (o.offer.vegetarian? 1 : 0)).reduce((prev, curr) => prev+curr);
         return Math.round(vegCount / orders.length * 100);
     }
 
     private calcOpenSum(orders: Order[]): number {
-        return orders.map(o => o.amount).reduce((prev, curr) => prev + curr);
+        let sum = orders.map(o => o.amount).reduce((prev, curr) => prev + curr);
+        return roundToTwoAfterDecimal(sum);
     }
 
     /**
@@ -68,7 +70,4 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
         return new Date(year, month+1, 0).getDate();
     }
 
-    private roundToTwoAfterDecimal(num: number){
-        return Math.round(num *100)/100;
-    }
 }

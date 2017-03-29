@@ -209,7 +209,7 @@ export class OffersApi {
             headers: headers,
         });
 
-        let offerData = _.cloneDeep(offer);
+        let offerData = <any>_.cloneDeep(offer);
         //simplify the date by capping of the time part
         offerData.date = toApiDate(offerData.date);
 

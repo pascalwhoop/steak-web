@@ -4,7 +4,7 @@ import {NO_ERRORS_SCHEMA, ViewChild, Component, SimpleChanges} from "@angular/co
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {Order} from "../../../shared/model/Order";
 
-fdescribe('OrdersSummaryCardComponent', () => {
+describe('OrdersSummaryCardComponent', () => {
     let component: OrdersSummaryCardComponent;
     let fixture: ComponentFixture<OrdersSummaryCardComponent>;
 
