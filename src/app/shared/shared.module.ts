@@ -27,7 +27,7 @@ import {NoopAnimationsModule} from "@angular/platform-browser/animations";
         RouterModule,
     ],
     declarations: [PageHeaderComponent, PageContentComponent, SidenavComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
-    providers: [PageTitleService, {provide: BrowserXhr, useExisting: CustomBrowserXhr}],
+    providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
     exports: [
         CommonModule,
         ApiModule,

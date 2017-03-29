@@ -9,6 +9,7 @@ import {BrowserXhr} from "@angular/http";
 import {AjaxVisualFeedbackModule} from "./ajax-visual-feedback/ajax-visual-feedback.module";
 import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.service";
 import {CoreModule} from "./core/core.module";
+import {PageTitleService} from "./shared/services/page-title.service";
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {CoreModule} from "./core/core.module";
         LoginModule,
         AjaxVisualFeedbackModule
     ],
-    providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
+    providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}, PageTitleService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
