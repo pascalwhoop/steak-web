@@ -45,6 +45,7 @@ describe('AdminHomeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(AdminHomeComponent);
         component = fixture.componentInstance;
+        spyOn(component, 'ensureOffersCached').and.stub(); //this gets called on ngOnInit but we don't want this to be called
 
         titleService = fixture.debugElement.injector.get(PageTitleService);
         spyOn(component.dialog, 'open').and.returnValue(mockDialogRef);
