@@ -34,7 +34,7 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
     sortBy: string = 'date';
     sortOrder: TdDataTableSortingOrder = TdDataTableSortingOrder.Descending;
 
-    constructor(public _dataTableService: TdDataTableService) {
+    constructor(public dataTableService: TdDataTableService) {
     }
 
     ngOnInit(): void {
@@ -55,9 +55,9 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
     filter(): IOrderHistoryData[] {
         if(!this.data || this.data.length < 1) return;
         let newData = this.data.map(order => this.generateRowFrom(order));
-        newData = this._dataTableService.filterData(newData, this.searchTerm, true);
+        newData = this.dataTableService.filterData(newData, this.searchTerm, true);
         this.filteredTotal = newData.length;
-        newData = this._dataTableService.sortData(newData, this.sortBy, this.sortOrder);
+        newData = this.dataTableService.sortData(newData, this.sortBy, this.sortOrder);
         return newData;
     }
 
