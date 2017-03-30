@@ -1,17 +1,23 @@
 @import "../../../styles/app-theme";
 @import "../../../styles/variables";
 
-.day-card{
+.day-card {
   margin-bottom: $padding-l;
 
   @media ($mat-small) {
-    .day-card{
+    .day-card {
       margin-bottom: $padding-m;
     }
   }
   @media ($mat-xsmall) {
-    .day-card{
+    .day-card {
       margin-bottom: $padding-s;
     }
+  }
+
+  steak-print-day-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
 }

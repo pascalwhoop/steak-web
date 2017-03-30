@@ -20,7 +20,7 @@ export class PrintDayButtonComponent implements OnInit {
 
     public onClick(date: Date) {
         this.fetchAllOrdersForDate(date).subscribe(orders => {
-            this.printService.printListOfOrdersForKitchen(orders);
+            this.printService.printListOfOrdersForKitchen(date, orders);
         })
 
     }

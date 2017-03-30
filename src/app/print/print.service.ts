@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Order} from "../shared/model/Order";
 import * as jsPDF from "jspdf";
 import {offerCountMapFromOrders, makeDaySubtitle, toApiDate} from "../core/util/util.service";
+import {MdSnackBar} from "@angular/material";
 
 @Injectable()
 export class PrintService {
@@ -10,20 +11,21 @@ export class PrintService {
     TOP_MARGIN = 20;
     LINE_HEIGHT = 10;
 
-    constructor() {
+    constructor(public snackBar: MdSnackBar) {
     }
 
-    public printListOfOrdersForKitchen(orders: Order[]) {
+    public printListOfOrdersForKitchen(date: Date, orders: Order[]) {
         let ordersMap = offerCountMapFromOrders(orders);
         let doc = this.getFreshPdf();
         let yOffset = this.TOP_MARGIN;
         if (orders.length == 0) {
-            this.makeNoOrdersDoc(doc);
+            this.notifyNoOrders(date);
             return;
         }
         yOffset = this.addHeader(doc, "Orders for: " + makeDaySubtitle(orders[0].offer.date), this.TOP_MARGIN);
         this.addLines(doc, this.getLinesFromOffersMap(ordersMap), yOffset, this.LINE_HEIGHT);
         doc.save('orders' + toApiDate(orders[0].offer.date) + '.pdf');
+        this.notifyPdfCreated(date);
     }
 
     /**
@@ -62,10 +64,12 @@ export class PrintService {
         return yOffset + 20;
     }
 
-    private makeNoOrdersDoc(doc: jsPDF) {
-        doc.text("No orders for tomorrow!", this.LEFT_MARGIN, this.TOP_MARGIN);
-        doc.save('orders.pdf');
+    private notifyNoOrders(date: Date) {
+        this.snackBar.open('No orders for ' + makeDaySubtitle(date), null, {duration: 2000});
     }
 
 
+    private notifyPdfCreated(date: Date) {
+        this.snackBar.open('PDF generated for ' + makeDaySubtitle(date), null, {duration: 2000});
+    }
 }
