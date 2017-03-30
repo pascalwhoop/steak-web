@@ -5,7 +5,7 @@ import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {PrintService} from "../../print/print.service";
 import {OrdersApiStub} from "../../../testing/orders-api-stub";
 
-fdescribe('PrintDayButtonComponent', () => {
+describe('PrintDayButtonComponent', () => {
     let component: PrintDayButtonComponent;
     let fixture: ComponentFixture<PrintDayButtonComponent>;
     let printerSpy = jasmine.createSpyObj('printService', ['printListOfOrdersForKitchen']);

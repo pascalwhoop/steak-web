@@ -1,11 +1,14 @@
 <steak-page-content padding>
 
+    <md-divider></md-divider>
+
     <div fxLayout="row" fxLayoutWrap fxLayoutGap="16px" fxLayoutAlign="space-between start">
         <!--the list of elements-->
         <md-card fxFlex="1 1 350px" *ngFor="let date of dates" class="day-card">
             <md-card-title>{{date | date:"EEEE"}}</md-card-title>
             <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
 
+            <steak-print-day-button [date]="date"></steak-print-day-button>
 
             <md-card-content class="offers-list">
                 <md-list>
