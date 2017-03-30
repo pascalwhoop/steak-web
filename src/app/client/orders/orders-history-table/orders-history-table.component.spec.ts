@@ -6,7 +6,7 @@ import {By} from "@angular/platform-browser";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {CoreModule} from "../../../core/core.module";
 
-fdescribe('OrdersHistoryTableComponent', () => {
+describe('OrdersHistoryTableComponent', () => {
     let component: OrdersHistoryTableComponent;
     let fixture: ComponentFixture<OrdersHistoryTableComponent>;
 
