@@ -7,15 +7,18 @@ import {OfferFormDialogComponent} from "./offer-form-dialog/offer-form-dialog.co
 import { AdminOfferItemComponent } from './admin-offer-item/admin-offer-item.component';
 import {CacheModule} from "../cache/cache.module";
 import { OfferDescriptionAutoCompleteComponent } from './offer-description-auto-complete/offer-description-auto-complete.component';
+import {PrintModule} from "../print/print.module";
+import { PrintDayButtonComponent } from './print-day-button/print-day-button.component';
 
 @NgModule({
     imports: [
         CommonModule,
         SharedModule,
         AdministrationRoutingModule,
+        PrintModule,
         CacheModule
     ],
-    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent],
+    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent],
     entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {
