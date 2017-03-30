@@ -1,4 +1,4 @@
-import {Offer} from "../../shared/model/Offer";
+import {Order} from "../../shared/model/Order";
 export function toApiDate(date: Date | string): string {
     date = new Date(date.toString());
     return date.toISOString().slice(0, 10);
@@ -29,10 +29,20 @@ export enum EditMode {
     CREATE, UPDATE, DELETE
 }
 
-export function isNullOrUndefined(test){
+export function isNullOrUndefined(test) {
     return test === null || test === undefined;
 }
 
-export function roundToTwoAfterDecimal(num: number){
-    return Math.round(num *100)/100;
+export function roundToTwoAfterDecimal(num: number) {
+    return Math.round(num * 100) / 100;
+}
+export function offerCountMapFromOrders(orders: Order[]): Map<string, number> {
+    let map = new Map<string,number>();
+
+    orders.forEach(order => {
+        let key = order.offer.description;
+        let val = map.get(key);
+        !val ? map.set(key, 1) : map.set(key, ++val);
+    });
+    return map;
 }
