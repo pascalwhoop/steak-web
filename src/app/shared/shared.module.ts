@@ -4,7 +4,6 @@ import {ApiModule} from "./api/api.module";
 import {MaterialModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {PageContentComponent} from "./components/page-content/page-content.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import "hammerjs";
 import {ObjectToArrayPipe} from "./pipes/object-to-array.pipe";
@@ -12,6 +11,7 @@ import {WorkingSpinnerComponent} from "./components/working-spinner/working-spin
 import {BrowserXhr} from "@angular/http";
 import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.service";
 import {CovalentCoreModule} from "@covalent/core";
+import {MainComponent} from "./components/main/main.component";
 
 @NgModule({
     imports: [
@@ -23,15 +23,15 @@ import {CovalentCoreModule} from "@covalent/core";
         CovalentCoreModule,
         RouterModule,
     ],
-    declarations: [PageContentComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
+    declarations: [MainComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
     providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
     exports: [
         CommonModule,
         CovalentCoreModule,
         ApiModule,
+        MainComponent,
         FormsModule,
         MaterialModule,
-        PageContentComponent,
         WorkingSpinnerComponent,
         ObjectToArrayPipe,
         FlexLayoutModule,

@@ -3,7 +3,7 @@ import {RouterModule} from "@angular/router";
 import {OffersPageComponent} from "./offers-page/offers-page.component";
 import {BillingPageComponent} from "./billing-page/billing-page.component";
 import {LoggedInGuard} from "../login/logged-in.guard";
-import {MainComponent} from "../main/main.component";
+import {MainComponent} from "../shared/components/main/main.component";
 
 @NgModule({
     imports: [

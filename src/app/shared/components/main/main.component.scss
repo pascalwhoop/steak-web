@@ -1,0 +1,7 @@
+steak-main{
+  //fix for bug in covalent, not making page full screen for some reason
+  md-sidenav-container{
+    position: absolute !important;
+
+  }
+}

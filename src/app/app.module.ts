@@ -9,13 +9,11 @@ import {AjaxVisualFeedbackModule} from "./ajax-visual-feedback/ajax-visual-feedb
 import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.service";
 import {CoreModule} from "./core/core.module";
 import {PageTitleService} from "./shared/services/page-title.service";
-import { MainComponent } from './main/main.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        MainComponent
     ],
     imports: [
         CoreModule,
