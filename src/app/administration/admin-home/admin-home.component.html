@@ -1,32 +1,33 @@
 <steak-page-content padding>
 
-    <md-divider></md-divider>
 
-    <div fxLayout="row" fxLayoutWrap fxLayoutGap="16px" fxLayoutAlign="space-between start">
+    <div fxLayout="row"  fxLayoutWrap fxLayoutAlign="space-between start">
         <!--the list of elements-->
-        <md-card fxFlex="1 1 350px" *ngFor="let date of dates" class="day-card">
-            <md-card-title>{{date | date:"EEEE"}}</md-card-title>
-            <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
+        <div fxFlex="100" fxFlex.gt-md="33" fxFlex.gt-xs="50" *ngFor="let date of dates" >
+            <md-card class="day-card">
+                <md-card-title>{{date | date:"EEEE"}}</md-card-title>
+                <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
 
-            <steak-print-day-button [date]="date"></steak-print-day-button>
+                <steak-print-day-button [date]="date"></steak-print-day-button>
 
-            <md-card-content class="offers-list">
-                <md-list>
-                    <!--<h3 md-subheader>Folders</h3>-->
-                    <steak-admin-offer-item (offerChange)="onOfferChange($event)"
-                                            (offerDelete)="onOfferDelete($event)"
-                                            [offer]="offer"
-                                            *ngFor="let offer of filterOffersForDate(offers, date)"></steak-admin-offer-item>
-                    <md-divider></md-divider>
-                    <!--<h3 md-subheader>Notes</h3>-->
+                <md-card-content class="offers-list">
+                    <md-list>
+                        <!--<h3 md-subheader>Folders</h3>-->
+                        <steak-admin-offer-item (offerChange)="onOfferChange($event)"
+                                                (offerDelete)="onOfferDelete($event)"
+                                                [offer]="offer"
+                                                *ngFor="let offer of filterOffersForDate(offers, date)"></steak-admin-offer-item>
+                        <md-divider></md-divider>
+                        <!--<h3 md-subheader>Notes</h3>-->
 
-                </md-list>
-            </md-card-content>
-            <md-card-actions>
-                <button md-button (click)="createNewFor(date)" class="add-new-button">+ Add new entry</button>
+                    </md-list>
+                </md-card-content>
+                <md-card-actions>
+                    <button md-button (click)="createNewFor(date)" class="add-new-button">+ Add new entry</button>
 
-            </md-card-actions>
-        </md-card>
+                </md-card-actions>
+            </md-card>
+        </div>
     </div>
 </steak-page-content>
 
