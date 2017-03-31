@@ -1,4 +1,3 @@
-import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {ClientModule} from "./client/client.module";
@@ -10,11 +9,13 @@ import {AjaxVisualFeedbackModule} from "./ajax-visual-feedback/ajax-visual-feedb
 import {CustomBrowserXhr} from "./ajax-visual-feedback/custom-browser-xhr.service";
 import {CoreModule} from "./core/core.module";
 import {PageTitleService} from "./shared/services/page-title.service";
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        MainComponent
     ],
     imports: [
         CoreModule,

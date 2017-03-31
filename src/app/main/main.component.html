@@ -1,0 +1,30 @@
+<td-layout #layout>
+    <td-navigation-drawer [sidenavTitle]="getTitle()" logo="assets:oc_logo.svg"
+                          navigationRoute="/"> <!-- [name]="getUsername()" color="color"-->
+        <md-nav-list>
+            <h3 md-subheader>Steak</h3>
+            <a md-list-item routerLink="/client/offers" routerLinkActive="active" (click)="layout.close()">Offers</a>
+            <a md-list-item routerLink="/client/orders" routerLinkActive="active" (click)="layout.close()">Orders</a>
+            <a md-list-item routerLink="/admin" routerLinkActive="active" (click)="layout.close()">Administration</a>
+            <a md-list-item routerLink="/client/billing" routerLinkActive="active" (click)="layout.close()">Billing</a>
+        </md-nav-list>
+
+        <!--<md-nav-list td-navigation-drawer-menu>-->
+            <!--<a md-list-item (click)="logout()"><md-icon>exit_to_app</md-icon>Sign out</a>-->
+        <!--</md-nav-list>-->
+    </td-navigation-drawer>
+
+    <td-layout-nav logo="assets:oc_logo.svg">
+        <div td-toolbar-content layout="row" layout-align="center center" flex>
+            <span>{{getTitle()}}</span>
+            <span flex></span>
+            <steak-working-spinner></steak-working-spinner>
+            <a md-icon-button mdTooltip="Logout">
+                <md-icon>person</md-icon>
+            </a>
+
+        </div>
+        <router-outlet></router-outlet>
+    </td-layout-nav>
+
+</td-layout>
