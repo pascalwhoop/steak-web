@@ -25,7 +25,14 @@ pre {
 oc-steak-app, steak-sidenav, md-sidenav-container{
   display: block;
 }
+
+.md-content{
+  max-width: $layout-breakpoint-lg;
+  margin: auto;
+}
+
 md-sidenav-container{
   transform: none !important;
   position: inherit !important;
 }
+
