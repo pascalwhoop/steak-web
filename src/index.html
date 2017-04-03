@@ -1,15 +1,242 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>SteakWeb</title>
-  <base href="/">
+    <meta charset="utf-8">
+    <title>SteakWeb</title>
+    <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style type="text/css">
+        .loading-container {
+            text-align: center;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90% !important;
+            width: 300px;
+            height: 300px;
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .cssload-loader {
+            -webkit-animation:spin 45s linear infinite;
+            -moz-animation:spin 45s linear infinite;
+            animation:spin 45s linear infinite;
+            width: 100%;
+            height: 100%;
+            perspective: 50px;
+        }
+
+        @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+        @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+        
+        .cssload-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            -o-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            border-radius: 50%;
+            -o-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+        }
+
+        .cssload-inner.cssload-one {
+            left: 0%;
+            top: 0%;
+            animation: cssload-rotate-one 2.15s linear infinite;
+            -o-animation: cssload-rotate-one 2.15s linear infinite;
+            -ms-animation: cssload-rotate-one 2.15s linear infinite;
+            -webkit-animation: cssload-rotate-one 2.15s linear infinite;
+            -moz-animation: cssload-rotate-one 2.15s linear infinite;
+            border-bottom: 10px solid #fa2d3b;
+        }
+
+        .cssload-inner.cssload-two {
+            right: 0%;
+            top: 0%;
+            animation: cssload-rotate-two 2.15s linear infinite;
+            -o-animation: cssload-rotate-two 2.15s linear infinite;
+            -ms-animation: cssload-rotate-two 2.15s linear infinite;
+            -webkit-animation: cssload-rotate-two 2.15s linear infinite;
+            -moz-animation: cssload-rotate-two 2.15s linear infinite;
+            border-right: 10px solid #ffc640;
+        }
+
+        .cssload-inner.cssload-three {
+            right: 0%;
+            bottom: 0%;
+            animation: cssload-rotate-three 2.15s linear infinite;
+            -o-animation: cssload-rotate-three 2.15s linear infinite;
+            -ms-animation: cssload-rotate-three 2.15s linear infinite;
+            -webkit-animation: cssload-rotate-three 2.15s linear infinite;
+            -moz-animation: cssload-rotate-three 2.15s linear infinite;
+            border-top: 10px solid #0081bd;
+        }
+
+        @keyframes cssload-rotate-one {
+            0% {
+                transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+                transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+
+        @-o-keyframes cssload-rotate-one {
+            0% {
+                -o-transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+                -o-transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+
+        @-ms-keyframes cssload-rotate-one {
+            0% {
+                -ms-transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+                -ms-transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-rotate-one {
+            0% {
+                -webkit-transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+
+        @-moz-keyframes cssload-rotate-one {
+            0% {
+                -moz-transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+                -moz-transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes cssload-rotate-two {
+            0% {
+                transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+                transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+
+        @-o-keyframes cssload-rotate-two {
+            0% {
+                -o-transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+                -o-transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+
+        @-ms-keyframes cssload-rotate-two {
+            0% {
+                -ms-transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+                -ms-transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-rotate-two {
+            0% {
+                -webkit-transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+
+        @-moz-keyframes cssload-rotate-two {
+            0% {
+                -moz-transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+                -moz-transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes cssload-rotate-three {
+            0% {
+                transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+                transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+
+        @-o-keyframes cssload-rotate-three {
+            0% {
+                -o-transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+                -o-transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+
+        @-ms-keyframes cssload-rotate-three {
+            0% {
+                -ms-transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+                -ms-transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-rotate-three {
+            0% {
+                -webkit-transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+
+        @-moz-keyframes cssload-rotate-three {
+            0% {
+                -moz-transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+                -moz-transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+    </style>
 </head>
 <body>
-  <oc-steak-app>Loading ...</oc-steak-app>
+<oc-steak-app>
+    <div class="loading-container">
+        <div class="cssload-loader">
+            <div class="cssload-inner cssload-one"></div>
+            <div class="cssload-inner cssload-two"></div>
+            <div class="cssload-inner cssload-three"></div>
+        </div>
+        <!--<img src="assets/icons/oc_logo.svg" alt="">-->
+        <p class="loading-text">Steak is loading...</p>
+    </div>
+</oc-steak-app>
 </body>
 </html>
