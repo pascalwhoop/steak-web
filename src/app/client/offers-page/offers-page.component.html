@@ -1,15 +1,6 @@
 <div fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between start">
     <!--the list of elements-->
     <div fxFlex="100" fxFlex.gt-md="33" fxFlex.gt-xs="50" *ngFor="let day of offerOrderData">
-        <md-card class="day-card " [ngClass]="{'mat-primary': dayHasOrders(day), 'mat-warn': !dayHasOrders(day)}">
-            <md-card-title>{{makeDayTitle(day.offerOrderPairs[0].offer)}}</md-card-title>
-            <md-card-subtitle>{{makeDaySubtitle(day.offerOrderPairs[0].offer)}}</md-card-subtitle>
-            <md-card-content>
-                <md-list>
-                    <steak-offer-item md-list-item [oo-pair]="ooPair"
-                                      *ngFor="let ooPair of day.offerOrderPairs"></steak-offer-item>
-                </md-list>
-            </md-card-content>
-        </md-card>
+        <steak-day-offers-card [day]="day"></steak-day-offers-card>
     </div>
 </div>

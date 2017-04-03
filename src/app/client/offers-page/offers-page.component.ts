@@ -9,8 +9,12 @@ import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {Order} from "../../shared/model/Order";
 import * as _ from "lodash";
-import {makeDayTitle, makeDaySubtitle} from "../../core/util/util.service";
 import {UserService} from "../../login/user.service";
+
+export interface IDayPack {
+    date: Date;
+    offerOrderPairs: OfferOrdersPair[]
+}
 
 @Component({
     selector: 'steak-offers-page',
@@ -66,13 +70,7 @@ export class OffersPageComponent implements OnInit {
         return results.sort((a, b) => (a.date.getTime() - b.date.getTime()));
     }
 
-    makeDaySubtitle(offer: Offer): string {
-        return makeDaySubtitle(offer.date)
-    }
 
-    makeDayTitle(offer: Offer): string {
-        return makeDayTitle(offer.date)
-    }
 
     makeOfferOrderPairs(offers: Offer[], orders: Order[]): OfferOrdersPair[] {
         return offers.map(offer => {
@@ -83,15 +81,5 @@ export class OffersPageComponent implements OnInit {
         })
     }
 
-    dayHasOrders(day: IDayPack){
-        for(let pair of day.offerOrderPairs){
-            if(pair.orders.length > 0) return true;
-        }
-    }
-}
 
-
-interface IDayPack {
-    date: Date;
-    offerOrderPairs: OfferOrdersPair[]
 }
