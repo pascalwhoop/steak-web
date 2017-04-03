@@ -42,6 +42,7 @@ export class SharedModule {
 
     constructor(public iconRegistry: MdIconRegistry, public sanitizer: DomSanitizer) {
         this.iconRegistry.addSvgIcon('oc_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/oc_logo.svg'));
+        this.iconRegistry.addSvgIcon('oc_brand', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/oc_brand.svg'));
         this.iconRegistry.addSvgIcon('breakfast', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/breakfast.svg'));
         this.iconRegistry.addSvgIcon('soup', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/soup.svg'));
         this.iconRegistry.addSvgIcon('vegetarian', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/salad.svg'));
