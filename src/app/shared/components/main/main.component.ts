@@ -11,8 +11,8 @@ import {MdIconRegistry} from "@angular/material";
 })
 export class MainComponent implements OnInit {
 
-    constructor(public titleService: PageTitleService, public userService: UserService, public iconRegistry: MdIconRegistry, public sanitizer: DomSanitizer) {
-        this.iconRegistry.addSvgIcon('oc_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/oc_logo.svg'));
+    constructor(public titleService: PageTitleService, public userService: UserService) {
+
     }
 
     getTitle() {

@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ApiModule} from "./api/api.module";
-import {MaterialModule} from "@angular/material";
+import {MaterialModule, MdIconRegistry} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -12,6 +12,7 @@ import {BrowserXhr} from "@angular/http";
 import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.service";
 import {CovalentCoreModule} from "@covalent/core";
 import {MainComponent} from "./components/main/main.component";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @NgModule({
     imports: [
@@ -38,4 +39,12 @@ import {MainComponent} from "./components/main/main.component";
     ]
 })
 export class SharedModule {
+
+    constructor(public iconRegistry: MdIconRegistry, public sanitizer: DomSanitizer) {
+        this.iconRegistry.addSvgIcon('oc_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/oc_logo.svg'));
+        this.iconRegistry.addSvgIcon('breakfast', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/breakfast.svg'));
+        this.iconRegistry.addSvgIcon('soup', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/soup.svg'));
+        this.iconRegistry.addSvgIcon('vegetarian', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/salad.svg'));
+        this.iconRegistry.addSvgIcon('meat', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steak.svg'));
+    }
 }

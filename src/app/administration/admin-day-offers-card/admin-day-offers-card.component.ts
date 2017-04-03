@@ -22,11 +22,8 @@ export class AdminDayOffersCardComponent implements OnInit {
     @Output('offerDelete')
     offerDeleteEmitter: EventEmitter<Offer> = new EventEmitter();
 
-    constructor(public dialog: MdDialog, public iconRegistry: MdIconRegistry, public sanitizer: DomSanitizer) {
-        this.iconRegistry.addSvgIcon('breakfast', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/breakfast.svg'));
-        this.iconRegistry.addSvgIcon('soup', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/soup.svg'));
-        this.iconRegistry.addSvgIcon('vegetarian', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/salad.svg'));
-        this.iconRegistry.addSvgIcon('meat', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steak.svg'));
+    constructor(public dialog: MdDialog) {
+
     }
 
     ngOnInit() {
