@@ -18,21 +18,16 @@ describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
     let fixture: ComponentFixture<AdminHomeComponent>;
     let titleService: PageTitleService;
-    let ajaxSpy = jasmine.createSpyObj('feedback', ['showMessageOnAnswer']);
     let offerCacheSpy = jasmine.createSpyObj('offerCacheSpy', ['putMany', 'put', 'find']);
 
-    //mocking a dialogRef for when we open our Md dialog with a button
-    let mockDialogRef = new MdDialogRef(new OverlayRef(null,null,null,null),{});
-    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null, null);
+
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [MdDialogModule, FormsModule],
             providers: [
                 PageTitleService,
-                MdDialog,
                 {provide: OffersApi, useClass: OffersApiStub},
-                {provide: AjaxVisualFeedbackService, useValue: ajaxSpy},
                 {provide: OfferCacheService , useValue: offerCacheSpy}
             ],
             declarations: [AdminHomeComponent, OfferFormDialogComponent],
@@ -48,7 +43,6 @@ describe('AdminHomeComponent', () => {
         spyOn(component, 'ensureOffersCached').and.stub(); //this gets called on ngOnInit but we don't want this to be called
 
         titleService = fixture.debugElement.injector.get(PageTitleService);
-        spyOn(component.dialog, 'open').and.returnValue(mockDialogRef);
 
         fixture.detectChanges();
     });
@@ -90,20 +84,7 @@ describe('AdminHomeComponent', () => {
     });
 
 
-    it('should open the dialog on clicking the button', fakeAsync(() => {
-        expect(component.dialog.open).toHaveBeenCalledTimes(0);
-        clickAddNewButton(component, fixture);
-        fixture.detectChanges();
-        tick();
-        expect(component.dialog.open).toHaveBeenCalled();
-    }));
-
 });
-
-let clickAddNewButton = function (component: AdminHomeComponent, fixture: ComponentFixture<AdminHomeComponent>) {
-    let button = <HTMLElement> fixture.debugElement.queryAll(By.css('.add-new-button'))[0].nativeElement;
-    button.click();
-};
 
 
 let makeFourMockOffersForTomorrow = function () {

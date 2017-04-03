@@ -9,6 +9,7 @@ import {CacheModule} from "../cache/cache.module";
 import { OfferDescriptionAutoCompleteComponent } from './offer-description-auto-complete/offer-description-auto-complete.component';
 import {PrintModule} from "../print/print.module";
 import { PrintDayButtonComponent } from './print-day-button/print-day-button.component';
+import { AdminDayOffersCardComponent } from './admin-day-offers-card/admin-day-offers-card.component';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { PrintDayButtonComponent } from './print-day-button/print-day-button.com
         PrintModule,
         CacheModule
     ],
-    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent],
+    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent, AdminDayOffersCardComponent],
     entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {

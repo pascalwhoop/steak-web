@@ -1,0 +1,14 @@
+md-card {
+  .mat-list-item-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  md-card-actions {
+    button[md-button] {
+      //TODO fix for alignment issue on buttons in card action area
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+}

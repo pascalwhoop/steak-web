@@ -1,0 +1,40 @@
+<md-card class="day-card">
+  <md-card-title>
+    <div layout="row" layout-align="center center">
+      <span>{{date | date:"EEEE"}}</span>
+      <span flex></span>
+      <span>
+      <button md-icon-button [mdMenuTriggerFor]="toolbarMenu"><md-icon>more_vert</md-icon></button>
+      <md-menu #toolbarMenu="mdMenu">
+        <steak-print-day-button [date]="date"></steak-print-day-button>
+      </md-menu>
+    </span>
+    </div>
+  </md-card-title>
+  <md-card-subtitle>{{date | date:'dd.MM'}}</md-card-subtitle>
+
+
+
+  <md-card-content class="offers-list">
+    <md-list>
+      <!--<h3 md-subheader>Folders</h3>-->
+      <steak-admin-offer-item (offerChange)="onOfferChange($event)"
+                              (offerDelete)="onOfferDelete($event)"
+                              [offer]="offer"
+                              *ngFor="let offer of offers"></steak-admin-offer-item>
+      <md-divider></md-divider>
+      <!--<h3 md-subheader>Notes</h3>-->
+
+    </md-list>
+  </md-card-content>
+  <md-card-actions layout="row">
+    <button md-button color="primary" (click)="createNewFor(date)" class="add-new-button">Add new entry</button>
+    <!--<button md-button (click)="createNewFor(date)" class="add-new-button"></button>-->
+    <!--<span flex></span>-->
+    <!--<md-icon svgIcon="meat"      [ngClass]="{'mat-primary': hasMeatyItem(offers), 'mat-warn': !hasMeatyItem(offers)}"></md-icon>-->
+    <!--<md-icon svgIcon="breakfast" [ngClass]="{'mat-primary': hasBreakfast(offers), 'mat-warn': !hasBreakfast(offers)}"></md-icon>-->
+    <!--<md-icon svgIcon="vegetarian" [ngClass]="{'mat-primary': hasVegetarianItem(offers), 'mat-warn': !hasVegetarianItem(offers)}"></md-icon>-->
+    <!--<md-icon svgIcon="soup" [ngClass]="{'mat-primary': hasSoup(offers), 'mat-warn': !hasSoup(offers)}"></md-icon>-->
+    
+  </md-card-actions>
+</md-card>
