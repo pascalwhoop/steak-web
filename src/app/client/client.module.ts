@@ -6,6 +6,7 @@ import {SharedModule} from "../shared/shared.module";
 import { OfferItemComponent } from './offer-item/offer-item.component';
 import { BillingPageComponent } from './billing-page/billing-page.component';
 import { ClientHomeComponent } from './client-home/client-home.component';
+import { DayOffersCardComponent } from './day-offers-card/day-offers-card.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { ClientHomeComponent } from './client-home/client-home.component';
         SharedModule,
         ClientRoutingModule
     ],
-    declarations: [OffersPageComponent, OfferItemComponent, BillingPageComponent, ClientHomeComponent],
+    declarations: [OffersPageComponent, OfferItemComponent, BillingPageComponent, ClientHomeComponent, DayOffersCardComponent],
     
 })
 export class ClientModule {
