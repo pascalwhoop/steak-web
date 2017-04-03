@@ -2,7 +2,7 @@
     <span class="offer-text">{{ooPair.offer.description}}</span>
     <span class="offer-price">{{ooPair.offer.price}} €</span>
     <md-chip-list class="offer-tags">
-        <md-chip color="primary">V</md-chip>
+        <md-chip color="primary" *ngIf="ooPair.offer.vegetarian">Veggi</md-chip>
     </md-chip-list>
 </div>
 <div class="orders-box">
@@ -11,7 +11,7 @@
     </div>
     <div class="offer-actions">
         <button md-mini-fab (click)="removeOrder(ooPair)" [disabled]="ooPair.orders.length < 1">-</button>
-        <button md-mini-fab (click)="addOrder(ooPair.offer)">+</button>
+        <button color="primary" md-mini-fab (click)="addOrder(ooPair.offer)">+</button>
     </div>
 </div>
 

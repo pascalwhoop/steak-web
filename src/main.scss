@@ -36,3 +36,11 @@ md-sidenav-container{
   position: inherit !important;
 }
 
+
+md-card.mat-primary{
+  background-color: map_get($steak-app-primary, 100)
+}
+
+md-card.mat-warn{
+  background-color: map_get($steak-app-warn, 100)
+}

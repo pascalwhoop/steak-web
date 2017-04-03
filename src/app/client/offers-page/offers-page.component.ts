@@ -82,6 +82,12 @@ export class OffersPageComponent implements OnInit {
             }
         })
     }
+
+    dayHasOrders(day: IDayPack){
+        for(let pair of day.offerOrderPairs){
+            if(pair.orders.length > 0) return true;
+        }
+    }
 }
 
 

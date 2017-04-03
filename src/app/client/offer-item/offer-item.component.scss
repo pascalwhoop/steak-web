@@ -24,9 +24,9 @@ steak-offer-item {
     font-weight: bolder;
   }
 
-  .orders-box{
+  .orders-box {
     display: flex;
-    .order-counter{
+    .order-counter {
       flex: 1 0 auto;
     }
     .offer-actions {
@@ -34,8 +34,6 @@ steak-offer-item {
       text-align: right;
     }
   }
-
-
 
   .offer-tags {
     margin: $padding-s 0;

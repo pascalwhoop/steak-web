@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between start">
     <!--the list of elements-->
     <div fxFlex="100" fxFlex.gt-md="33" fxFlex.gt-xs="50" *ngFor="let day of offerOrderData">
-        <md-card class="day-card">
+        <md-card class="day-card " [ngClass]="{'mat-primary': dayHasOrders(day), 'mat-warn': !dayHasOrders(day)}">
             <md-card-title>{{makeDayTitle(day.offerOrderPairs[0].offer)}}</md-card-title>
             <md-card-subtitle>{{makeDaySubtitle(day.offerOrderPairs[0].offer)}}</md-card-subtitle>
             <md-card-content>
