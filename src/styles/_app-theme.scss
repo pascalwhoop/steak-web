@@ -1,5 +1,6 @@
 @import '~@angular/material/core/theming/all-theme';
 @import '~@covalent/core/theming/all-theme';
+@import "variables";
 
 //@import '~@angular/material/core/theming/_theming';
 
@@ -10,8 +11,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$steak-app-primary: mat-palette($mat-blue-grey);
-$steak-app-accent:  mat-palette($mat-teal, 500, 100, 700);
+$steak-app-primary: mat-palette($md-oc-blue);
+$steak-app-accent:  mat-palette($mat-orange, 500, 100, 700);
 
 // The warn palette is optional (defaults to red).
 $steak-app-warn:    mat-palette($mat-red);

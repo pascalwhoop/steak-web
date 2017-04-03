@@ -1,5 +1,5 @@
 @import '~@angular/material/core/style/_variables';
-@import "./app-theme";
+@import '~@angular/material/core/theming/_palette';
 
 $small-breakpoint-width: 840px;
 
@@ -7,7 +7,40 @@ $padding-s: 16px;
 $padding-m: 32px;
 $padding-l: 40px;
 
-$hover-background: mat-color($steak-app-grey, 0.1);
+$md-oc-blue: (
+        50 : #e0ebf6,
+        100 : #b3cce8,
+        200 : #80aad9,
+        300 : #4d88ca,
+        400 : #266fbe,
+        500 : #0055b3,
+        600 : #004eac,
+        700 : #0044a3,
+        800 : #003b9a,
+        900 : #002a8b,
+        A100 : #b7c7ff,
+        A200 : #849fff,
+        A400 : #5178ff,
+        A700 : #3764ff,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #ffffff,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #ffffff,
+                A700 : #ffffff,
+        )
+);
+
+$hover-background: green;
 
 [padding] {
   padding: $padding-l;
@@ -24,3 +57,4 @@ $hover-background: mat-color($steak-app-grey, 0.1);
     padding: $padding-s;
   }
 }
+
