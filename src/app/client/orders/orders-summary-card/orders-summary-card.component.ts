@@ -31,18 +31,18 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
         this.expectedBill = this.calcExpectedBill(newOrders);
     }
 
-    private calcExpectedBill(orders: Order[]): number {
+    public calcExpectedBill(orders: Order[]): number {
 
         let sum = this.calcOpenSum(orders);
         return roundToTwoAfterDecimal(sum / this.getPercentageOfMonthComplete());
     }
 
-    private calcVegetarianScore(orders: Order[]): number {
+    public calcVegetarianScore(orders: Order[]): number {
         let vegCount = orders.map(o => <number> (o.offer.vegetarian? 1 : 0)).reduce((prev, curr) => prev+curr);
         return Math.round(vegCount / orders.length * 100);
     }
 
-    private calcOpenSum(orders: Order[]): number {
+    public calcOpenSum(orders: Order[]): number {
         let sum = orders.map(o => o.amount).reduce((prev, curr) => prev + curr);
         return roundToTwoAfterDecimal(sum);
     }
@@ -53,7 +53,7 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
      * This means that the current price is about 50% of the total expected costs this month.
      * This ignores weekends etc but its a good estimate
      */
-    private getPercentageOfMonthComplete(): number {
+    public getPercentageOfMonthComplete(): number {
         let d = new Date();
         let dateNow = d.getDate();
         let totalInMonth = this.daysInMonth(d.getMonth(), d.getFullYear());
@@ -66,7 +66,7 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
      * @param year
      * @returns {number}
      */
-    private daysInMonth(month, year) {
+    public daysInMonth(month, year) {
         return new Date(year, month+1, 0).getDate();
     }
 
