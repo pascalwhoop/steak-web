@@ -47,7 +47,7 @@ export const MOCK_OFFERS: Offer[] = [
     }
 ];
 
-export const MOCK_OFFER_ORDER_PAIR: OfferOrdersPair[] = [
+export const MOCK_OFFER_ORDER_PAIRS: OfferOrdersPair[] = [
     {
         "offer": {
             "_id": "58aafa33fcf99f402c680c49",

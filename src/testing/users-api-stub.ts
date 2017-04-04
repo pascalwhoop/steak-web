@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {MOCK_USERS, MOCK_OFFER_ORDER_PAIR} from "./mock-data";
+import {MOCK_USERS, MOCK_OFFER_ORDER_PAIRS} from "./mock-data";
 import {OfferOrdersPair} from "../app/shared/model/OfferOrdersPair";
 import {User} from "../app/shared/model/User";
 
@@ -20,7 +20,7 @@ export class UsersApiStub {
 
     public offersOrdersGET(useridpath: string, datepath: Date): Observable < Array < OfferOrdersPair >> {
         return new Observable(observer => {
-            observer.next(MOCK_OFFER_ORDER_PAIR);
+            observer.next(MOCK_OFFER_ORDER_PAIRS);
         })
     }
 

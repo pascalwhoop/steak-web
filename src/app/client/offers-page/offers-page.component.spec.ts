@@ -3,15 +3,16 @@ import {OffersPageComponent} from "./offers-page.component";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {MOCK_OFFERS, MOCK_OFFER_ORDER_PAIR, MOCK_ORDERS} from "../../../testing/mock-data";
-import {By} from "@angular/platform-browser";
+import {MOCK_OFFERS, MOCK_OFFER_ORDER_PAIRS, MOCK_ORDERS} from "../../../testing/mock-data";
 import {UsersApi} from "../../shared/api/endpoints/UsersApi";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {UsersApiStub} from "../../../testing/users-api-stub";
 import {OrdersApiStub} from "../../../testing/orders-api-stub";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import Spy = jasmine.Spy;
 import {UserService} from "../../login/user.service";
+import * as _ from "lodash";
+import {itemsFrom, setDatesForOfferOrdersPairs} from "../../../testing/testing-utility-functions";
+import Spy = jasmine.Spy;
 
 describe('OffersPageComponent', () => {
     let component: OffersPageComponent;
@@ -61,17 +62,26 @@ describe('OffersPageComponent', () => {
     });
 
     it('should map pairs to dates and return an array of mappings', () => {
-        let mappings = component.mapPairsToDays(MOCK_OFFER_ORDER_PAIR);
+        let mappings = component.mapPairsToDays(MOCK_OFFER_ORDER_PAIRS);
         expect(mappings.length).toBe(1);
         expect(mappings[0].offerOrderPairs.length).toBe(2);
     });
 
-    it('should display offers in list', fakeAsync(() => {
-        component.offerOrderData = component.mapPairsToDays(MOCK_OFFER_ORDER_PAIR);
+    it('should display daily offers cards in a grid', fakeAsync(() => {
+        component.offerOrderData = component.mapPairsToDays(MOCK_OFFER_ORDER_PAIRS);
         //let UI update
         tick();
         fixture.detectChanges();
-        let elements = fixture.debugElement.queryAll(By.css('steak-offer-item'));
+        let elements = itemsFrom(fixture, 'steak-day-offers-card');
+        expect(elements.length).toBe(1);
+
+        //try again with changed dates
+        let anotherTwo = component.mapPairsToDays(setDatesForOfferOrdersPairs(_.cloneDeep(MOCK_OFFER_ORDER_PAIRS), '2016-05-03'));
+        component.offerOrderData = component.offerOrderData.concat(anotherTwo);
+        //let UI update
+        tick();
+        fixture.detectChanges();
+        elements = itemsFrom(fixture, 'steak-day-offers-card');
         expect(elements.length).toBe(2);
     }));
 
@@ -80,16 +90,5 @@ describe('OffersPageComponent', () => {
         let pairs = component.makeOfferOrderPairs(MOCK_OFFERS, MOCK_ORDERS);
         expect(pairs[0].orders.length).toBe(2);
 
-    });
-
-    it('should build a week day from an offer', () => {
-        expect(component.makeDayTitle(MOCK_OFFERS[0])).toBe("Saturday");
-    });
-
-    it('should build a readable date from an offer', () => {
-        expect(component.makeDaySubtitle(MOCK_OFFERS[0])).toBe("11.05");
-        expect(component.makeDaySubtitle(MOCK_OFFERS[1])).toBe("11.05");
-        expect(component.makeDaySubtitle(MOCK_OFFERS[2])).toBe("11.05");
-        expect(component.makeDaySubtitle(MOCK_OFFERS[3])).toBe("04.10");
     });
 });

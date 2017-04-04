@@ -3,7 +3,7 @@ import {MaterialModule} from "@angular/material";
 import {OfferItemComponent} from "./offer-item.component";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {MOCK_OFFER_ORDER_PAIR} from "../../../testing/mock-data";
+import {MOCK_OFFER_ORDER_PAIRS} from "../../../testing/mock-data";
 import Spy = jasmine.Spy;
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
@@ -34,7 +34,7 @@ describe('OfferItemComponent', () => {
 
         //orderSpy = spyOn(component.orderApi);
 
-        component.ooPair = MOCK_OFFER_ORDER_PAIR[0];
+        component.ooPair = MOCK_OFFER_ORDER_PAIRS[0];
 
         fixture.detectChanges();
     });
