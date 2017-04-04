@@ -129,6 +129,89 @@ export const MOCK_ORDERS: Order[] = [
     }
 ];
 
+export const MOCK_COMPLETE_DAY: Offer[] = [
+    {
+        "_id": "58a47bd88fdd83084b5c88a2",
+        "description": "Gemüseeintopf mit Rauchfleisch und Siedewurst",
+        "vegetarian": false,
+        "price": 5,
+        "time": "Mittag",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": true,
+        "heat": 40
+    },
+    {
+        "_id": "58a47bd88fdd83084b5c88a3",
+        "description": "Knödl mit Reis",
+        "vegetarian": true,
+        "price": 5,
+        "time": "Mittag",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": true,
+        "heat": 80
+    },
+    {
+        "_id": "58a47bd88fdd83084b5c88a4",
+        "description": "Karottencremesuppe",
+        "vegetarian": true,
+        "price": 3,
+        "time": "Mittag",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 60
+    },
+    {
+        "_id": "58a47bd88fdd83084b5c8909",
+        "description": "Frühstück mit Müsli",
+        "vegetarian": false,
+        "price": 3,
+        "time": "Fruehstueck",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 45
+    },
+    {
+        "_id": "58a47bdf38fdd83084b5c8909",
+        "description": "Frühstück ohne Müsli",
+        "vegetarian": false,
+        "price": 2.5,
+        "time": "Fruehstueck",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 45
+    },
+    {
+        "_id": "58a47bdf38fd4f3f084b5c8909",
+        "description": "Müsli",
+        "vegetarian": false,
+        "price": 2.5,
+        "time": "Fruehstueck",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 7
+    },
+    {
+        "_id": "58a47bd88fdd83084b5c88a5",
+        "description": "Kleiner Salat",
+        "vegetarian": true,
+        "price": 4,
+        "time": "Mittag",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 70
+    },
+    {
+        "_id": "58a47bd88fdd83084b5c88a5",
+        "description": "Großer Salat",
+        "vegetarian": true,
+        "price": 4,
+        "time": "Mittag",
+        "date": new Date("2013-10-04T00:00:00.000Z"),
+        "main_offer": false,
+        "heat": 70
+    }
+];
+
 export const MOCK_USERS: User [] = [
     {
         employeeId: 'abc',

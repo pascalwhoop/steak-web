@@ -1,4 +1,4 @@
-<md-card class="day-card">
+<md-card class="day-card" [ngClass]="{'mat-primary': dayIsComplete(offers), 'mat-warn': !dayIsComplete(offers)}">
   <md-card-title>
     <div layout="row" layout-align="center center">
       <span>{{date | date:"EEEE"}}</span>

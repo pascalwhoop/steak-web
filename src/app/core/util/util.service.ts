@@ -46,3 +46,17 @@ export function offerCountMapFromOrders(orders: Order[]): Map<string, number> {
     });
     return map;
 }
+
+export let STANDARD_DESCRIPTIONS = {
+    BREAKFAST_WITH_CEREAL: "Frühstück mit Müsli",
+    BREAKFAST_WITHOUT_CEREAL: "Frühstück ohne Müsli",
+    SMALL_SALAD: "Kleiner Salat",
+    LARGE_SALAD: "Großer Salat",
+    CEREAL: "Müsli",
+    SOUP: "suppe"
+};
+
+export let STANDARD_TIMES = {
+    BREAKFAST: "Fruehstueck",
+    LUNCH: "Mittag"
+}

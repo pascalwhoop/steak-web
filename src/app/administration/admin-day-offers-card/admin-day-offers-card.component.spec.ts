@@ -6,14 +6,15 @@ import {MdDialog, OverlayRef, MdDialogRef, MdDialogModule, MdMenuModule} from "@
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
 import {FormsModule} from "@angular/forms";
 import {makeFourMockOffersForTomorrow} from "../../../testing/testing-utility-functions";
+import {MOCK_OFFERS, MOCK_COMPLETE_DAY} from "../../../testing/mock-data";
 
-describe('AdminDayOffersCardComponent', () => {
+fdescribe('AdminDayOffersCardComponent', () => {
     let component: AdminDayOffersCardComponent;
     let fixture: ComponentFixture<AdminDayOffersCardComponent>;
 
     //mocking a dialogRef for when we open our Md dialog with a button
     let mockDialogRef = new MdDialogRef(new OverlayRef(null, null, null, null), {});
-    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null, null);
+    mockDialogRef.componentInstance = new OfferFormDialogComponent(null, null, null, null);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -55,9 +56,38 @@ describe('AdminDayOffersCardComponent', () => {
         let tomorrowItems = fixture.debugElement.queryAll(By.css('steak-admin-offer-item'));
         expect(tomorrowItems.length).toBe(4);
     }));
+
+    it('should have a red background when not all minimum meals are offered', () => {
+        //days always have: salad, breakfast, 2 main lunches of which one must be vegetarian
+        expect(component.dayIsComplete(MOCK_OFFERS)).toBeFalsy();
+        expect(component.dayIsComplete(MOCK_COMPLETE_DAY)).toBeTruthy();
+
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 0, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 1, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 2, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 3, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 4, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 5, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 6, 1))).toBeFalsy();
+        expect(component.dayIsComplete(arrWithout(MOCK_COMPLETE_DAY, 7, 1))).toBeFalsy();
+        expect(MOCK_COMPLETE_DAY.length).toBe(8);
+
+    });
 });
 
 let clickAddNewButton = function (component: AdminDayOffersCardComponent, fixture: ComponentFixture<AdminDayOffersCardComponent>) {
     let button = <HTMLElement> fixture.debugElement.queryAll(By.css('.add-new-button'))[0].nativeElement;
     button.click();
+};
+
+/**
+ * removes the indexes from the array and returns a new one
+ * @param arr
+ * @param start
+ * @param end
+ */
+let arrWithout = function(arr, start, count){
+    let retArr = [].concat(arr);
+    retArr.splice(start, count);
+    return retArr;
 };

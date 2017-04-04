@@ -1,9 +1,8 @@
 import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
-import {EditMode} from "../../core/util/util.service";
+import {EditMode, STANDARD_TIMES, STANDARD_DESCRIPTIONS} from "../../core/util/util.service";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {MdDialog, MdIconRegistry} from "@angular/material";
-import {DomSanitizer} from "@angular/platform-browser";
+import {MdDialog} from "@angular/material";
 
 @Component({
     selector: 'steak-admin-day-offers-card',
@@ -35,18 +34,16 @@ export class AdminDayOffersCardComponent implements OnInit {
      * @param date
      */
     createNewFor(date: Date) {
-        let ref = this.dialog.open(OfferFormDialogComponent);
-        ref.componentInstance.date = date;
+        let ref = this.dialog.open(OfferFormDialogComponent, {data: {date: date, editMode: EditMode.CREATE}});
 
-        let instance = ref.componentInstance;
-        instance.editMode = EditMode.CREATE;
+        ref.afterClosed().subscribe(offer =>{
+            if (offer) {
+                this.offers.push(offer);
+                this.offerEventEmitter.emit(offer);
+            }
 
-        instance.offerEventEmitter.subscribe(next => {
-            ref.close();
-            if (next) this.offers.push(next);
-        });
+        })
     }
-
 
     /**
      * method that gets called when a child has been changed and it needs to be changed in the array
@@ -66,4 +63,79 @@ export class AdminDayOffersCardComponent implements OnInit {
         this.offerDeleteEmitter.emit(offer);
     }
 
+    /**
+     * Checks if a day has all the necessary offers to make it 'complete'
+     * A day should have
+     *  - breakfast
+     *  - lunch
+     *      - 1x main vegetarian meal
+     *      - 1x main veggie or non veggie meal
+     *  - salad offers (large, small)
+     *  - soup offer
+     * @param offers
+     */
+    dayIsComplete(offers: Offer[]): boolean {
+        if(!offers || offers.length == 0) return false;
+        
+        return (this.containBreakfast(offers) &&
+        this.containVegetarianLunch(offers) &&
+        this.containSoup(offers) &&
+        this.containSalad(offers) &&
+        this.containTwoMainMeals(offers))
+
+    }
+
+    containBreakfast(offers: Offer[]): boolean {
+        let cereal = false;
+        let bWithCer = false;
+        let bWithoutCer = false;
+
+        //if offers contain all three core breakfast elements, breakfast is completed
+        for (let off of offers) {
+            if (off.time == STANDARD_TIMES.BREAKFAST) {
+                if (off.description == STANDARD_DESCRIPTIONS.BREAKFAST_WITHOUT_CEREAL) bWithoutCer = true;
+                if (off.description == STANDARD_DESCRIPTIONS.BREAKFAST_WITH_CEREAL) bWithCer = true;
+                if (off.description == STANDARD_DESCRIPTIONS.CEREAL) cereal = true;
+            }
+        }
+        return cereal && bWithCer && bWithoutCer;
+    }
+
+    containSoup(offers: Offer[]): boolean {
+        //if one of the offers is soup, it contains soup
+        for (let off of offers) {
+            if (off.description.toLowerCase().indexOf(STANDARD_DESCRIPTIONS.SOUP) >= 0 && !off.main_offer) return true;
+        }
+        return false;
+    }
+
+    private containSalad(offers: Offer[]): boolean {
+        let smallSalad = false;
+        let largeSalad = false;
+
+        //if offers contain all three core breakfast elements, breakfast is completed
+        for (let off of offers) {
+            if (off.time == STANDARD_TIMES.LUNCH) {
+                if (off.description == STANDARD_DESCRIPTIONS.LARGE_SALAD) smallSalad = true;
+                if (off.description == STANDARD_DESCRIPTIONS.SMALL_SALAD) largeSalad = true;
+            }
+        }
+        return smallSalad && largeSalad;
+    }
+
+    private containVegetarianLunch(offers: Offer[]): boolean {
+        //if one of the offers is veggi and main offer
+        for (let off of offers) {
+            if (off.vegetarian && off.main_offer) return true;
+        }
+        return false;
+    }
+
+    private containTwoMainMeals(offers: Offer[]) {
+        let mainOfferCount = 0;
+        offers.forEach(offer => {
+            if(offer.main_offer) mainOfferCount++
+        });
+        return mainOfferCount >= 2;
+    }
 }
