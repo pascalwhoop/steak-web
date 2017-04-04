@@ -2,8 +2,10 @@ import {async, ComponentFixture, TestBed, tick, fakeAsync} from "@angular/core/t
 import {AdminDayOffersCardComponent} from "./admin-day-offers-card.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {By} from "@angular/platform-browser";
-import {MdDialog, OverlayRef, MdDialogRef, MdDialogModule} from "@angular/material";
+import {MdDialog, OverlayRef, MdDialogRef, MdDialogModule, MdMenuModule} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
+import {FormsModule} from "@angular/forms";
+import {makeFourMockOffersForTomorrow} from "../../../testing/testing-utility-functions";
 
 describe('AdminDayOffersCardComponent', () => {
     let component: AdminDayOffersCardComponent;
@@ -15,7 +17,7 @@ describe('AdminDayOffersCardComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [MdDialogModule],
+            imports: [MdDialogModule, FormsModule, MdMenuModule],
             declarations: [AdminDayOffersCardComponent],
             providers: [
                 MdDialog,
@@ -43,6 +45,15 @@ describe('AdminDayOffersCardComponent', () => {
         fixture.detectChanges();
         tick();
         expect(component.dialog.open).toHaveBeenCalled();
+    }));
+
+    it('should list all offers under the right date', fakeAsync(() => {
+        component.offers = makeFourMockOffersForTomorrow();
+        expect(component.offers.length).toBe(4);
+        fixture.detectChanges();
+        tick(); //let the templates filters run through
+        let tomorrowItems = fixture.debugElement.queryAll(By.css('steak-admin-offer-item'));
+        expect(tomorrowItems.length).toBe(4);
     }));
 });
 
