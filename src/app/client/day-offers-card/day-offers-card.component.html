@@ -1,6 +1,6 @@
-<md-card class="day-card " [ngClass]="{'mat-primary': dayHasOrders(day), 'mat-warn': !dayHasOrders(day)}">
-  <md-card-title>{{makeDayTitle(day.offerOrderPairs[0].offer)}}</md-card-title>
-  <md-card-subtitle>{{makeDaySubtitle(day.offerOrderPairs[0].offer)}}</md-card-subtitle>
+<md-card class="day-card " [ngClass]="{'mat-primary': dayHasOrders(day), 'mat-warn': !dayHasOrders(day)}" *ngIf="day">
+  <md-card-title>{{makeDayTitle(day.date)}}</md-card-title>
+  <md-card-subtitle>{{makeDaySubtitle(day.date)}}</md-card-subtitle>
   <md-card-content>
     <md-list>
       <steak-offer-item md-list-item [oo-pair]="ooPair"

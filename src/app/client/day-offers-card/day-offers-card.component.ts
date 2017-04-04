@@ -19,15 +19,16 @@ export class DayOffersCardComponent implements OnInit {
     ngOnInit() {
     }
 
-    makeDaySubtitle(offer: Offer): string {
-        return makeDaySubtitle(offer.date)
+    makeDaySubtitle(date: Date): string {
+        return makeDaySubtitle(date)
     }
 
-    makeDayTitle(offer: Offer): string {
-        return makeDayTitle(offer.date)
+    makeDayTitle(date: Date): string {
+        return makeDayTitle(date)
     }
 
     dayHasOrders(day: IDayPack) {
+        if(!day)return false;
         for (let pair of day.offerOrderPairs) {
             if (pair.orders.length > 0) return true;
         }
