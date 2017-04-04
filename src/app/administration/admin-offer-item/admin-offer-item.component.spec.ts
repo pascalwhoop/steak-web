@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {AdminOfferItemComponent} from "./admin-offer-item.component";
 import {MdDialog} from "@angular/material";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('AdminOfferItemComponent', () => {
     let component: AdminOfferItemComponent;
@@ -12,7 +13,8 @@ describe('AdminOfferItemComponent', () => {
             declarations: [AdminOfferItemComponent],
             providers: [
                 {provide: MdDialog, useValue: dialogSpy}
-            ]
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
         })
             .compileComponents();
     }));

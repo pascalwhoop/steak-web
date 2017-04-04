@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 import {OfferCacheService} from "../../cache/offer-cache.service";
+import {AdminDayOffersCardComponent} from "../admin-day-offers-card/admin-day-offers-card.component";
 
 describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
@@ -56,28 +57,12 @@ describe('AdminHomeComponent', () => {
     });
 
     it('should generate the next three weeks as possible days to add stuff to', () => {
-        expect(component.dates.length > 10).toBeTruthy()
+        expect(component.dates.length > 14).toBeTruthy()
     });
 
     // it('should call the filterOffersForDate method as often as there are days', () => {
     //
     // });
-
-    it('should list all offers under the right date', fakeAsync(() => {
-        component.offers = makeFourMockOffersForTomorrow();
-        expect(component.offers.length).toBe(4);
-        expect(component.dates.length).toBe(21);
-        fixture.detectChanges();
-        tick(); //let the templates filters run through
-
-        let tomorrowList = fixture.debugElement.queryAll(By.css('.offers-list'))[1];
-        let tomorrowItems = tomorrowList.queryAll(By.css('steak-admin-offer-item'));
-        expect(tomorrowItems.length).toBe(4);
-        //day after tomorrow
-        let daTomorrow = fixture.debugElement.queryAll(By.css('.offers-list'))[2];
-        let daTomorrowItems = daTomorrow.queryAll(By.css('steak-admin-offer-item'));
-        expect(daTomorrowItems.length).toBe(0);
-    }));
 
     it('should filter offers for a date given', () => {
         expect(component.filterOffersForDate(MOCK_OFFERS, new Date('2013-05-11T00:45:00.000Z')).length).toBe(3);
