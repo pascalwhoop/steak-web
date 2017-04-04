@@ -1,6 +1,6 @@
 <td-layout #layout>
-    <td-navigation-drawer [sidenavTitle]="getTitle()" logo="oc_logo"
-                          navigationRoute="/"> <!-- [name]="getUsername()" color="color"-->
+    <td-navigation-drawer [sidenavTitle]="title" logo="oc_logo"
+                          navigationRoute="/"> <!-- [name]="username" color="color"-->
         <md-nav-list>
             <h3 md-subheader>Steak</h3>
             <a md-list-item routerLink="/client/offers" routerLinkActive="active" (click)="layout.close()">Offers</a>
@@ -16,7 +16,7 @@
 
     <td-layout-nav logo="oc_brand">
         <div td-toolbar-content layout="row" layout-align="center center" flex>
-            <span>{{getTitle()}}</span>
+            <span>{{title}}</span>
             <span flex></span>
             <steak-working-spinner></steak-working-spinner>
             <a md-icon-button mdTooltip="Logout">

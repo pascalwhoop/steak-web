@@ -15,11 +15,11 @@ export class MainComponent implements OnInit {
 
     }
 
-    getTitle() {
+    get title() {
         return this.titleService.title;
     }
 
-    getUsername() {
+    get username() {
         return this.userService.username;
     }
 
