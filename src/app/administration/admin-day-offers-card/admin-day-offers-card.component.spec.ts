@@ -7,10 +7,12 @@ import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.c
 import {FormsModule} from "@angular/forms";
 import {makeFourMockOffersForTomorrow} from "../../../testing/testing-utility-functions";
 import {MOCK_OFFERS, MOCK_COMPLETE_DAY} from "../../../testing/mock-data";
+import {Observable} from "rxjs";
 
-fdescribe('AdminDayOffersCardComponent', () => {
+describe('AdminDayOffersCardComponent', () => {
     let component: AdminDayOffersCardComponent;
     let fixture: ComponentFixture<AdminDayOffersCardComponent>;
+    let dialogOpenSpy;
 
     //mocking a dialogRef for when we open our Md dialog with a button
     let mockDialogRef = new MdDialogRef(new OverlayRef(null, null, null, null), {});
@@ -32,7 +34,7 @@ fdescribe('AdminDayOffersCardComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(AdminDayOffersCardComponent);
         component = fixture.componentInstance;
-        spyOn(component.dialog, 'open').and.returnValue(mockDialogRef);
+        dialogOpenSpy = spyOn(component.dialog, 'open').and.returnValue(mockDialogRef);
         fixture.detectChanges();
     });
 
@@ -40,13 +42,30 @@ fdescribe('AdminDayOffersCardComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should open the dialog on clicking the button', fakeAsync(() => {
-        expect(component.dialog.open).toHaveBeenCalledTimes(0);
-        clickAddNewButton(component, fixture);
-        fixture.detectChanges();
-        tick();
-        expect(component.dialog.open).toHaveBeenCalled();
-    }));
+    describe('the create new button', () => {
+        it('should open the dialog on clicking the button', fakeAsync(() => {
+            expect(component.dialog.open).toHaveBeenCalledTimes(0);
+            clickAddNewButton(component, fixture);
+            fixture.detectChanges();
+            tick();
+            expect(component.dialog.open).toHaveBeenCalled();
+        }));
+
+        it('should emit the newly created offer to the eventEmitter after dialog close', fakeAsync(() => {
+            //creating subscription spy
+            let subscriberSpy = jasmine.createSpy('subscriberSpy', () => {});
+            //when the method that is tested calls the spy, we expect something that has a functino afterClosed which then returns an obs
+            dialogOpenSpy.and.returnValue({afterClosed: () => Observable.of(MOCK_OFFERS[0])});
+            //we expect the object to notify the eventEmitter
+            component.offerEventEmitter.subscribe(subscriberSpy);
+            component.createNewFor(new Date());
+
+            tick();
+            fixture.detectChanges();
+            expect(subscriberSpy).toHaveBeenCalled();
+        }));
+    });
+
 
     it('should list all offers under the right date', fakeAsync(() => {
         component.offers = makeFourMockOffersForTomorrow();
@@ -86,7 +105,7 @@ let clickAddNewButton = function (component: AdminDayOffersCardComponent, fixtur
  * @param start
  * @param end
  */
-let arrWithout = function(arr, start, count){
+let arrWithout = function (arr, start, count) {
     let retArr = [].concat(arr);
     retArr.splice(start, count);
     return retArr;

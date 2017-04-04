@@ -1,10 +1,11 @@
-import {Component, OnInit, Input, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Offer} from "../../shared/model/Offer";
 import {EditMode} from "../../core/util/util.service";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
-import {FormControl, Validators, Form} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {OfferCacheService} from "../../cache/offer-cache.service";
+import {MdDialogRef} from "@angular/material";
 
 @Component({
     selector: 'steak-offer-form-dialog',
@@ -15,21 +16,25 @@ export class OfferFormDialogComponent implements OnInit {
 
     @Input()
     date: Date;
-    offerEventEmitter: EventEmitter<Offer> = new EventEmitter();
     editMode: EditMode = EditMode.CREATE;
     offer: Offer = new OfferObj();
     offerForm: FormControl;
 
 
-    constructor(public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService, public offerCache: OfferCacheService) {
+    constructor(public dialogRef: MdDialogRef<OfferFormDialogComponent>, public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService, public offerCache: OfferCacheService) {
+
         this.offer.heat = 20; //default to 20 degrees
         this.offer.description = '';
     }
 
     ngOnInit() {
+        let params = this.dialogRef.config.data;
+        this.date = params.date;
+        this.editMode = params.editMode;
+        if (params.offer) this.offer = params.offer;
     }
 
-    applyOldOfferAsTemplate(offer: Offer){
+    applyOldOfferAsTemplate(offer: Offer) {
         delete offer._id;
         offer.date = this.date;
         this.offer = offer;
@@ -40,25 +45,20 @@ export class OfferFormDialogComponent implements OnInit {
 
         let obs = this.offersApi.offerPost(this.offer);
         obs.subscribe(offer => {
-            this.offerEventEmitter.emit(offer);
+            this.dialogRef.close(offer);
         });
         this.vFeedback.showMessageOnAnswer('Create successful', 'Create failed', obs);
     }
 
     updateOffer(offer: Offer) {
         let obs = this.offersApi.offerPut(offer);
-        obs.subscribe(
-            offer => {
-
-                this.offerEventEmitter.emit(offer);
-            }
-        );
+        obs.subscribe(offer => this.dialogRef.close(offer));
         this.vFeedback.showMessageOnAnswer('Update successful', 'Update failed', obs);
     }
 
     deleteOffer(offer: Offer) {
         let obs = this.offersApi.offerDelete(offer._id);
-        obs.subscribe(next => this.offerEventEmitter.emit(null));
+        obs.subscribe(next => this.dialogRef.close(offer._id));
         this.vFeedback.showMessageOnAnswer('Delete successful', 'Delete failed', obs);
     }
 
@@ -67,10 +67,12 @@ export class OfferFormDialogComponent implements OnInit {
     }
 
     canBeUpdate(): boolean {
+        //TODO check for is not too late
         return (this.editMode == EditMode.UPDATE);
     }
 
     canBeDelete(): boolean {
+        //TODO check for has orders already
         return (this.editMode == EditMode.UPDATE);
     }
 

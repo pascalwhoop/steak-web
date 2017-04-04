@@ -2,7 +2,7 @@ import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
 import {EditMode, STANDARD_TIMES, STANDARD_DESCRIPTIONS} from "../../core/util/util.service";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {MdDialog} from "@angular/material";
+import {MdDialog, MdDialogRef} from "@angular/material";
 
 @Component({
     selector: 'steak-admin-day-offers-card',
@@ -33,16 +33,13 @@ export class AdminDayOffersCardComponent implements OnInit {
      * create a new offer and add it to the list when it has been created
      * @param date
      */
-    createNewFor(date: Date) {
+    createNewFor(date: Date) : MdDialogRef<OfferFormDialogComponent>{
         let ref = this.dialog.open(OfferFormDialogComponent, {data: {date: date, editMode: EditMode.CREATE}});
 
-        ref.afterClosed().subscribe(offer =>{
-            if (offer) {
-                this.offers.push(offer);
-                this.offerEventEmitter.emit(offer);
-            }
-
-        })
+        ref.afterClosed().subscribe(offer => {
+            if (offer) this.onOfferChange(offer);
+        });
+        return ref;
     }
 
     /**
@@ -75,8 +72,8 @@ export class AdminDayOffersCardComponent implements OnInit {
      * @param offers
      */
     dayIsComplete(offers: Offer[]): boolean {
-        if(!offers || offers.length == 0) return false;
-        
+        if (!offers || offers.length == 0) return false;
+
         return (this.containBreakfast(offers) &&
         this.containVegetarianLunch(offers) &&
         this.containSoup(offers) &&
@@ -134,7 +131,7 @@ export class AdminDayOffersCardComponent implements OnInit {
     private containTwoMainMeals(offers: Offer[]) {
         let mainOfferCount = 0;
         offers.forEach(offer => {
-            if(offer.main_offer) mainOfferCount++
+            if (offer.main_offer) mainOfferCount++
         });
         return mainOfferCount >= 2;
     }

@@ -83,6 +83,8 @@ export class AdminHomeComponent implements OnInit {
         let changedIndex = this.offers.findIndex(_offer => _offer._id == offer._id);
         if (changedIndex > -1) {
             this.offers[changedIndex] = offer;
+        }else{
+            this.offers.push(offer);
         }
     }
 

@@ -45,7 +45,8 @@ export class SharedModule {
         this.iconRegistry.addSvgIcon('oc_brand', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/oc_brand.svg'));
         this.iconRegistry.addSvgIcon('breakfast', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/breakfast.svg'));
         this.iconRegistry.addSvgIcon('soup', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/soup.svg'));
-        this.iconRegistry.addSvgIcon('vegetarian', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/salad.svg'));
+        this.iconRegistry.addSvgIcon('salad', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/salad.svg'));
         this.iconRegistry.addSvgIcon('meat', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steak.svg'));
+        this.iconRegistry.addSvgIcon('vegetarian', this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/vegetarian.svg'));
     }
 }

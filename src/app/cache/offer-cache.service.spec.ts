@@ -37,7 +37,7 @@ describe('OfferCacheService', () => {
 
         //but then
         let otherId = 1000;
-        moreOffers.forEach(offer => offer._id = otherId++);
+        moreOffers.forEach(offer => offer._id = (otherId++).toString());
         service.putMany(moreOffers);
         //and suddenly there were 8
         let them = JSON.parse(localStorage.getItem('offers'));

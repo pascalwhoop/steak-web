@@ -191,7 +191,7 @@ export const MOCK_COMPLETE_DAY: Offer[] = [
         "heat": 7
     },
     {
-        "_id": "58a47bd88fdd83084b5c88a5",
+        "_id": "58a47bd88fd483084b5c88a5",
         "description": "Kleiner Salat",
         "vegetarian": true,
         "price": 4,

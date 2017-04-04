@@ -27,38 +27,44 @@ export class AdminOfferItemComponent implements OnInit {
     }
 
     edit(offer: Offer) {
-        let ref = this.dialog.open(OfferFormDialogComponent);
-        //TODO pass as data, since injector of DialogRef doesn't work for some reason
-        let instance = ref.componentInstance;
         let editOffer = _.cloneDeep(offer);
-        instance.date = editOffer.date;
-        instance.offer = editOffer;
-        instance.editMode = EditMode.UPDATE;
-
-        instance.offerEventEmitter.subscribe(next => {
-            ref.close();
-            if (!next) this.offerDeleteEmitter.emit(this.offer);
-            else {
-                this.offerEventEmitter.emit(next);
+        let ref = this.dialog.open(OfferFormDialogComponent, {
+            data: {
+                date: editOffer.date,
+                offer: editOffer,
+                editMode: EditMode.UPDATE
             }
+        });
+
+
+        ref.afterClosed().subscribe(offer => {
+            //if deleted, we pass back just the ID
+            if (offer && typeof offer ==='string') {
+                this.offerDeleteEmitter.emit(this.offer);
+            }
+            //else the changed object
+            else if (offer) {
+                this.offerEventEmitter.emit(offer);
+            }
+            //if nothing was changed, we pass back nothing
         });
     }
 
     getIconForMeal(offer: Offer) {
-        if(offer.time == 'Fruehstueck'){
+        if (offer.time == 'Fruehstueck') {
             return 'breakfast'
-        }else{
-            if(offer.vegetarian && offer.main_offer){
+        } else {
+            if (offer.vegetarian && offer.main_offer) {
                 return 'vegetarian'
             }
-            if(!offer.vegetarian && offer.main_offer){
+            if (!offer.vegetarian && offer.main_offer) {
                 return 'meat'
             }
-            if(!offer.main_offer){
-                if(offer.description.toLowerCase().indexOf('salat') >= 0){
-                    return 'vegetarian';
+            if (!offer.main_offer) {
+                if (offer.description.toLowerCase().indexOf('salat') >= 0) {
+                    return 'salad';
                 }
-                if(offer.description.toLowerCase().indexOf('suppe') >= 0){
+                if (offer.description.toLowerCase().indexOf('suppe') >= 0) {
                     return 'soup';
                 }
             }
