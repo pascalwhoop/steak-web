@@ -10,6 +10,8 @@ import { OfferDescriptionAutoCompleteComponent } from './offer-description-auto-
 import {PrintModule} from "../print/print.module";
 import { PrintDayButtonComponent } from './print-day-button/print-day-button.component';
 import { AdminDayOffersCardComponent } from './admin-day-offers-card/admin-day-offers-card.component';
+import { QuickDefaultsCreateButtonComponent } from './quick-defaults-create-button/quick-defaults-create-button.component';
+import {DefaultOffersService} from "./default-offers-service/default-offers.service";
 
 @NgModule({
     imports: [
@@ -19,7 +21,8 @@ import { AdminDayOffersCardComponent } from './admin-day-offers-card/admin-day-o
         PrintModule,
         CacheModule
     ],
-    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent, AdminDayOffersCardComponent],
+    providers: [DefaultOffersService],
+    declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent, AdminDayOffersCardComponent, QuickDefaultsCreateButtonComponent],
     entryComponents: [OfferFormDialogComponent]
 })
 export class AdministrationModule {
