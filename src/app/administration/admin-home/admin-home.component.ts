@@ -26,7 +26,7 @@ export class AdminHomeComponent implements OnInit {
     ngOnInit() {
 
         this.title.title = "Administration";
-        this.offers = this.offerCache.offers;
+        //this.offers = this.offerCache.offers; //TODO causing many bugs! too many UI elements created, wrong Offers etc. still caching should be done
         this.fetchOffers()
             .subscribe(offers => this.offerCache.putMany(offers));
         this.ensureOffersCached()
