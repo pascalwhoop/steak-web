@@ -1,5 +1,4 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {MaterialModule} from "@angular/material";
 import {OfferItemComponent} from "./offer-item.component";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
@@ -12,7 +11,7 @@ import {Observable} from "rxjs";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 
-fdescribe('OfferItemComponent', () => {
+describe('OfferItemComponent', () => {
     let component: OfferItemComponent;
     let fixture: ComponentFixture<OfferItemComponent>;
     let orderSpy: Spy;
