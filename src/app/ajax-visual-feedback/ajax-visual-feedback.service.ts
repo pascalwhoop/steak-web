@@ -6,9 +6,10 @@ import {Subscribable} from "rxjs/Observable";
 import {AnonymousSubscription} from "rxjs/Subscription";
 
 @Injectable()
-export class AjaxVisualFeedbackService implements Subscribable<XhrEvent>{
+export class AjaxVisualFeedbackService implements Subscribable<XhrEvent> {
 
-    constructor(private snackBar: MdSnackBar, private browserXhr: CustomBrowserXhr) {}
+    constructor(private snackBar: MdSnackBar, private browserXhr: CustomBrowserXhr) {
+    }
 
     /**
      * Subscribe to XhrEvents triggered by http and perform action based on them
@@ -18,28 +19,32 @@ export class AjaxVisualFeedbackService implements Subscribable<XhrEvent>{
      * @returns {Subscription}
      */
     subscribe(next?: (value: XhrEvent) => void, error?: (error: any) => void, complete?: () => void): AnonymousSubscription {
-        return this.browserXhr.observable.subscribe(next,error,complete);
+        return this.browserXhr.observable.subscribe(next, error, complete);
     }
 
     /**
      *
      * @param successMessage
-     * @param failMessage
+     * @param errorMessage
      * @param observableRequest
      * @param actionText
      */
-    public showMessageOnAnswer(successMessage: string, failMessage: string, observableRequest: Observable<any>, actionText?: string): Observable<MdSnackBarRef<SimpleSnackBar>> {
+    public showMessageOnAnswer(successMessage: string, errorMessage: string, observableRequest: Observable<any>, actionText?: string): Observable<MdSnackBarRef<SimpleSnackBar>> {
         let obs = new Observable(sub => {
             observableRequest
                 .subscribe(
                     null,
                     err => {
-                        let snack = this.snackBar.open(failMessage, null, {duration: 1500});
-                        sub.next(snack);
+                        if (errorMessage) {
+                            let snack = this.snackBar.open(errorMessage, null, {duration: 1500});
+                            sub.next(snack);
+                        }
                         sub.complete()
                     },
                     () => {
-                        sub.next(this.snackBar.open(successMessage, actionText, {duration: 1500}));
+                        if (successMessage) {
+                            sub.next(this.snackBar.open(successMessage, actionText, {duration: 1500}));
+                        }
                         sub.complete()
                     })
         }).publish();
@@ -49,7 +54,7 @@ export class AjaxVisualFeedbackService implements Subscribable<XhrEvent>{
 
 }
 
-export interface XhrEvent{
+export interface XhrEvent {
     event: any;
     type: any;
 }

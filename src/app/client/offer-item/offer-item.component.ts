@@ -3,6 +3,7 @@ import {Offer} from "../../shared/model/Offer";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {OfferOrdersPair} from "../../shared/model/OfferOrdersPair";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
+import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 @Component({
     selector: 'steak-offer-item',
@@ -14,15 +15,17 @@ export class OfferItemComponent implements OnInit {
     @Input('oo-pair')
     ooPair: OfferOrdersPair;
 
-    constructor(public orderApi: OrdersApi, public offersApi: OffersApi) {
+    constructor(public orderApi: OrdersApi, public offersApi: OffersApi, public snack: AjaxVisualFeedbackService) {
     }
 
     ngOnInit() {
     }
 
 
-    addOrder(offer: Offer) {
-        this.orderApi.orderPost(offer._id, false).subscribe(order => {
+    public addOrder(offer: Offer) {
+        let obs = this.orderApi.orderPost(offer._id, false);
+        this.snack.showMessageOnAnswer(null, 'Order failed', obs);
+        obs.subscribe(order => {
             this.ooPair.orders.push(order);
         });
     }
@@ -33,10 +36,11 @@ export class OfferItemComponent implements OnInit {
         //otherwise result in several delete orders for the same element.
         let orderToRemove = ooPair.orders.shift();
         if (!orderToRemove) return;
-        this.orderApi.orderDelete(orderToRemove._id)
-            .subscribe(null, error => {
-                ooPair.orders.push(orderToRemove);
-            })
+        let obs = this.orderApi.orderDelete(orderToRemove._id);
+        this.snack.showMessageOnAnswer(null, 'Order remove failed', obs);
+        obs.subscribe(null, error => {
+            ooPair.orders.push(orderToRemove);
+        })
     }
 
 }
