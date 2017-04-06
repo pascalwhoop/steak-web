@@ -24,7 +24,7 @@ describe('OrdersHistoryTableComponent', () => {
         fixture = TestBed.createComponent(OrdersHistoryTableComponent);
         component = fixture.componentInstance;
 
-        component.data = MOCK_ORDERS;
+        component.orders = MOCK_ORDERS;
         component.filter();
         fixture.detectChanges();
     });

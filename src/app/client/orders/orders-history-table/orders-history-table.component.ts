@@ -17,7 +17,7 @@ import {Offer} from "../../../shared/model/Offer";
 export class OrdersHistoryTableComponent implements OnInit, OnChanges {
 
     @Input('orders')
-    data: Order[];
+    orders: Order[];
 
     columns: ITdDataTableColumn[] = [
         {name: 'date', label: 'Date', tooltip: 'date ordered'},
@@ -52,9 +52,10 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
         this.filteredData = this.filter();
     }
 
-    filter(): IOrderHistoryData[] {
-        if(!this.data || this.data.length < 1) return;
-        let newData = this.data.map(order => this.generateRowFrom(order));
+    filter(data?: Order[]): IOrderHistoryData[] {
+
+        if(!this.orders || this.orders.length < 1) return;
+        let newData = this.orders.map(order => this.generateRowFrom(order));
         newData = this.dataTableService.filterData(newData, this.searchTerm, true);
         this.filteredTotal = newData.length;
         newData = this.dataTableService.sortData(newData, this.sortBy, this.sortOrder);
@@ -63,7 +64,8 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['orders'] && changes['orders'].currentValue) {
-            this.filter();
+            this.orders = changes['orders'].currentValue;
+            this.filteredData = this.filter();
         }
     }
 
