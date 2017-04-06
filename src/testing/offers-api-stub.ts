@@ -14,6 +14,7 @@ export class OffersApiStub {
     public offerDelete(username: string, offerid: string): Observable<{}> {
         return new Observable(observer => {
             observer.next({});
+            observer.complete()
         })
     }
 
@@ -21,6 +22,7 @@ export class OffersApiStub {
     public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
         return new Observable(observer => {
             observer.next(MOCK_OFFERS);
+            observer.complete()
         })
     }
 
@@ -28,6 +30,7 @@ export class OffersApiStub {
     public offerGetOne(username: string, offerid: string): Observable<Offer> {
         return new Observable(observer => {
             observer.next(MOCK_OFFERS[0]);
+            observer.complete()
         })
     }
 
@@ -35,6 +38,7 @@ export class OffersApiStub {
     public offerPUT(offerData: Offer): Observable<Offer> {
         return new Observable(observer => {
             observer.next(offerData);
+            observer.complete()
         })
     }
 
@@ -42,6 +46,7 @@ export class OffersApiStub {
     public offerPost(offer: Offer): Observable<Offer> {
         return new Observable(observer => {
             observer.next(offer);
+            observer.complete()
         })
     }
 

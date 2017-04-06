@@ -3,17 +3,24 @@ import {QuickDefaultsCreateButtonComponent} from "./quick-defaults-create-button
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {Observable} from "rxjs";
-import {TdDialogService} from "@covalent/core";
+import {TdDialogService, TdLoadingService} from "@covalent/core";
+import {DefaultOffersService} from "../default-offers-service/default-offers.service";
+import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
-fdescribe('QuickDefaultsCreateButtonComponent', () => {
+describe('QuickDefaultsCreateButtonComponent', () => {
     let component: QuickDefaultsCreateButtonComponent;
     let fixture: ComponentFixture<QuickDefaultsCreateButtonComponent>;
+    let loadingSpy = jasmine.createSpyObj('loading', ['register', 'resolve', 'create']);
+    let feedbackSpy = jasmine.createSpyObj('snack', ['showMessageOnAnswer']);
 
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [QuickDefaultsCreateButtonComponent],
             providers: [
+                DefaultOffersService,
+                {provide: TdLoadingService, useValue: loadingSpy},
+                {provide: AjaxVisualFeedbackService, useValue: feedbackSpy},
                 {provide: OffersApi, useClass: OffersApiStub},
                 {provide: TdDialogService, useValue: tdDialogServiceStub}
             ]
@@ -27,8 +34,23 @@ fdescribe('QuickDefaultsCreateButtonComponent', () => {
         fixture.detectChanges();
     });
 
+
+    afterEach(() => {
+        //resetAllCalls to spys
+        loadingSpy.register.calls.reset();
+        loadingSpy.resolve.calls.reset();
+        loadingSpy.create.calls.reset();
+        feedbackSpy.showMessageOnAnswer.calls.reset();
+    });
+
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should ask for confirmation before sending off 5 http requests', () => {
+        spyOn(component.simpleDialog, 'openConfirm').and.callThrough();
+        component.createDefaults();
+        expect(component.simpleDialog.openConfirm).toHaveBeenCalledTimes(1); 
     });
 
     it('should call http with salads and breakfast offers', fakeAsync(() => {
@@ -37,13 +59,22 @@ fdescribe('QuickDefaultsCreateButtonComponent', () => {
         component.createDefaults();
         expect(createSpy).toHaveBeenCalledTimes(5);
     }));
+
+    it('should call the loading and feedback services ', () => {
+        component.createDefaults();
+        expect(loadingSpy.register).toHaveBeenCalledTimes(1);
+        expect(loadingSpy.resolve).toHaveBeenCalledTimes(1);
+        expect(feedbackSpy.showMessageOnAnswer).toHaveBeenCalledTimes(1);
+    });
 });
 
 
 let tdDialogServiceStub = {
-    openConfirm: () =>{
-        return {afterClosed: () =>{
-            return Observable.of(true);
-        }}
+    openConfirm: () => {
+        return {
+            afterClosed: () => {
+                return Observable.of(true);
+            }
+        }
     }
 };

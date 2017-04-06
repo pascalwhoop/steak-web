@@ -29,12 +29,7 @@
   </md-card-content>
   <md-card-actions layout="row">
     <button md-button color="primary" (click)="createNewFor(date)" class="add-new-button">Add new entry</button>
-    <button md-button>Quick defaults creation</button>
-    <!--<span flex></span>-->
-    <!--<md-icon svgIcon="meat"      [ngClass]="{'mat-primary': hasMeatyItem(offers), 'mat-warn': !hasMeatyItem(offers)}"></md-icon>-->
-    <!--<md-icon svgIcon="breakfast" [ngClass]="{'mat-primary': hasBreakfast(offers), 'mat-warn': !hasBreakfast(offers)}"></md-icon>-->
-    <!--<md-icon svgIcon="vegetarian" [ngClass]="{'mat-primary': hasVegetarianItem(offers), 'mat-warn': !hasVegetarianItem(offers)}"></md-icon>-->
-    <!--<md-icon svgIcon="soup" [ngClass]="{'mat-primary': hasSoup(offers), 'mat-warn': !hasSoup(offers)}"></md-icon>-->
-    
+
+    <steak-quick-defaults-create-button (offerChange)="onOfferChange($event)" [date]="date"></steak-quick-defaults-create-button>
   </md-card-actions>
 </md-card>
