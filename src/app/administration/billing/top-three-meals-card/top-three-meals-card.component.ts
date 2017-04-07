@@ -43,7 +43,8 @@ export class TopThreeMealsCardComponent implements OnChanges {
                     return prev;
                 }
             }, {});
-        return _.values(offerCountMap).sort((a,b) => a.count - b.count).slice(0,3);
+        //sort descending
+        return _.values(offerCountMap).sort((a,b) => b.count - a.count).slice(0,3);
     }
 }
 
