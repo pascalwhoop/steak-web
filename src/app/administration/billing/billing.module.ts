@@ -6,11 +6,12 @@ import {TopThreeMealsCardComponent} from "./top-three-meals-card/top-three-meals
 import {TotalSumCardComponent} from "./total-sum-card/total-sum-card.component";
 import {AverageSumPerEmployeeCardComponent} from "./average-sum-per-employee-card/average-sum-per-employee-card.component";
 import {GenerateBillingPdfFormCardComponent} from "./generate-billing-pdf-form-card/generate-billing-pdf-form-card.component";
+import {CovalentCoreModule} from "@covalent/core";
 
 @NgModule({
     imports: [
         CommonModule,
-        SharedModule
+        SharedModule,
     ],
     declarations: [BillingPageComponent, TopThreeMealsCardComponent, TotalSumCardComponent, AverageSumPerEmployeeCardComponent, GenerateBillingPdfFormCardComponent],
     exports: [

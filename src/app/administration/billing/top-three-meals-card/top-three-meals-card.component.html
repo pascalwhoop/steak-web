@@ -1,9 +1,14 @@
 <md-card class="md-card-colored" flex>
-  <md-card-content class="text-center">
-    <div class="md-headline">Top 3 offers of the month</div>
-    <!--<md-icon class="icon tc-indigo-700">perm_contact_calendar</md-icon>-->
-    <div layout="column">
-      <div *ngFor="let top of topOrders">{{top.count}}: {{top.description}}</div>
-    </div>
+  <md-card-content>
+    <h3>Top 3 offers of the month</h3>
+
+    <md-list dense>
+      <md-list-item *ngFor="let top of topOrders">
+        <md-icon md-list-icon [svgIcon]="_getIconForMeal(top.offer)" color="primary"></md-icon>
+        <h4 md-line>{{top.offer.description}}</h4>
+        <p md-line>{{top.count}} orders</p>
+      </md-list-item>
+    </md-list>
+
   </md-card-content>
 </md-card>

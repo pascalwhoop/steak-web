@@ -1,6 +1,8 @@
 import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
 import * as _ from "lodash";
+import {Offer} from "../../../shared/model/Offer";
+import {getIconForMeal} from "../../../core/util/util.service";
 
 
 @Component({
@@ -27,24 +29,23 @@ export class TopThreeMealsCardComponent implements OnChanges {
     }
 
 
-    private recalculate(orders: Order[]) {
-        let offerCountMap: ITopOfferMap = orders.map(order => {
-            return {
-                _id: order.offer._id,
-                description: order.offer.description
-            }
-        })
+    recalculate(orders: Order[]) {
+        let offerCountMap: ITopOfferMap = orders.map(order => order.offer)
             .reduce((prev, curr, index, arr): ITopOfferMap => {
                 if (prev[curr._id]) {
                     prev[curr._id].count++;
                     return prev;
                 } else {
-                    prev[curr._id] = {description: curr.description, count: 1, _id: curr._id};
+                    prev[curr._id] = {offer: curr, count: 1};
                     return prev;
                 }
             }, {});
         //sort descending
-        return _.values(offerCountMap).sort((a,b) => b.count - a.count).slice(0,3);
+        return _.values(offerCountMap).sort((a, b) => b.count - a.count).slice(0, 3);
+    }
+
+    _getIconForMeal(offer: Offer){
+        return getIconForMeal(offer);
     }
 }
 
@@ -53,8 +54,7 @@ interface ITopOfferMap {
 }
 
 interface ITopOffer {
-    description: string;
-    _id: string;
+    offer: Offer;
     count: number;
 }
 

@@ -7,7 +7,7 @@ import {OrdersApi} from "../../../shared/api/endpoints/OrdersApi";
 import {OrdersApiStub} from "../../../../testing/orders-api-stub";
 import {itemFrom} from "../../../../testing/testing-utility-functions";
 
-fdescribe('BillingPageComponent', () => {
+describe('BillingPageComponent', () => {
     let component: BillingPageComponent;
     let fixture: ComponentFixture<BillingPageComponent>;
 
