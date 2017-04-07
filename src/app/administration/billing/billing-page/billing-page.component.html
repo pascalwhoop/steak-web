@@ -1,1 +1,12 @@
+<div layout="row" layout-wrap>
+    <steak-top-three-meals-card             [orders]="orders" flex="100" flex-gt-xs="33"></steak-top-three-meals-card>
+    <steak-total-sum-card                   [orders]="orders" flex="100" flex-gt-xs="33"></steak-total-sum-card>
+    <steak-average-sum-per-employee-card    [orders]="orders" flex="100" flex-gt-xs="33"></steak-average-sum-per-employee-card>
+</div>
+<div layout="row">
+    <steak-generate-billing-pdf-form-card flex="100"></steak-generate-billing-pdf-form-card>
+</div>
+
+<!--this takes all the width-->
+<!--<div fxFlex="100" fxFlex.gt-md="33" fxFlex.gt-xs="50" *ngFor="let day of offerOrderData">-->
 <steak-orders-history-table [orders]="orders" [columns]="columns"></steak-orders-history-table>

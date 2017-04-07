@@ -1,0 +1,9 @@
+<md-card class="md-card-colored" flex>
+  <md-card-content class="text-center">
+    <div class="md-headline">Top 3 offers of the month</div>
+    <!--<md-icon class="icon tc-indigo-700">perm_contact_calendar</md-icon>-->
+    <div layout="column">
+      <div *ngFor="let top of topOrders">{{top.count}}: {{top.description}}</div>
+    </div>
+  </md-card-content>
+</md-card>

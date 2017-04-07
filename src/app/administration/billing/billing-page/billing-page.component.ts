@@ -22,7 +22,7 @@ export class BillingPageComponent implements OnInit {
     {name: 'user', label: "Employee code"}
   ];
 
-  constructor(public title: PageTitleService, public ordersApi: OrdersApi, public userService: UserService) {
+  constructor(public title: PageTitleService, public ordersApi: OrdersApi) {
   }
 
   ngOnInit() {

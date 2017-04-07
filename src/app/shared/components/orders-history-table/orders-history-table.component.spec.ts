@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed, fakeAsync, tick} from "@angular/core/testing";
 import {OrdersHistoryTableComponent} from "./orders-history-table.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {TdDataTableService, CovalentCoreModule} from "@covalent/core";
+import {TdDataTableService, CovalentCoreModule, ITdDataTableColumn} from "@covalent/core";
 import {By} from "@angular/platform-browser";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {CoreModule} from "../../../core/core.module";
@@ -25,6 +25,7 @@ describe('OrdersHistoryTableComponent', () => {
         component = fixture.componentInstance;
 
         component.orders = MOCK_ORDERS;
+        component.columns = TEST_COLUMNS;
         component.filter();
         fixture.detectChanges();
     });
@@ -83,3 +84,11 @@ describe('OrdersHistoryTableComponent', () => {
         return fixture.debugElement.queryAll(By.css('tbody>tr'));
     };
 });
+
+let TEST_COLUMNS: ITdDataTableColumn[] = [
+    {name: 'date', label: 'Date', tooltip: 'date ordered'},
+    {name: 'description', label: 'Description'},
+    {name: 'amount', label: 'Price'},
+    {name: 'vegetarian', label: 'Vegetarian'},
+    {name: 'paid', label: 'Paid'}
+    ];
