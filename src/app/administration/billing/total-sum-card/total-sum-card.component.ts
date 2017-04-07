@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
+import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
 
 @Component({
@@ -6,7 +6,7 @@ import {Order} from "../../../shared/model/Order";
     templateUrl: './total-sum-card.component.html',
     styleUrls: ['./total-sum-card.component.scss']
 })
-export class TotalSumCardComponent implements OnChanges{
+export class TotalSumCardComponent implements OnChanges {
 
     @Input()
     orders: Order[];
@@ -19,11 +19,15 @@ export class TotalSumCardComponent implements OnChanges{
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['orders'] && changes['orders'].currentValue) {
-            this.recalculate()
+            let newVals = changes['orders'].currentValue;
+            this.total = this.recalculate(newVals);
+            this.orders = newVals;
         }
     }
 
-    private recalculate() {
-
+    recalculate(orders: Order[]): number {
+        return orders.reduce((prev, curr) => {
+            return prev + curr.amount
+        }, 0)
     }
 }

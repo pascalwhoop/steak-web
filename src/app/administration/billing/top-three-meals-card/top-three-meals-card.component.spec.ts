@@ -28,7 +28,7 @@ describe('TopThreeMealsCardComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    fit('should list the top three offers as a list with count', fakeAsync(() => {
+    it('should list the top three offers as a list with count', fakeAsync(() => {
         //makes 2x 5 orders for each offer
         component.orders = MOCK_ORDERS.concat(MOCK_ORDERS,MOCK_ORDERS,MOCK_ORDERS,MOCK_ORDERS);
         component.topOrders = component.recalculate(component.orders);
