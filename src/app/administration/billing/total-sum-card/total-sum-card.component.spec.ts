@@ -5,6 +5,7 @@ import {NO_ERRORS_SCHEMA, SimpleChange} from "@angular/core";
 import {CovalentCoreModule} from "@covalent/core";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {itemFrom} from "../../../../testing/testing-utility-functions";
+import * as _ from "lodash";
 import {Order} from "../../../shared/model/Order";
 
 describe('TotalSumCardComponent', () => {
@@ -40,46 +41,50 @@ describe('TotalSumCardComponent', () => {
         expect(sumText).toBe('36.75 €')
     }));
 
-    fit('should calculate the chart data from the Order Input', () => {
+    it('should calculate the chart data from the Order Input', () => {
         let mockOrders = getMockOrdersForChartTest();
-        expect(component.recalcChartData(mockOrders)).toBe(expectedChartData);
+        expect(JSON.stringify(component.recalcChartData(mockOrders))).toEqual(JSON.stringify(expectedChartData));
     });
 });
 
 let expectedChartData = [
-    {name: 'soup', series: []},
-    {name: 'salad', series: []},
-    {name: 'breakfast', series: []},
+    {
+        name: 'meat',
+        series: []
+    },
     {
         name: 'vegetarian',
         series: [
             {
                 value: 5,
-                name: '2017-02-21T00:00:00.000Z'
+                name: new Date('2017-02-22T00:00:00.000Z')
             },
             {
                 value: 10,
-                name: '2018-02-21T00:00:00.000Z'
+                name: new Date('2018-02-22T00:00:00.000Z')
             }
         ]
     },
+    {name: 'soup', series: []},
+    {name: 'salad', series: []},
     {
-        name: 'meat',
+        name: 'breakfast',
         series: [
             {
                 value: 7.25,
-                name: '2017-02-22T00:00:00.000Z'
+                name: new Date('2017-02-22T00:00:00.000Z')
             },
             {
                 value: 14.50,
-                name: '2018-02-22T00:00:00.000Z'
+                name: new Date('2018-02-22T00:00:00.000Z')
             }
         ]
-    }
+    },
 ];
 
 function getMockOrdersForChartTest(): Order[] {
-    let chartInputOrders = MOCK_ORDERS.concat(MOCK_ORDERS);
+    let ords = _.cloneDeep(MOCK_ORDERS);
+    let chartInputOrders = ords.concat(_.cloneDeep(ords));
     chartInputOrders[2].amount *= 2;
     chartInputOrders[2].offer.date = new Date('2018-02-22T00:00:00.000Z');
     chartInputOrders[3].amount *= 2;

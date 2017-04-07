@@ -92,7 +92,7 @@ describe('OffersPageComponent', () => {
     it('should group the offers and orders into objects for each offer', () => {
         //our mock data includes 2 orders that match the first offer in the offer mock data. therefore, there should be 1 offer with 2 orders
         let pairs = component.makeOfferOrderPairs(MOCK_OFFERS, MOCK_ORDERS);
-        expect(pairs[0].orders.length).toBe(2);
+        expect(pairs[0].orders.length).toBe(1);
 
     });
 
