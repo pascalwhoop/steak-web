@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
 import * as _ from "lodash";
 import {Offer} from "../../../shared/model/Offer";
-import {getIconForMeal} from "../../../core/util/util.service";
+import {getIconNameForMeal} from "../../../core/util/util.service";
 
 
 @Component({
@@ -45,7 +45,7 @@ export class TopThreeMealsCardComponent implements OnChanges {
     }
 
     _getIconForMeal(offer: Offer){
-        return getIconForMeal(offer);
+        return getIconNameForMeal(offer);
     }
 }
 

@@ -5,6 +5,7 @@ import {NO_ERRORS_SCHEMA, SimpleChange} from "@angular/core";
 import {CovalentCoreModule} from "@covalent/core";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {itemFrom} from "../../../../testing/testing-utility-functions";
+import {Order} from "../../../shared/model/Order";
 
 describe('TotalSumCardComponent', () => {
     let component: TotalSumCardComponent;
@@ -38,4 +39,50 @@ describe('TotalSumCardComponent', () => {
         let sumText = itemFrom(fixture, '.md-headline').nativeElement.innerHTML;
         expect(sumText).toBe('36.75 €')
     }));
+
+    fit('should calculate the chart data from the Order Input', () => {
+        let mockOrders = getMockOrdersForChartTest();
+        expect(component.recalcChartData(mockOrders)).toBe(expectedChartData);
+    });
 });
+
+let expectedChartData = [
+    {name: 'soup', series: []},
+    {name: 'salad', series: []},
+    {name: 'breakfast', series: []},
+    {
+        name: 'vegetarian',
+        series: [
+            {
+                value: 5,
+                name: '2017-02-21T00:00:00.000Z'
+            },
+            {
+                value: 10,
+                name: '2018-02-21T00:00:00.000Z'
+            }
+        ]
+    },
+    {
+        name: 'meat',
+        series: [
+            {
+                value: 7.25,
+                name: '2017-02-22T00:00:00.000Z'
+            },
+            {
+                value: 14.50,
+                name: '2018-02-22T00:00:00.000Z'
+            }
+        ]
+    }
+];
+
+function getMockOrdersForChartTest(): Order[] {
+    let chartInputOrders = MOCK_ORDERS.concat(MOCK_ORDERS);
+    chartInputOrders[2].amount *= 2;
+    chartInputOrders[2].offer.date = new Date('2018-02-22T00:00:00.000Z');
+    chartInputOrders[3].amount *= 2;
+    chartInputOrders[3].offer.date = new Date('2018-02-22T00:00:00.000Z');
+    return chartInputOrders;
+}

@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
 import {MdDialog} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {EditMode, getIconForMeal} from "../../core/util/util.service";
+import {EditMode, getIconNameForMeal} from "../../core/util/util.service";
 import * as _ from "lodash";
 
 @Component({
@@ -51,7 +51,7 @@ export class AdminOfferItemComponent implements OnInit {
     }
 
     _getIconForMeal(offer: Offer) {
-        return getIconForMeal(offer);
+        return getIconNameForMeal(offer);
     }
 
 }

@@ -5,5 +5,22 @@
     <div layout="column">
       <div class="md-subhead">Total Amount</div>
     </div>
+    <md-divider></md-divider>
+    <div style="height:250px;">
+      <ngx-charts-line-chart *ngIf="chartData"
+              [scheme]="orangeScheme"
+              [results]="chartData"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [autoScale]="autoScale"
+              [yAxisTickFormatting]="axisDigits">
+      </ngx-charts-line-chart>
+    </div>
   </md-card-content>
 </md-card>

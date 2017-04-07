@@ -15,6 +15,7 @@ import {MainComponent} from "./components/main/main.component";
 import {DomSanitizer} from "@angular/platform-browser";
 import { NothingHereComponent } from './components/nothing-here/nothing-here.component';
 import {OrdersHistoryTableComponent} from "./components/orders-history-table/orders-history-table.component";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import {OrdersHistoryTableComponent} from "./components/orders-history-table/ord
     exports: [
         CommonModule,
         CovalentCoreModule,
+        NgxChartsModule,
         ApiModule,
         MainComponent,
         FormsModule,

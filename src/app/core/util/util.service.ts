@@ -62,7 +62,7 @@ export let STANDARD_TIMES = {
     LUNCH: "Mittag"
 };
 
-export function getIconForMeal(offer: Offer){
+export function getIconNameForMeal(offer: Offer){
     if (offer.time == 'Fruehstueck') {
         return 'breakfast'
     } else {
