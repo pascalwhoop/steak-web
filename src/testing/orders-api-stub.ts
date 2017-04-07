@@ -26,6 +26,8 @@ export class OrdersApiStub {
     public orderDelete(orderid: string, extraHttpRequestParams?: any): Observable<{}> {
         return new Observable(observer => {
             observer.next({});
+            observer.complete()
+
         })
     }
 
@@ -33,6 +35,8 @@ export class OrdersApiStub {
     public orderGetOne(orderid: string, extraHttpRequestParams?: any): Observable<Order> {
         return new Observable(observer => {
             observer.next(MOCK_ORDERS[0]);
+            observer.complete()
+
         })
     }
 
@@ -40,12 +44,16 @@ export class OrdersApiStub {
     public orderPUT(orderBooking: OrderBooking, extraHttpRequestParams?: any): Observable<Order> {
         return new Observable(observer => {
             observer.next(MOCK_ORDERS[0]);
+            observer.complete()
+
         })
     }
 
     public orderPost(orderid: string, order: Order): Observable<Order> {
         return new Observable(observer => {
             observer.next(order);
+            observer.complete()
+
         })
     }
 
@@ -53,6 +61,7 @@ export class OrdersApiStub {
     public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Array<Order>> {
         return new Observable(observer => {
             observer.next(MOCK_ORDERS);
+            observer.complete()
         })
     }
 

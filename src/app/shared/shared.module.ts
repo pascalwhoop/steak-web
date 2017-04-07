@@ -13,6 +13,7 @@ import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.servi
 import {CovalentCoreModule, TdLoadingService, LoadingType} from "@covalent/core";
 import {MainComponent} from "./components/main/main.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import { NothingHereComponent } from './components/nothing-here/nothing-here.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,7 @@ import {DomSanitizer} from "@angular/platform-browser";
         CovalentCoreModule,
         RouterModule,
     ],
-    declarations: [MainComponent, ObjectToArrayPipe, WorkingSpinnerComponent],
+    declarations: [MainComponent, ObjectToArrayPipe, WorkingSpinnerComponent, NothingHereComponent],
     providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
     exports: [
         CommonModule,
@@ -34,6 +35,7 @@ import {DomSanitizer} from "@angular/platform-browser";
         FormsModule,
         MaterialModule,
         WorkingSpinnerComponent,
+        NothingHereComponent,
         ObjectToArrayPipe,
         FlexLayoutModule,
     ]
