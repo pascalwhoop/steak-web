@@ -26,22 +26,22 @@ describe('OfferCacheService', () => {
 
     it('should let components filter through offers based on search string', () => {
         expect(service.find('Wirsingeintopf').length).toBe(1);
-        expect(service.find(' und ').length).toBe(3);
+        expect(service.find(' und ').length).toBe(4);
     });
 
     it('should store more elements in localStorage if they are put into cache', () => {
-        //at the beginning there were 4
+        //at the beginning there were 5
         let offers = JSON.parse(localStorage.getItem('offers'));
-        expect(offers.length).toBe(4);
+        expect(offers.length).toBe(5);
         let moreOffers = _.cloneDeep(MOCK_OFFERS);
 
         //but then
         let otherId = 1000;
         moreOffers.forEach(offer => offer._id = (otherId++).toString());
         service.putMany(moreOffers);
-        //and suddenly there were 8
+        //and suddenly there were 10
         let them = JSON.parse(localStorage.getItem('offers'));
-        expect(them.length).toBe(8);
+        expect(them.length).toBe(10);
     });
 });
 

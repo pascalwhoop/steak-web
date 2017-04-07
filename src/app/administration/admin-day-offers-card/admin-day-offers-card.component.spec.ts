@@ -69,11 +69,11 @@ describe('AdminDayOffersCardComponent', () => {
 
     it('should list all offers under the right date', fakeAsync(() => {
         component.offers = makeFourMockOffersForTomorrow();
-        expect(component.offers.length).toBe(4);
+        expect(component.offers.length).toBe(5);
         fixture.detectChanges();
         tick(); //let the templates filters run through
         let tomorrowItems = fixture.debugElement.queryAll(By.css('steak-admin-offer-item'));
-        expect(tomorrowItems.length).toBe(4);
+        expect(tomorrowItems.length).toBe(5);
     }));
 
     it('should have a red background when not all minimum meals are offered', () => {

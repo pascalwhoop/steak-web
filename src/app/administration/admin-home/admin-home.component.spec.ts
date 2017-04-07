@@ -66,14 +66,14 @@ describe('AdminHomeComponent', () => {
 
     it('should replace previous offers and create new ones with onOfferChange', () => {
         component.offers = _.clone(MOCK_OFFERS);
-        expect(component.offers.length).toBe(4);
+        expect(component.offers.length).toBe(5);
         //adding an already existing object doesnt matter
         component.onOfferChange(_.clone(MOCK_OFFERS[0]));
-        expect(component.offers.length).toBe(4);
+        expect(component.offers.length).toBe(5);
 
         //adding a new offer increases count by 1
         component.onOfferChange(MOCK_COMPLETE_DAY[6]);
-        expect(component.offers.length).toBe(5);
+        expect(component.offers.length).toBe(6);
     });
 
 

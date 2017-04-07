@@ -44,6 +44,16 @@ export const MOCK_OFFERS: Offer[] = [
         "date": new Date("2013-10-04T00:00:00.000Z"),
         "main_offer": false,
         "heat": 70
+    },
+    {
+        "_id": "58a47bd88fdd83064b5c88a2",
+        "description": "Backfisch mit Remoulade, Bratkartoffeln und Salatteller",
+        "vegetarian": false,
+        "price": 7.25,
+        "time": "Fruehstueck",
+        "date": new Date("2017-02-22T00:00:00.000Z"),
+        "main_offer": true,
+        "heat": -40
     }
 ];
 
