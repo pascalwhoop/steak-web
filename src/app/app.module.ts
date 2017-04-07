@@ -13,7 +13,7 @@ import {PageTitleService} from "./shared/services/page-title.service";
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
     ],
     imports: [
         CoreModule,
