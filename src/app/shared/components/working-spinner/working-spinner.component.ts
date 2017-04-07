@@ -4,7 +4,7 @@ import {AjaxVisualFeedbackService} from "../../../ajax-visual-feedback/ajax-visu
 
 @Component({
     selector: 'steak-working-spinner',
-    template: `<md-progress-spinner mode="indeterminate" *ngIf="_visible"></md-progress-spinner>`,
+    template: `<md-progress-spinner mode="indeterminate" *ngIf="_visible" color="accent"></md-progress-spinner>`,
     styleUrls: ['working-spinner.component.scss']
 })
 export class WorkingSpinnerComponent implements OnInit, OnDestroy {

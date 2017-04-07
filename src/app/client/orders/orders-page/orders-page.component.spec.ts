@@ -4,8 +4,8 @@ import {PageTitleService} from "../../../shared/services/page-title.service";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OrdersApiStub} from "../../../../testing/orders-api-stub";
 import {OrdersApi} from "../../../shared/api/endpoints/OrdersApi";
-import Spy = jasmine.Spy;
 import {UserService} from "../../../login/user.service";
+import Spy = jasmine.Spy;
 
 describe('OrdersPageComponent', () => {
     let component: OrdersPageComponent;
@@ -41,6 +41,5 @@ describe('OrdersPageComponent', () => {
     it('should set its page name to the pageTitleService', () => {
         expect(titleService.title).toBe('Orders');
     });
-
-    });
+    
 });
