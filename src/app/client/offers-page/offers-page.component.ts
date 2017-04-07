@@ -10,10 +10,12 @@ import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {Order} from "../../shared/model/Order";
 import * as _ from "lodash";
 import {UserService} from "../../login/user.service";
+import {MdSnackBar} from "@angular/material";
+import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 export interface IDayPack {
     date: Date;
-    offerOrderPairs: OfferOrdersPair[]
+    offerOrderPairs: OfferOrdersPair[];
 }
 
 @Component({
@@ -23,9 +25,9 @@ export interface IDayPack {
 })
 export class OffersPageComponent implements OnInit {
 
-    offerOrderData: IDayPack[];
+    offerOrderData: IDayPack[] = [];
 
-    constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi, public userService: UserService) {
+    constructor(public title: PageTitleService, public usersApi: UsersApi, public offersApi: OffersApi, public ordersApi: OrdersApi, public userService: UserService, public feedback: AjaxVisualFeedbackService) {
 
     }
 
@@ -41,17 +43,23 @@ export class OffersPageComponent implements OnInit {
 
 
     fetchData(): Observable<OfferOrdersPair[]> {
-        return new Observable(observer => {
+        let obs = new Observable(observer => {
             let offerObs = this.offersApi.offersGet(null, new Date());
             let orderObs = this.ordersApi.ordersGET(new Date(), null, null, this.userService.username);
 
-            Observable.forkJoin(offerObs, orderObs)
-                .subscribe(results => {
+            let obs = Observable.forkJoin(offerObs, orderObs);
+            obs.subscribe(results => {
                     let offers = results[0];
                     let orders = results[1];
                     observer.next(this.makeOfferOrderPairs(offers, orders));
+                },
+                error => {
+                    this.offerOrderData = null;
+                    this.feedback.showFetchError('offers');
                 });
-        })
+        }).publish();
+        obs.connect();
+        return obs;
     }
 
     mapPairsToDays(pairings: OfferOrdersPair[]): IDayPack[] {
@@ -69,7 +77,6 @@ export class OffersPageComponent implements OnInit {
         });
         return results.sort((a, b) => (a.date.getTime() - b.date.getTime()));
     }
-
 
 
     makeOfferOrderPairs(offers: Offer[], orders: Order[]): OfferOrdersPair[] {
