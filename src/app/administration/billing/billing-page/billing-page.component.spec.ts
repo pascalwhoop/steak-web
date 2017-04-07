@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BillingPageComponent } from './billing-page.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('BillingPageComponent', () => {
   let component: BillingPageComponent;
@@ -8,7 +9,8 @@ describe('BillingPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BillingPageComponent ]
+      declarations: [ BillingPageComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

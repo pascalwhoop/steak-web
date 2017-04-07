@@ -14,6 +14,7 @@ import {CovalentCoreModule, TdLoadingService, LoadingType} from "@covalent/core"
 import {MainComponent} from "./components/main/main.component";
 import {DomSanitizer} from "@angular/platform-browser";
 import { NothingHereComponent } from './components/nothing-here/nothing-here.component';
+import {OrdersHistoryTableComponent} from "./components/orders-history-table/orders-history-table.component";
 
 @NgModule({
     imports: [
@@ -25,7 +26,7 @@ import { NothingHereComponent } from './components/nothing-here/nothing-here.com
         CovalentCoreModule,
         RouterModule,
     ],
-    declarations: [MainComponent, ObjectToArrayPipe, WorkingSpinnerComponent, NothingHereComponent],
+    declarations: [MainComponent, ObjectToArrayPipe, WorkingSpinnerComponent, NothingHereComponent, OrdersHistoryTableComponent],
     providers: [{provide: BrowserXhr, useExisting: CustomBrowserXhr}],
     exports: [
         CommonModule,
@@ -35,6 +36,7 @@ import { NothingHereComponent } from './components/nothing-here/nothing-here.com
         FormsModule,
         MaterialModule,
         WorkingSpinnerComponent,
+        OrdersHistoryTableComponent,
         NothingHereComponent,
         ObjectToArrayPipe,
         FlexLayoutModule,

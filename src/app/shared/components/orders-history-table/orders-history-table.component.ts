@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
-import {Order} from "../../../shared/model/Order";
+import {Order} from "../../model/Order";
 import {
     ITdDataTableColumn, ITdDataTableSortChangeEvent, TdDataTableService,
     TdDataTableSortingOrder
@@ -68,7 +68,8 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
             description: order.offer.description,
             vegetarian: order.offer.vegetarian,
             paid: order.paid,
-            amount: order.amount
+            amount: order.amount,
+            user: order.employee_id
         }
 
     }
@@ -80,5 +81,5 @@ interface IOrderHistoryData {
     vegetarian: boolean;
     paid: boolean;
     amount: number;
-
+    user?: string;
 }
