@@ -52,6 +52,11 @@ export class AjaxVisualFeedbackService implements Subscribable<XhrEvent> {
         return obs;
     }
 
+    public showFetchError(noun: string, button?: boolean, duration?: number){
+        let buttonText = button===false ? null : "OK";
+        this.snackBar.open(`Couldn't fetch ${noun} from server`, buttonText, {duration: duration? duration : 10000});
+    }
+
 }
 
 export interface XhrEvent {
