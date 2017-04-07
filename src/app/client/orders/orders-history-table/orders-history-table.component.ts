@@ -1,13 +1,9 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
 import {
-    ITdDataTableColumn,
-    TdDataTableSortingOrder,
-    IPageChangeEvent,
-    ITdDataTableSortChangeEvent,
-    TdDataTableService
+    ITdDataTableColumn, ITdDataTableSortChangeEvent, TdDataTableService,
+    TdDataTableSortingOrder
 } from "@covalent/core";
-import {Offer} from "../../../shared/model/Offer";
 
 @Component({
     selector: 'steak-orders-history-table',
@@ -19,13 +15,8 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
     @Input('orders')
     orders: Order[];
 
-    columns: ITdDataTableColumn[] = [
-        {name: 'date', label: 'Date', tooltip: 'date ordered'},
-        {name: 'description', label: 'Description'},
-        {name: 'amount', label: 'Price'},
-        {name: 'vegetarian', label: 'Vegetarian'},
-        {name: 'paid', label: 'Paid'}
-    ];
+    @Input()
+    columns: ITdDataTableColumn[];
 
     filteredData: IOrderHistoryData[];
     filteredTotal: number;
@@ -54,7 +45,7 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
 
     filter(data?: Order[]): IOrderHistoryData[] {
 
-        if(!this.orders || this.orders.length < 1) return;
+        if (!this.orders || this.orders.length < 1) return;
         let newData = this.orders.map(order => this.generateRowFrom(order));
         newData = this.dataTableService.filterData(newData, this.searchTerm, true);
         this.filteredTotal = newData.length;
@@ -71,7 +62,7 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
 
 
     private generateRowFrom(order: Order): IOrderHistoryData {
-        
+
         return {
             date: order.offer.date,
             description: order.offer.description,
