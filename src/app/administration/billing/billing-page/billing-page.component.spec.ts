@@ -22,4 +22,8 @@ describe('BillingPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show a form to create PDF bills for the accounting department', () => {
+
+  });
 });

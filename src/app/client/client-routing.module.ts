@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {OffersPageComponent} from "./offers-page/offers-page.component";
-import {BillingPageComponent} from "./billing-page/billing-page.component";
 import {LoggedInGuard} from "../login/logged-in.guard";
 import {MainComponent} from "../shared/components/main/main.component";
 
@@ -14,7 +13,6 @@ import {MainComponent} from "../shared/components/main/main.component";
                     component: MainComponent,
                     children: [
                         {path: 'offers', component: OffersPageComponent},
-                        {path: 'billing', component: BillingPageComponent},
                         {
                             path: 'orders',
                             loadChildren: 'app/client/orders/orders.module#OrdersModule',

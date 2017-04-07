@@ -12,14 +12,16 @@ import { PrintDayButtonComponent } from './print-day-button/print-day-button.com
 import { AdminDayOffersCardComponent } from './admin-day-offers-card/admin-day-offers-card.component';
 import { QuickDefaultsCreateButtonComponent } from './quick-defaults-create-button/quick-defaults-create-button.component';
 import {DefaultOffersService} from "./default-offers-service/default-offers.service";
+import {BillingModule} from "./billing/billing.module";
 
 @NgModule({
     imports: [
         CommonModule,
         SharedModule,
-        AdministrationRoutingModule,
         PrintModule,
-        CacheModule
+        CacheModule,
+        BillingModule,
+        AdministrationRoutingModule
     ],
     providers: [DefaultOffersService],
     declarations: [AdminHomeComponent, OfferFormDialogComponent, AdminOfferItemComponent, OfferDescriptionAutoCompleteComponent, PrintDayButtonComponent, AdminDayOffersCardComponent, QuickDefaultsCreateButtonComponent],
