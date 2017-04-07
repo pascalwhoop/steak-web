@@ -17,7 +17,8 @@ import {BillingPageComponent} from "./billing/billing-page/billing-page.componen
                         {path: 'home', component: AdminHomeComponent},
                         {path: 'billing', component: BillingPageComponent},
                     ]
-                }
+                },
+                { path: '**', redirectTo: 'home'}
 
             ]
         )

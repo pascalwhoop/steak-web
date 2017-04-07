@@ -10,7 +10,7 @@ export const routes: Routes = [
         loadChildren: 'app/administration/administration.module#AdministrationModule',
         canActivate: [LoggedInGuard]
     },
-    { path: '**', redirectTo: 'client/offers'}
+
 ];
 
 @NgModule({

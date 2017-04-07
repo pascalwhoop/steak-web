@@ -21,6 +21,7 @@ import {MainComponent} from "../shared/components/main/main.component";
                     ,
                     canActivate: [LoggedInGuard]
                 },
+                { path: '**', redirectTo: 'client/offers'}
 
 
             ]
