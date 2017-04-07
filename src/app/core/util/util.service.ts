@@ -1,4 +1,5 @@
 import {Order} from "../../shared/model/Order";
+import {Offer} from "../../shared/model/Offer";
 export function toApiDate(date: Date | string): string {
     date = new Date(date.toString());
     return date.toISOString().slice(0, 10);
@@ -59,4 +60,25 @@ export let STANDARD_DESCRIPTIONS = {
 export let STANDARD_TIMES = {
     BREAKFAST: "Fruehstueck",
     LUNCH: "Mittag"
+};
+
+export function getIconForMeal(offer: Offer){
+    if (offer.time == 'Fruehstueck') {
+        return 'breakfast'
+    } else {
+        if (offer.vegetarian && offer.main_offer) {
+            return 'vegetarian'
+        }
+        if (!offer.vegetarian && offer.main_offer) {
+            return 'meat'
+        }
+        if (!offer.main_offer) {
+            if (offer.description.toLowerCase().indexOf('salat') >= 0) {
+                return 'salad';
+            }
+            if (offer.description.toLowerCase().indexOf('suppe') >= 0) {
+                return 'soup';
+            }
+        }
+    }
 }

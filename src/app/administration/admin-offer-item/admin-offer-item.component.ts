@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
 import {MdDialog} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {EditMode} from "../../core/util/util.service";
+import {EditMode, getIconForMeal} from "../../core/util/util.service";
 import * as _ from "lodash";
 
 @Component({
@@ -50,25 +50,8 @@ export class AdminOfferItemComponent implements OnInit {
         });
     }
 
-    getIconForMeal(offer: Offer) {
-        if (offer.time == 'Fruehstueck') {
-            return 'breakfast'
-        } else {
-            if (offer.vegetarian && offer.main_offer) {
-                return 'vegetarian'
-            }
-            if (!offer.vegetarian && offer.main_offer) {
-                return 'meat'
-            }
-            if (!offer.main_offer) {
-                if (offer.description.toLowerCase().indexOf('salat') >= 0) {
-                    return 'salad';
-                }
-                if (offer.description.toLowerCase().indexOf('suppe') >= 0) {
-                    return 'soup';
-                }
-            }
-        }
+    _getIconForMeal(offer: Offer) {
+        return getIconForMeal(offer);
     }
 
 }
