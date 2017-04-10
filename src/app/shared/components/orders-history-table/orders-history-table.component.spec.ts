@@ -1,10 +1,10 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
-import {OrdersHistoryTableComponent} from "./orders-history-table.component";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {CovalentCoreModule, ITdDataTableColumn, TdDataTableService} from "@covalent/core";
-import {By} from "@angular/platform-browser";
-import {MOCK_ORDERS} from "../../../../testing/mock-data";
-import {CoreModule} from "../../../core/core.module";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {OrdersHistoryTableComponent} from './orders-history-table.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {CovalentCoreModule, ITdDataTableColumn, TdDataTableService} from '@covalent/core';
+import {By} from '@angular/platform-browser';
+import {MOCK_ORDERS} from '../../../../testing/mock-data';
+import {CoreModule} from '../../../core/core.module';
 
 describe('OrdersHistoryTableComponent', () => {
     let component: OrdersHistoryTableComponent;
@@ -15,7 +15,7 @@ describe('OrdersHistoryTableComponent', () => {
             imports: [CovalentCoreModule, CoreModule],
             declarations: [OrdersHistoryTableComponent],
             providers: [TdDataTableService],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));
@@ -29,7 +29,6 @@ describe('OrdersHistoryTableComponent', () => {
         component.filter();
         fixture.detectChanges();
     });
-
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -45,13 +44,12 @@ describe('OrdersHistoryTableComponent', () => {
         expect(headers.length).toBe(5);
     });
 
-
     it('should let the user order by date', fakeAsync(() => {
         tick();
         let dateHeader = fixture.debugElement.queryAll(By.css('th'))[0].queryAll(By.css('md-icon'))[0];
 
-        let first = "22-02-2017";
-        let second = "21-02-2017";
+        let first = '22-02-2017';
+        let second = '21-02-2017';
         //expect them to be sorted descending
         expect(getDateForRow(getRows()[0])).toEqual(first);
         expect(getDateForRow(getRows()[1])).toEqual(second);
@@ -77,7 +75,7 @@ describe('OrdersHistoryTableComponent', () => {
     });
 
     let getDateForRow = function (row): string {
-        return row.queryAll(By.css('td>div>span'))[0].nativeElement.innerHTML
+        return row.queryAll(By.css('td>div>span'))[0].nativeElement.innerHTML;
     };
 
     let getRows = function () {
@@ -90,5 +88,5 @@ let TEST_COLUMNS: ITdDataTableColumn[] = [
     {name: 'description', label: 'Description'},
     {name: 'amount', label: 'Price'},
     {name: 'vegetarian', label: 'Vegetarian'},
-    {name: 'paid', label: 'Paid'}
+    {name: 'paid', label: 'Paid'},
     ];

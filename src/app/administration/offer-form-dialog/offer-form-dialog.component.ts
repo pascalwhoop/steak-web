@@ -1,16 +1,16 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {Offer} from "../../shared/model/Offer";
-import {EditMode} from "../../core/util/util.service";
-import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
-import {FormControl} from "@angular/forms";
-import {OfferCacheService} from "../../cache/offer-cache.service";
-import {MdDialogRef} from "@angular/material";
+import {Component, Input, OnInit} from '@angular/core';
+import {OffersApi} from '../../shared/api/endpoints/OffersApi';
+import {Offer} from '../../shared/model/Offer';
+import {EditMode} from '../../core/util/util.service';
+import {AjaxVisualFeedbackService} from '../../ajax-visual-feedback/ajax-visual-feedback.service';
+import {FormControl} from '@angular/forms';
+import {OfferCacheService} from '../../cache/offer-cache.service';
+import {MdDialogRef} from '@angular/material';
 
 @Component({
     selector: 'steak-offer-form-dialog',
     templateUrl: 'offer-form-dialog.component.html',
-    styleUrls: ['offer-form-dialog.component.scss']
+    styleUrls: ['offer-form-dialog.component.scss'],
 })
 export class OfferFormDialogComponent implements OnInit {
 
@@ -19,7 +19,6 @@ export class OfferFormDialogComponent implements OnInit {
     editMode: EditMode = EditMode.CREATE;
     offer: Offer = new OfferObj();
     offerForm: FormControl;
-
 
     constructor(public dialogRef: MdDialogRef<OfferFormDialogComponent>, public offersApi: OffersApi, public vFeedback: AjaxVisualFeedbackService, public offerCache: OfferCacheService) {
 
@@ -44,7 +43,7 @@ export class OfferFormDialogComponent implements OnInit {
         offer.date = this.date;
 
         let obs = this.offersApi.offerPost(this.offer);
-        obs.subscribe(offer => {
+        obs.subscribe((offer) => {
             this.dialogRef.close(offer);
         });
         this.vFeedback.showMessageOnAnswer('Create successful', 'Create failed', obs);
@@ -52,13 +51,13 @@ export class OfferFormDialogComponent implements OnInit {
 
     updateOffer(offer: Offer) {
         let obs = this.offersApi.offerPut(offer);
-        obs.subscribe(offer => this.dialogRef.close(offer));
+        obs.subscribe((offer) => this.dialogRef.close(offer));
         this.vFeedback.showMessageOnAnswer('Update successful', 'Update failed', obs);
     }
 
     deleteOffer(offer: Offer) {
         let obs = this.offersApi.offerDelete(offer._id);
-        obs.subscribe(next => this.dialogRef.close(offer._id));
+        obs.subscribe((next) => this.dialogRef.close(offer._id));
         this.vFeedback.showMessageOnAnswer('Delete successful', 'Delete failed', obs);
     }
 
@@ -78,7 +77,6 @@ export class OfferFormDialogComponent implements OnInit {
 
 }
 
-
 class OfferObj implements Offer {
     description: string;
     _id: string;
@@ -88,7 +86,6 @@ class OfferObj implements Offer {
     main_offer: boolean;
     vegetarian: boolean;
     heat: number;
-
 
     constructor(description?: string, id?: string, price?: number, date?: Date, time?: string, main_offer?: boolean, vegetarian?: boolean, heat?: number) {
         this.description = description;
@@ -101,4 +98,3 @@ class OfferObj implements Offer {
         this.heat = heat;
     }
 }
-

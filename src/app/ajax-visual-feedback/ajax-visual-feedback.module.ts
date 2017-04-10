@@ -1,16 +1,16 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {CustomBrowserXhr} from "./custom-browser-xhr.service";
-import {AjaxVisualFeedbackService} from "./ajax-visual-feedback.service";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CustomBrowserXhr} from './custom-browser-xhr.service';
+import {AjaxVisualFeedbackService} from './ajax-visual-feedback.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
 
   ],
   declarations: [],
   providers: [CustomBrowserXhr, AjaxVisualFeedbackService],
-  exports: []
+  exports: [],
 
 })
 export class AjaxVisualFeedbackModule { }

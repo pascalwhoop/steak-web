@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {MdSnackBar, MdSnackBarRef, SimpleSnackBar} from "@angular/material";
-import {Observable, Subscription} from "rxjs";
-import {CustomBrowserXhr} from "./custom-browser-xhr.service";
-import {Subscribable} from "rxjs/Observable";
-import {AnonymousSubscription} from "rxjs/Subscription";
+import {Injectable} from '@angular/core';
+import {MdSnackBar, MdSnackBarRef, SimpleSnackBar} from '@angular/material';
+import {Observable, Subscription} from 'rxjs';
+import {CustomBrowserXhr} from './custom-browser-xhr.service';
+import {Subscribable} from 'rxjs/Observable';
+import {AnonymousSubscription} from 'rxjs/Subscription';
 
 @Injectable()
 export class AjaxVisualFeedbackService implements Subscribable<XhrEvent> {
@@ -30,31 +30,31 @@ export class AjaxVisualFeedbackService implements Subscribable<XhrEvent> {
      * @param actionText
      */
     public showMessageOnAnswer(successMessage: string, errorMessage: string, observableRequest: Observable<any>, actionText?: string): Observable<MdSnackBarRef<SimpleSnackBar>> {
-        let obs = new Observable(sub => {
+        let obs = new Observable((sub) => {
             observableRequest
                 .subscribe(
                     null,
-                    err => {
+                    (err) => {
                         if (errorMessage) {
                             let snack = this.snackBar.open(errorMessage, null, {duration: 1500});
                             sub.next(snack);
                         }
-                        sub.complete()
+                        sub.complete();
                     },
                     () => {
                         if (successMessage) {
                             sub.next(this.snackBar.open(successMessage, actionText, {duration: 1500}));
                         }
-                        sub.complete()
-                    })
+                        sub.complete();
+                    });
         }).publish();
         obs.connect();
         return obs;
     }
 
     public showFetchError(noun: string, button?: boolean, duration?: number){
-        let buttonText = button===false ? null : "OK";
-        this.snackBar.open(`Couldn't fetch ${noun} from server`, buttonText, {duration: duration? duration : 10000});
+        let buttonText = button === false ? null : 'OK';
+        this.snackBar.open(`Couldn't fetch ${noun} from server`, buttonText, {duration: duration ? duration : 10000});
     }
 
 }

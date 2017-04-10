@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Offer} from "../shared/model/Offer";
+import {Injectable} from '@angular/core';
+import {Offer} from '../shared/model/Offer';
 
 @Injectable()
 export class OfferCacheService {
@@ -10,9 +10,8 @@ export class OfferCacheService {
         this._offers = new Map<string, Offer>();
         let offers = <Offer[]>JSON.parse(localStorage.getItem('offers'));
         if (offers) this._putManyInMemory(offers);
-        console.log("we have " + this.offers.length + " cached offers to use.")
+        console.log('we have ' + this.offers.length + ' cached offers to use.');
     }
-
 
     get offers(): Offer[] {
         return this._getOffersAsArray();
@@ -42,12 +41,12 @@ export class OfferCacheService {
     }
 
     private _putManyInMemory(offers: Offer[]) {
-        offers.forEach(offer => this._putInMemory(offer));
+        offers.forEach((offer) => this._putInMemory(offer));
     }
 
     find(searchString: string): Offer[] {
         searchString = searchString.toLowerCase();
         let offersArray = this._getOffersAsArray();
-        return offersArray.filter(offer => offer.description.toLowerCase().indexOf(searchString) >= 0);
+        return offersArray.filter((offer) => offer.description.toLowerCase().indexOf(searchString) >= 0);
     }
 }

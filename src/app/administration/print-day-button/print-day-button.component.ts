@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import {PrintService} from "../../print/print.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {OrdersApi} from '../../shared/api/endpoints/OrdersApi';
+import {PrintService} from '../../print/print.service';
 
 @Component({
     selector: 'steak-print-day-button',
     templateUrl: './print-day-button.component.html',
-    styleUrls: ['./print-day-button.component.scss']
+    styleUrls: ['./print-day-button.component.scss'],
 })
 export class PrintDayButtonComponent implements OnInit {
 
@@ -19,9 +19,9 @@ export class PrintDayButtonComponent implements OnInit {
     }
 
     public onClick(date: Date) {
-        this.fetchAllOrdersForDate(date).subscribe(orders => {
+        this.fetchAllOrdersForDate(date).subscribe((orders) => {
             this.printService.printListOfOrdersForKitchen(date, orders);
-        })
+        });
 
     }
 

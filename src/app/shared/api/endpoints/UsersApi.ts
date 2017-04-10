@@ -9,16 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Injectable} from "@angular/core";
-import {Http, RequestMethod, RequestOptions, RequestOptionsArgs, Response, URLSearchParams} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../../model/models";
-import {environment} from "../../../../environments/environment";
-import {User} from "../../model/User";
+import {Injectable} from '@angular/core';
+import {Http, RequestMethod, RequestOptions, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import * as models from '../../model/models';
+import {environment} from '../../../../environments/environment';
+import {User} from '../../model/User';
 
 /* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class UsersApi {
@@ -51,10 +50,9 @@ export class UsersApi {
      * @param useridpath The user id for which to fetch data
      * @param datepath
      */
-    public offersOrdersGET(useridpath: string, datepath: Date): Observable < Array < models.OfferOrdersPair >> {
-        let dateString = datepath.toISOString().slice(0,10);
+    public offersOrdersGET(useridpath: string, datepath: Date): Observable < models.OfferOrdersPair[]> {
+        let dateString = datepath.toISOString().slice(0, 10);
         const path = this.basePath + `/users/${useridpath}/offersordersoverview/date/${dateString}`;
-
 
         // verify required parameter 'useridpath' is not null or undefined
         if (useridpath === null || useridpath === undefined) {
@@ -104,7 +102,7 @@ export class UsersApi {
      * Returns a list of user objects
      * @param openPayments A flag that can be set to true to only get employees with open payments
      */
-    public userGetMany(openPayments ?: boolean): Observable < Array < models.User >> {
+    public userGetMany(openPayments ?: boolean): Observable < models.User[]> {
         const path = this.basePath + `/users`;
 
         let queryParameters = new URLSearchParams();
@@ -115,9 +113,8 @@ export class UsersApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
-            search: queryParameters
+            search: queryParameters,
         });
-
 
         return this.http.get(path, requestOptions)
             .map((response: Response) => {
@@ -128,6 +125,5 @@ export class UsersApi {
                 }
             });
     }
-
 
 }

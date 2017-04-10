@@ -1,8 +1,8 @@
-import {Injectable, Optional, SkipSelf} from "@angular/core";
-import {BrowserXhr} from "@angular/http";
-import {Observable, Subscriber} from "rxjs";
-import {XhrEvent} from "./ajax-visual-feedback.service";
-import {CoreModule} from "../core/core.module";
+import {Injectable, Optional, SkipSelf} from '@angular/core';
+import {BrowserXhr} from '@angular/http';
+import {Observable, Subscriber} from 'rxjs';
+import {XhrEvent} from './ajax-visual-feedback.service';
+import {CoreModule} from '../core/core.module';
 
 @Injectable()
 export class CustomBrowserXhr extends BrowserXhr {
@@ -12,13 +12,12 @@ export class CustomBrowserXhr extends BrowserXhr {
 
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
         super();
-        if (parentModule) { throw new Error('CustomBrowserXhr is already loaded. Import it in the AppModule only');}
+        if (parentModule) { throw new Error('CustomBrowserXhr is already loaded. Import it in the AppModule only'); }
 
-        this._observable = Observable.create(subscriber => {
+        this._observable = Observable.create((subscriber) => {
             this._subscriber = subscriber;
         }).share();
     }
-
 
     get observable(): Observable<XhrEvent> {
         return this._observable;

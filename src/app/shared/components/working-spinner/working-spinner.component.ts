@@ -1,14 +1,13 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {AnonymousSubscription} from "rxjs/Subscription";
-import {AjaxVisualFeedbackService} from "../../../ajax-visual-feedback/ajax-visual-feedback.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AnonymousSubscription} from 'rxjs/Subscription';
+import {AjaxVisualFeedbackService} from '../../../ajax-visual-feedback/ajax-visual-feedback.service';
 
 @Component({
     selector: 'steak-working-spinner',
     template: `<md-progress-spinner mode="indeterminate" *ngIf="_visible" color="accent"></md-progress-spinner>`,
-    styleUrls: ['working-spinner.component.scss']
+    styleUrls: ['working-spinner.component.scss'],
 })
 export class WorkingSpinnerComponent implements OnInit, OnDestroy {
-
 
     public _visible: boolean;
     private _subscription: AnonymousSubscription;
@@ -18,7 +17,7 @@ export class WorkingSpinnerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._subscription = this.vfeedbackService.subscribe(next => {
+        this._subscription = this.vfeedbackService.subscribe((next) => {
             switch (next.type) {
                 case 'open':
                     this._connectionCounter++;

@@ -1,8 +1,7 @@
-import {inject, TestBed} from "@angular/core/testing";
-import {PrintService} from "./print.service";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {MdSnackBar} from "@angular/material";
-
+import {inject, TestBed} from '@angular/core/testing';
+import {PrintService} from './print.service';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {MdSnackBar} from '@angular/material';
 
 describe('PrintService', () => {
     let snackSpy = jasmine.createSpyObj('snackBar', ['open']);
@@ -10,9 +9,9 @@ describe('PrintService', () => {
         TestBed.configureTestingModule({
             providers: [
                 PrintService,
-                {provide: MdSnackBar, useValue: snackSpy}
+                {provide: MdSnackBar, useValue: snackSpy},
             ],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         });
     });
 

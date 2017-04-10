@@ -1,19 +1,19 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
-import {OffersPageComponent} from "./offers-page.component";
-import {PageTitleService} from "../../shared/services/page-title.service";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {MOCK_OFFER_ORDER_PAIRS, MOCK_OFFERS, MOCK_ORDERS} from "../../../testing/mock-data";
-import {UsersApi} from "../../shared/api/endpoints/UsersApi";
-import {OffersApiStub} from "../../../testing/offers-api-stub";
-import {UsersApiStub} from "../../../testing/users-api-stub";
-import {OrdersApiStub} from "../../../testing/orders-api-stub";
-import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import {UserService} from "../../login/user.service";
-import * as _ from "lodash";
-import {itemFrom, itemsFrom, setDatesForOfferOrdersPairs} from "../../../testing/testing-utility-functions";
-import {Observable} from "rxjs";
-import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {OffersPageComponent} from './offers-page.component';
+import {PageTitleService} from '../../shared/services/page-title.service';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {OffersApi} from '../../shared/api/endpoints/OffersApi';
+import {MOCK_OFFER_ORDER_PAIRS, MOCK_OFFERS, MOCK_ORDERS} from '../../../testing/mock-data';
+import {UsersApi} from '../../shared/api/endpoints/UsersApi';
+import {OffersApiStub} from '../../../testing/offers-api-stub';
+import {UsersApiStub} from '../../../testing/users-api-stub';
+import {OrdersApiStub} from '../../../testing/orders-api-stub';
+import {OrdersApi} from '../../shared/api/endpoints/OrdersApi';
+import {UserService} from '../../login/user.service';
+import * as _ from 'lodash';
+import {itemFrom, itemsFrom, setDatesForOfferOrdersPairs} from '../../../testing/testing-utility-functions';
+import {Observable} from 'rxjs';
+import {AjaxVisualFeedbackService} from '../../ajax-visual-feedback/ajax-visual-feedback.service';
 import Spy = jasmine.Spy;
 
 describe('OffersPageComponent', () => {
@@ -32,10 +32,10 @@ describe('OffersPageComponent', () => {
                 {provide: OrdersApi, useClass: OrdersApiStub},
                 {provide: AjaxVisualFeedbackService, useValue: feedbackSpy},
                 {provide: UsersApi, useClass: UsersApiStub},
-                {provide: UserService, useValue: {username: 'xxx'}}
+                {provide: UserService, useValue: {username: 'xxx'}},
             ],
             declarations: [OffersPageComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));
@@ -101,13 +101,12 @@ describe('OffersPageComponent', () => {
         //expect nothing here not to be visible at beginning, because we have elements.
         expect(itemFrom(fixture, 'steak-nothing-here')).toBeFalsy();
         //now let's override the return of the spy and make it fail
-        offersSpy.and.returnValue(new Observable(sub => sub.error({fail: true})));
+        offersSpy.and.returnValue(new Observable((sub) => sub.error({fail: true})));
         component.fetchData();
         fixture.detectChanges();
         tick();
         expect(feedbackSpy.showFetchError).toHaveBeenCalled();
-        expect(itemFrom(fixture, 'steak-nothing-here')).toBeTruthy()
-
+        expect(itemFrom(fixture, 'steak-nothing-here')).toBeTruthy();
 
     }));
 });

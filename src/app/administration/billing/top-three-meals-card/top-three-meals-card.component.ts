@@ -1,14 +1,13 @@
-import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
-import {Order} from "../../../shared/model/Order";
-import * as _ from "lodash";
-import {Offer} from "../../../shared/model/Offer";
-import {getIconNameForMeal} from "../../../core/util/util.service";
-
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Order} from '../../../shared/model/Order';
+import * as _ from 'lodash';
+import {Offer} from '../../../shared/model/Offer';
+import {getIconNameForMeal} from '../../../core/util/util.service';
 
 @Component({
     selector: 'steak-top-three-meals-card',
     templateUrl: './top-three-meals-card.component.html',
-    styleUrls: ['./top-three-meals-card.component.scss']
+    styleUrls: ['./top-three-meals-card.component.scss'],
 })
 export class TopThreeMealsCardComponent implements OnChanges {
 
@@ -28,9 +27,8 @@ export class TopThreeMealsCardComponent implements OnChanges {
         }
     }
 
-
     recalculate(orders: Order[]) {
-        let offerCountMap: ITopOfferMap = orders.map(order => order.offer)
+        let offerCountMap: ITopOfferMap = orders.map((order) => order.offer)
             .reduce((prev, curr, index, arr): ITopOfferMap => {
                 if (prev[curr._id]) {
                     prev[curr._id].count++;
@@ -57,4 +55,3 @@ interface ITopOffer {
     offer: Offer;
     count: number;
 }
-

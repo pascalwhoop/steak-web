@@ -1,16 +1,16 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
-import {Order} from "../../model/Order";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Order} from '../../model/Order';
 import {
     ITdDataTableColumn,
     ITdDataTableSortChangeEvent,
     TdDataTableService,
-    TdDataTableSortingOrder
-} from "@covalent/core";
+    TdDataTableSortingOrder,
+} from '@covalent/core';
 
 @Component({
     selector: 'steak-orders-history-table',
     templateUrl: './orders-history-table.component.html',
-    styleUrls: ['./orders-history-table.component.scss']
+    styleUrls: ['./orders-history-table.component.scss'],
 })
 export class OrdersHistoryTableComponent implements OnInit, OnChanges {
 
@@ -48,7 +48,7 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
     filter(data?: Order[]): IOrderHistoryData[] {
 
         if (!this.orders || this.orders.length < 1) return;
-        let newData = this.orders.map(order => this.generateRowFrom(order));
+        let newData = this.orders.map((order) => this.generateRowFrom(order));
         newData = this.dataTableService.filterData(newData, this.searchTerm, true);
         this.filteredTotal = newData.length;
         newData = this.dataTableService.sortData(newData, this.sortBy, this.sortOrder);
@@ -62,7 +62,6 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
         }
     }
 
-
     private generateRowFrom(order: Order): IOrderHistoryData {
 
         return {
@@ -71,8 +70,8 @@ export class OrdersHistoryTableComponent implements OnInit, OnChanges {
             vegetarian: order.offer.vegetarian,
             paid: order.paid,
             amount: order.amount,
-            user: order.employee_id
-        }
+            user: order.employee_id,
+        };
 
     }
 }

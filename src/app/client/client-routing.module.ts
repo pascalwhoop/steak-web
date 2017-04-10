@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {RouterModule} from "@angular/router";
-import {OffersPageComponent} from "./offers-page/offers-page.component";
-import {LoggedInGuard} from "../login/logged-in.guard";
-import {MainComponent} from "../shared/components/main/main.component";
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {OffersPageComponent} from './offers-page/offers-page.component';
+import {LoggedInGuard} from '../login/logged-in.guard';
+import {MainComponent} from '../shared/components/main/main.component';
 
 @NgModule({
     imports: [
@@ -16,19 +16,18 @@ import {MainComponent} from "../shared/components/main/main.component";
                         {
                             path: 'orders',
                             loadChildren: 'app/client/orders/orders.module#OrdersModule',
-                        }
+                        },
                     ]
                     ,
-                    canActivate: [LoggedInGuard]
+                    canActivate: [LoggedInGuard],
                 },
-                { path: '**', redirectTo: 'client/offers'}
+                { path: '**', redirectTo: 'client/offers'},
 
-
-            ]
-        )
+            ],
+        ),
     ],
     declarations: [],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class ClientRoutingModule {
 }

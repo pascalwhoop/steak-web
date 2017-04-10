@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Injectable, Optional} from "@angular/core";
+import {Injectable, Optional} from '@angular/core';
 import {
     Headers,
     Http,
@@ -17,27 +17,24 @@ import {
     RequestOptions,
     RequestOptionsArgs,
     Response,
-    URLSearchParams
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../../model/models";
-import {Configuration} from "../configuration";
-import {environment} from "../../../../environments/environment";
-import {OrderBooking} from "../../model/OrderBooking";
-import {Order} from "../../model/Order";
-import {isNullOrUndefined, toApiDate} from "../../../core/util/util.service";
-
+    URLSearchParams,
+} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import * as models from '../../model/models';
+import {Configuration} from '../configuration';
+import {environment} from '../../../../environments/environment';
+import {OrderBooking} from '../../model/OrderBooking';
+import {Order} from '../../model/Order';
+import {isNullOrUndefined, toApiDate} from '../../../core/util/util.service';
 
 /* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class OrdersApi {
     public basePath = environment.endpoints.HOST + environment.endpoints.STEAK_BASE_URI;
     public defaultHeaders: Headers = new Headers(environment.DEFAULT_HEADERS);
     public configuration: Configuration = new Configuration();
-
 
     constructor(protected http: Http, @Optional() configuration: Configuration) {
         if (configuration) {
@@ -59,7 +56,6 @@ export class OrdersApi {
         if (orderid === null || orderid === undefined) {
             throw new Error('Required parameter orderid was null or undefined when calling orderDelete.');
         }
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             headers: headers,
@@ -97,7 +93,6 @@ export class OrdersApi {
             });
     }
 
-
     public orderPost(offerId: string, takeaway: boolean): Observable<Order> {
 
         const path = this.basePath + `/orders`;
@@ -121,7 +116,7 @@ export class OrdersApi {
                 } else {
                     return response.json();
                 }
-            })
+            });
     }
 
     /**
@@ -142,7 +137,7 @@ export class OrdersApi {
      * @param userid The user id for which to fetch data
      * @param openPayments A flag that can be set to true to only get employees with open payments
      */
-    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Array<models.Order>> {
+    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<models.Order[]> {
         const path = this.basePath + `/orders`;
 
         let queryParameters = new URLSearchParams();
@@ -170,7 +165,7 @@ export class OrdersApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
 
         return this.http.get(path, requestOptions)
@@ -178,11 +173,10 @@ export class OrdersApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json().map(oJson => OrdersApi.inflateOrderFromJson(oJson));
+                    return response.json().map((oJson) => OrdersApi.inflateOrderFromJson(oJson));
                 }
             });
     }
-
 
     /**
      * OrderGET
@@ -210,14 +204,13 @@ export class OrdersApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json'
+            'application/json',
         ];
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
 
         // https://github.com/swagger-api/swagger-codegen/issues/4037
@@ -229,10 +222,9 @@ export class OrdersApi {
     }
 
     static inflateOrderFromJson(json): Order {
-        if(json.date) json.date = new Date(json.date);
-        if(json.offer.date) json.offer.date = new Date(json.offer.date);
+        if (json.date) json.date = new Date(json.date);
+        if (json.offer.date) json.offer.date = new Date(json.offer.date);
         return json as Order;
     }
 
 }
-

@@ -1,13 +1,13 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {PrintService} from "./print.service";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PrintService} from './print.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   providers: [PrintService],
   declarations: [],
-  exports: []
+  exports: [],
 })
 export class PrintModule { }

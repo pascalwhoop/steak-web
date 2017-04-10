@@ -1,7 +1,7 @@
-import {Pipe} from "@angular/core";
+import {Pipe} from '@angular/core';
 
 @Pipe({
-    name: 'ota'
+    name: 'ota',
 })
 export class ObjectToArrayPipe {
     /*

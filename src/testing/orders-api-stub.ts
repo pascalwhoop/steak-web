@@ -1,11 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
-import {Order} from "../app/shared/model/Order";
-import {OrderBooking} from "../app/shared/model/OrderBooking";
-import {MOCK_ORDERS} from "./mock-data";
-
+import {Order} from '../app/shared/model/Order';
+import {OrderBooking} from '../app/shared/model/OrderBooking';
+import {MOCK_ORDERS} from './mock-data';
 
 @Injectable()
 export class OrdersApiStub {
@@ -13,48 +12,43 @@ export class OrdersApiStub {
     constructor() {
     }
 
-
     public orderDelete(orderid: string, extraHttpRequestParams?: any): Observable<{}> {
-        return new Observable(observer => {
+        return new Observable((observer) => {
             observer.next({});
-            observer.complete()
+            observer.complete();
 
-        })
+        });
     }
-
 
     public orderGetOne(orderid: string, extraHttpRequestParams?: any): Observable<Order> {
-        return new Observable(observer => {
+        return new Observable((observer) => {
             observer.next(MOCK_ORDERS[0]);
-            observer.complete()
+            observer.complete();
 
-        })
+        });
     }
 
-
     public orderPUT(orderBooking: OrderBooking, extraHttpRequestParams?: any): Observable<Order> {
-        return new Observable(observer => {
+        return new Observable((observer) => {
             observer.next(MOCK_ORDERS[0]);
-            observer.complete()
+            observer.complete();
 
-        })
+        });
     }
 
     public orderPost(orderid: string, order: Order): Observable<Order> {
-        return new Observable(observer => {
+        return new Observable((observer) => {
             observer.next(order);
-            observer.complete()
+            observer.complete();
 
-        })
+        });
     }
 
-
-    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Array<Order>> {
-        return new Observable(observer => {
+    public ordersGET(startdate?: Date, date?: Date, enddate?: Date, userid?: string, openPayments?: boolean): Observable<Order[]> {
+        return new Observable((observer) => {
             observer.next(MOCK_ORDERS);
-            observer.complete()
-        })
+            observer.complete();
+        });
     }
-
 
 }

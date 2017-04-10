@@ -5,4 +5,3 @@ export class Configuration {
     accessToken: string | (() => string);
 
 }
-

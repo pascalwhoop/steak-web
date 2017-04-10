@@ -16,7 +16,8 @@
     "bump-patch": "gulp bump-version --ver patch",
     "bump-minor": "gulp bump-version --ver minor",
     "bump-major": "gulp bump-version --ver major",
-    "lint": "tslint --format codeFrame -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\""
+    "lint": "tslint --format codeFrame -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\"",
+    "fix-lint": "tslint --format --fix -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\""
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {NothingHereComponent} from "./nothing-here.component";
+import {NothingHereComponent} from './nothing-here.component';
 
 describe('NothingHereComponent', () => {
   let component: NothingHereComponent;
@@ -8,7 +8,7 @@ describe('NothingHereComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NothingHereComponent ]
+      declarations: [ NothingHereComponent ],
     })
     .compileComponents();
   }));

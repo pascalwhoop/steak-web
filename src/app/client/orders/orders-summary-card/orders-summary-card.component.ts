@@ -1,11 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
-import {Order} from "../../../shared/model/Order";
-import {roundToTwoAfterDecimal} from "../../../core/util/util.service";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Order} from '../../../shared/model/Order';
+import {roundToTwoAfterDecimal} from '../../../core/util/util.service';
 
 @Component({
     selector: 'steak-orders-summary-card',
     templateUrl: './orders-summary-card.component.html',
-    styleUrls: ['./orders-summary-card.component.scss']
+    styleUrls: ['./orders-summary-card.component.scss'],
 })
 export class OrdersSummaryCardComponent implements OnInit, OnChanges {
 
@@ -22,7 +22,6 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
     ngOnInit() {
     }
 
-
     ngOnChanges(changes: SimpleChanges): void {
         let newOrders = changes['orders'].currentValue;
         if (!newOrders) return;
@@ -38,12 +37,12 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
     }
 
     public calcVegetarianScore(orders: Order[]): number {
-        let vegCount = orders.map(o => <number> (o.offer.vegetarian? 1 : 0)).reduce((prev, curr) => prev+curr);
+        let vegCount = orders.map((o) => <number> (o.offer.vegetarian ? 1 : 0)).reduce((prev, curr) => prev + curr);
         return Math.round(vegCount / orders.length * 100);
     }
 
     public calcOpenSum(orders: Order[]): number {
-        let sum = orders.map(o => o.amount).reduce((prev, curr) => prev + curr);
+        let sum = orders.map((o) => o.amount).reduce((prev, curr) => prev + curr);
         return roundToTwoAfterDecimal(sum);
     }
 
@@ -57,7 +56,7 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
         let d = new Date();
         let dateNow = d.getDate();
         let totalInMonth = this.daysInMonth(d.getMonth(), d.getFullYear());
-        return dateNow/totalInMonth;
+        return dateNow / totalInMonth;
     }
 
     /**
@@ -67,7 +66,7 @@ export class OrdersSummaryCardComponent implements OnInit, OnChanges {
      * @returns {number}
      */
     public daysInMonth(month, year) {
-        return new Date(year, month+1, 0).getDate();
+        return new Date(year, month + 1, 0).getDate();
     }
 
 }

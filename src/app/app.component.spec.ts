@@ -1,14 +1,14 @@
 /* tslint:disable:no-unused-variable */
 
-import {async, TestBed} from "@angular/core/testing";
-import {AppComponent} from "./app.component";
-import {RouterOutletStubComponent} from "../testing/router-outlet-stub";
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {RouterOutletStubComponent} from '../testing/router-outlet-stub';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, RouterOutletStubComponent
+        AppComponent, RouterOutletStubComponent,
       ],
     });
     TestBed.compileComponents();

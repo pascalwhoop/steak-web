@@ -24,8 +24,8 @@ gulp.task('bump-version', function(){
         plugin: 'bump-version',
         message: '--ver selected as input is not supported.'
       });
-  };
-  var mainPackageJson = gulp.src('package.json')
+  }
+    var mainPackageJson = gulp.src('package.json')
   .pipe(gulpif(isVerType, bump({type: options.ver}), bump({version: options.ver})))
   .pipe(gulp.dest('.'));
 

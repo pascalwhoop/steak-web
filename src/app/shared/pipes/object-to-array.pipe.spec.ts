@@ -1,4 +1,4 @@
-import {ObjectToArrayPipe} from "./object-to-array.pipe";
+import {ObjectToArrayPipe} from './object-to-array.pipe';
 
 describe('ObjectToArrayPipe', () => {
     let pipe;

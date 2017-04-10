@@ -1,11 +1,10 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {LoginPageComponent} from "./login-page.component";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {FormsModule} from "@angular/forms";
-import {UserService} from "../user.service";
-import {By} from "@angular/platform-browser";
-import {Router} from "@angular/router";
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {LoginPageComponent} from './login-page.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {UserService} from '../user.service';
+import {By} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 describe('LoginPageComponent', () => {
     let component: LoginPageComponent;
@@ -19,10 +18,10 @@ describe('LoginPageComponent', () => {
             imports: [FormsModule],
             providers: [
                 {provide: UserService, useValue: userServiceSpy},
-                {provide: Router, useValue: routerSpy}
+                {provide: Router, useValue: routerSpy},
             ],
             declarations: [LoginPageComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
 
         })
             .compileComponents();
@@ -56,8 +55,7 @@ describe('LoginPageComponent', () => {
                 fixture.detectChanges();
 
                 expect(loginButton.properties['disabled']).toBe(false);
-            })
-
+            });
 
     }));
 });

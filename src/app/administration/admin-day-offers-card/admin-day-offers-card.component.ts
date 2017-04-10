@@ -1,13 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Offer} from "../../shared/model/Offer";
-import {EditMode, STANDARD_DESCRIPTIONS, STANDARD_TIMES} from "../../core/util/util.service";
-import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {MdDialog, MdDialogRef} from "@angular/material";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Offer} from '../../shared/model/Offer';
+import {EditMode, STANDARD_DESCRIPTIONS, STANDARD_TIMES} from '../../core/util/util.service';
+import {OfferFormDialogComponent} from '../offer-form-dialog/offer-form-dialog.component';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
     selector: 'steak-admin-day-offers-card',
     templateUrl: './admin-day-offers-card.component.html',
-    styleUrls: ['./admin-day-offers-card.component.scss']
+    styleUrls: ['./admin-day-offers-card.component.scss'],
 })
 export class AdminDayOffersCardComponent implements OnInit {
 
@@ -28,7 +28,6 @@ export class AdminDayOffersCardComponent implements OnInit {
     ngOnInit() {
     }
 
-
     /**
      * create a new offer and add it to the list when it has been created
      * @param date
@@ -36,7 +35,7 @@ export class AdminDayOffersCardComponent implements OnInit {
     createNewFor(date: Date) : MdDialogRef<OfferFormDialogComponent>{
         let ref = this.dialog.open(OfferFormDialogComponent, {data: {date: date, editMode: EditMode.CREATE}});
 
-        ref.afterClosed().subscribe(offer => {
+        ref.afterClosed().subscribe((offer) => {
             if (offer) this.onOfferChange(offer);
         });
         return ref;
@@ -78,7 +77,7 @@ export class AdminDayOffersCardComponent implements OnInit {
         this.containVegetarianLunch(offers) &&
         this.containSoup(offers) &&
         this.containSalad(offers) &&
-        this.containTwoMainMeals(offers))
+        this.containTwoMainMeals(offers));
 
     }
 
@@ -130,8 +129,8 @@ export class AdminDayOffersCardComponent implements OnInit {
 
     private containTwoMainMeals(offers: Offer[]) {
         let mainOfferCount = 0;
-        offers.forEach(offer => {
-            if (offer.main_offer) mainOfferCount++
+        offers.forEach((offer) => {
+            if (offer.main_offer) mainOfferCount++;
         });
         return mainOfferCount >= 2;
     }

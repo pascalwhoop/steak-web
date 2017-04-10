@@ -1,14 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Offer} from "../../shared/model/Offer";
-import {MdDialog} from "@angular/material";
-import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {EditMode, getIconNameForMeal} from "../../core/util/util.service";
-import * as _ from "lodash";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Offer} from '../../shared/model/Offer';
+import {MdDialog} from '@angular/material';
+import {OfferFormDialogComponent} from '../offer-form-dialog/offer-form-dialog.component';
+import {EditMode, getIconNameForMeal} from '../../core/util/util.service';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'steak-admin-offer-item',
     templateUrl: './admin-offer-item.component.html',
-    styleUrls: ['./admin-offer-item.component.scss']
+    styleUrls: ['./admin-offer-item.component.scss'],
 })
 export class AdminOfferItemComponent implements OnInit {
 
@@ -32,14 +32,13 @@ export class AdminOfferItemComponent implements OnInit {
             data: {
                 date: editOffer.date,
                 offer: editOffer,
-                editMode: EditMode.UPDATE
-            }
+                editMode: EditMode.UPDATE,
+            },
         });
 
-
-        ref.afterClosed().subscribe(offer => {
+        ref.afterClosed().subscribe((offer) => {
             //if deleted, we pass back just the ID
-            if (offer && typeof offer ==='string') {
+            if (offer && typeof offer === 'string') {
                 this.offerDeleteEmitter.emit(this.offer);
             }
             //else the changed object

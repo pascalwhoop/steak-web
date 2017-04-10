@@ -1,19 +1,18 @@
-import {fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
-import {AjaxVisualFeedbackService, XhrEvent} from "./ajax-visual-feedback.service";
-import {MdSnackBar} from "@angular/material";
-import {Observable, Subscriber} from "rxjs";
-import {CustomBrowserXhr} from "./custom-browser-xhr.service";
+import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {AjaxVisualFeedbackService, XhrEvent} from './ajax-visual-feedback.service';
+import {MdSnackBar} from '@angular/material';
+import {Observable, Subscriber} from 'rxjs';
+import {CustomBrowserXhr} from './custom-browser-xhr.service';
 
 describe('AjaxVisualFeedbackService', () => {
 
     //mocking dependencies
     let snackSpy = jasmine.createSpyObj('snackBar', ['open']);
-    let observable = Observable.create(_subscriber => {
+    let observable = Observable.create((_subscriber) => {
         subscriber = _subscriber;
     });
     let customBrowserSpy = {observable: observable};
     let subscriber: Subscriber<XhrEvent>;
-
 
     let service: AjaxVisualFeedbackService;
 
@@ -22,8 +21,8 @@ describe('AjaxVisualFeedbackService', () => {
             providers: [
                 AjaxVisualFeedbackService,
                 {provide: MdSnackBar, useValue: snackSpy},
-                {provide: CustomBrowserXhr, useValue: customBrowserSpy}
-            ]
+                {provide: CustomBrowserXhr, useValue: customBrowserSpy},
+            ],
         });
 
     });
@@ -40,17 +39,16 @@ describe('AjaxVisualFeedbackService', () => {
 
     it('should let listeners subscribe', fakeAsync(() => {
         let result = {type: 'nothing', event: {}};
-        service.subscribe(next => result = next);
+        service.subscribe((next) => result = next);
         subscriber.next({type: 'open', event: {}});
         tick();
         expect(result.type).toEqual('open');
-        service.subscribe(null, error =>result = error);
-        subscriber.error({type: 'error', event:{}});
+        service.subscribe(null, (error) => result = error);
+        subscriber.error({type: 'error', event: {}});
         tick();
         expect(result.type).toEqual('error');
 
     }));
-
 
     // it('should notify spinners of processing events and completion', fakeAsync(() => {
     //
@@ -83,29 +81,26 @@ describe('AjaxVisualFeedbackService', () => {
     //     expect(listenerSpy.onLoadingComplete).toHaveBeenCalledTimes(0);
     // }));
 
-
-    it('should call MdSnackBar on successful response from observable', done => {
-        service.showMessageOnAnswer('hooray!', null, new Observable(sub => {
+    it('should call MdSnackBar on successful response from observable', (done) => {
+        service.showMessageOnAnswer('hooray!', null, new Observable((sub) => {
             sub.next('fake server response');
             sub.complete();
         }))
         //inside observable subscription of service
-            .subscribe(next => {
-                expect(snackSpy.open).toHaveBeenCalledWith('hooray!', undefined, {duration: 1500})
+            .subscribe((next) => {
+                expect(snackSpy.open).toHaveBeenCalledWith('hooray!', undefined, {duration: 1500});
             }, null, done);
     });
 
-
-    it('should call MdSnackBar  with error on failed response from observable', done => {
-        service.showMessageOnAnswer('hooray!', 'fail :(', new Observable(sub => {
+    it('should call MdSnackBar  with error on failed response from observable', (done) => {
+        service.showMessageOnAnswer('hooray!', 'fail :(', new Observable((sub) => {
             sub.error();
             sub.complete();
         }))
         //inside observable subscription of service
-            .subscribe(next => {
+            .subscribe((next) => {
                 expect(snackSpy.open).toHaveBeenCalledWith('fail :(', undefined, {duration: 1500});
             }, null, done);
     });
-
 
 });

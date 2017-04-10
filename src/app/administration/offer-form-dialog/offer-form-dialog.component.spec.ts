@@ -1,14 +1,14 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {OfferFormDialogComponent} from "./offer-form-dialog.component";
-import {FormsModule} from "@angular/forms";
-import {OffersApiStub} from "../../../testing/offers-api-stub";
-import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
-import {OfferCacheService} from "../../cache/offer-cache.service";
-import {MdDialogRef} from "@angular/material";
-import {MOCK_OFFERS} from "../../../testing/mock-data";
-import {EditMode} from "../../core/util/util.service";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {OfferFormDialogComponent} from './offer-form-dialog.component';
+import {FormsModule} from '@angular/forms';
+import {OffersApiStub} from '../../../testing/offers-api-stub';
+import {OffersApi} from '../../shared/api/endpoints/OffersApi';
+import {AjaxVisualFeedbackService} from '../../ajax-visual-feedback/ajax-visual-feedback.service';
+import {OfferCacheService} from '../../cache/offer-cache.service';
+import {MdDialogRef} from '@angular/material';
+import {MOCK_OFFERS} from '../../../testing/mock-data';
+import {EditMode} from '../../core/util/util.service';
 
 describe('OfferFormDialogComponent', () => {
     let component: OfferFormDialogComponent;
@@ -20,9 +20,9 @@ describe('OfferFormDialogComponent', () => {
             data: {
                 date: new Date(),
                 offer: MOCK_OFFERS[0],
-                editMode: EditMode.UPDATE
-            }
-        }
+                editMode: EditMode.UPDATE,
+            },
+        },
     };
 
     beforeEach(async(() => {
@@ -32,10 +32,10 @@ describe('OfferFormDialogComponent', () => {
                 {provide: MdDialogRef, useValue: mockMdDialogRef},
                 {provide: AjaxVisualFeedbackService, useValue: feedbackSpy},
                 {provide: OfferCacheService, useValue: cacheSpy},
-                {provide: OffersApi, useClass: OffersApiStub}
+                {provide: OffersApi, useClass: OffersApiStub},
             ],
             declarations: [OfferFormDialogComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));

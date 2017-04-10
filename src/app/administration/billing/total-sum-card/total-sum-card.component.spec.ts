@@ -1,12 +1,12 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import {TotalSumCardComponent} from "./total-sum-card.component";
-import {NO_ERRORS_SCHEMA, SimpleChange} from "@angular/core";
-import {CovalentCoreModule} from "@covalent/core";
-import {MOCK_ORDERS} from "../../../../testing/mock-data";
-import {itemFrom} from "../../../../testing/testing-utility-functions";
-import * as _ from "lodash";
-import {Order} from "../../../shared/model/Order";
+import {TotalSumCardComponent} from './total-sum-card.component';
+import {NO_ERRORS_SCHEMA, SimpleChange} from '@angular/core';
+import {CovalentCoreModule} from '@covalent/core';
+import {MOCK_ORDERS} from '../../../../testing/mock-data';
+import {itemFrom} from '../../../../testing/testing-utility-functions';
+import * as _ from 'lodash';
+import {Order} from '../../../shared/model/Order';
 
 describe('TotalSumCardComponent', () => {
     let component: TotalSumCardComponent;
@@ -16,7 +16,7 @@ describe('TotalSumCardComponent', () => {
         TestBed.configureTestingModule({
             imports: [CovalentCoreModule],
             declarations: [TotalSumCardComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));
@@ -38,7 +38,7 @@ describe('TotalSumCardComponent', () => {
         tick();
 
         let sumText = itemFrom(fixture, '.md-headline').nativeElement.innerHTML;
-        expect(sumText).toBe('36.75 €')
+        expect(sumText).toBe('36.75 €');
     }));
 
     it('should calculate the chart data from the Order Input', () => {
@@ -50,20 +50,20 @@ describe('TotalSumCardComponent', () => {
 let expectedChartData = [
     {
         name: 'meat',
-        series: []
+        series: [],
     },
     {
         name: 'vegetarian',
         series: [
             {
                 value: 5,
-                name: new Date('2017-02-21T00:00:00.000Z')
+                name: new Date('2017-02-21T00:00:00.000Z'),
             },
             {
                 value: 10,
-                name: new Date('2018-02-21T00:00:00.000Z')
-            }
-        ]
+                name: new Date('2018-02-21T00:00:00.000Z'),
+            },
+        ],
     },
     {name: 'soup', series: []},
     {name: 'salad', series: []},
@@ -72,13 +72,13 @@ let expectedChartData = [
         series: [
             {
                 value: 7.25,
-                name: new Date('2017-02-22T00:00:00.000Z')
+                name: new Date('2017-02-22T00:00:00.000Z'),
             },
             {
                 value: 14.50,
-                name: new Date('2018-02-22T00:00:00.000Z')
-            }
-        ]
+                name: new Date('2018-02-22T00:00:00.000Z'),
+            },
+        ],
     },
 ];
 

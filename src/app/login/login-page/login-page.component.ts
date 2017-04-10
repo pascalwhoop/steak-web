@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {UserService} from "../user.service";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../user.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'steak-login-page',
     templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.scss']
+    styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.userService.isLoggedIn()){
+        if (this.userService.isLoggedIn()){
             this.router.navigateByUrl('');
         }
     }

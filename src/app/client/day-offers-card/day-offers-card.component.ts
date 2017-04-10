@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {IDayPack} from "../offers-page/offers-page.component";
-import {makeDaySubtitle, makeDayTitle} from "../../core/util/util.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {IDayPack} from '../offers-page/offers-page.component';
+import {makeDaySubtitle, makeDayTitle} from '../../core/util/util.service';
 
 @Component({
     selector: 'steak-day-offers-card',
     templateUrl: './day-offers-card.component.html',
-    styleUrls: ['./day-offers-card.component.scss']
+    styleUrls: ['./day-offers-card.component.scss'],
 })
 export class DayOffersCardComponent implements OnInit {
 
@@ -19,15 +19,15 @@ export class DayOffersCardComponent implements OnInit {
     }
 
     makeDaySubtitle(date: Date): string {
-        return makeDaySubtitle(date)
+        return makeDaySubtitle(date);
     }
 
     makeDayTitle(date: Date): string {
-        return makeDayTitle(date)
+        return makeDayTitle(date);
     }
 
     dayHasOrders(day: IDayPack) {
-        if(!day)return false;
+        if (!day)return false;
         for (let pair of day.offerOrderPairs) {
             if (pair.orders.length > 0) return true;
         }

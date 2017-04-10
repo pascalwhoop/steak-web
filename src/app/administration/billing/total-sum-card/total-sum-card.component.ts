@@ -1,12 +1,11 @@
-import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
-import {Order} from "../../../shared/model/Order";
-import {TdDigitsPipe} from "@covalent/core";
-import {getIconNameForMeal} from "../../../core/util/util.service";
-
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Order} from '../../../shared/model/Order';
+import {TdDigitsPipe} from '@covalent/core';
+import {getIconNameForMeal} from '../../../core/util/util.service';
 
 interface INgxCategory {
-    name: string,
-    series: INgxDataPoint[]
+    name: string;
+    series: INgxDataPoint[];
 }
 interface INgxDataPoint {
     name: any;
@@ -16,7 +15,7 @@ interface INgxDataPoint {
 @Component({
     selector: 'steak-total-sum-card',
     templateUrl: './total-sum-card.component.html',
-    styleUrls: ['./total-sum-card.component.scss']
+    styleUrls: ['./total-sum-card.component.scss'],
 })
 export class TotalSumCardComponent implements OnChanges {
 
@@ -24,7 +23,7 @@ export class TotalSumCardComponent implements OnChanges {
     orders: Order[];
 
     total: number = 0;
-    chartData: Array<any>;
+    chartData: any[];
 
     // options
     showXAxis: boolean = true;
@@ -46,7 +45,6 @@ export class TotalSumCardComponent implements OnChanges {
     constructor() {
     }
 
-
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['orders'] && changes['orders'].currentValue) {
             let newVals = changes['orders'].currentValue;
@@ -58,20 +56,20 @@ export class TotalSumCardComponent implements OnChanges {
 
     recalcTotal(orders: Order[]): number {
         return orders.reduce((prev, curr) => {
-            return prev + curr.amount
-        }, 0)
+            return prev + curr.amount;
+        }, 0);
     }
 
-    recalcChartData(newVals: Order[]): Array<any> {
+    recalcChartData(newVals: Order[]): any[] {
         let data: INgxCategory[] = [
             {name: 'meat', series: []},
             {name: 'vegetarian', series: []},
             {name: 'soup', series: []},
             {name: 'salad', series: []},
-            {name: 'breakfast', series: []}
+            {name: 'breakfast', series: []},
         ];
-        newVals.forEach(order => {
-            this.putChartDataPoint(order, data)
+        newVals.forEach((order) => {
+            this.putChartDataPoint(order, data);
         });
         return data;
     }
@@ -80,14 +78,13 @@ export class TotalSumCardComponent implements OnChanges {
     axisDigits(val: any): any {
         return new TdDigitsPipe().transform(val);
     }
-    
 
     private putChartDataPoint(order: Order, data: INgxCategory[]) {
         let category = getIconNameForMeal(order.offer);
-        if(!category)return; //for those data points that contain dirty category data
-        let series = data.find(elem => elem.name == category).series;
-        let point = series.find(elem => elem.name.toString() == order.offer.date.toString());
-        if(point) point.value+= order.amount;
-        else series.push({value: order.amount, name: order.offer.date})
+        if (!category)return; //for those data points that contain dirty category data
+        let series = data.find((elem) => elem.name == category).series;
+        let point = series.find((elem) => elem.name.toString() == order.offer.date.toString());
+        if (point) point.value += order.amount;
+        else series.push({value: order.amount, name: order.offer.date});
     }
 }

@@ -1,5 +1,5 @@
-import {offerCountMapFromOrders, toApiDate} from "./util.service";
-import {MOCK_ORDERS} from "../../../testing/mock-data";
+import {offerCountMapFromOrders, toApiDate} from './util.service';
+import {MOCK_ORDERS} from '../../../testing/mock-data';
 describe('UtilService', () => {
     beforeEach(() => {
 
@@ -26,7 +26,5 @@ describe('UtilService', () => {
 
         });
     });
-
-
 
 });

@@ -1,7 +1,6 @@
-import {inject, TestBed} from "@angular/core/testing";
-import {Http} from "@angular/http";
-import {UserService} from "./user.service";
-
+import {inject, TestBed} from '@angular/core/testing';
+import {Http} from '@angular/http';
+import {UserService} from './user.service';
 
 describe('UserService', () => {
   beforeEach(() => {
@@ -9,7 +8,7 @@ describe('UserService', () => {
 
     TestBed.configureTestingModule({
       providers: [UserService,
-        {provide: Http, use: http}]
+        {provide: Http, use: http}],
     });
   });
 

@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {PrintDayButtonComponent} from "./print-day-button.component";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
-import {PrintService} from "../../print/print.service";
-import {OrdersApiStub} from "../../../testing/orders-api-stub";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {PrintDayButtonComponent} from './print-day-button.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {OrdersApi} from '../../shared/api/endpoints/OrdersApi';
+import {PrintService} from '../../print/print.service';
+import {OrdersApiStub} from '../../../testing/orders-api-stub';
 
 describe('PrintDayButtonComponent', () => {
     let component: PrintDayButtonComponent;
@@ -15,9 +15,9 @@ describe('PrintDayButtonComponent', () => {
             declarations: [PrintDayButtonComponent],
             providers: [
                 {provide: OrdersApi, useClass: OrdersApiStub},
-                {provide: PrintService, useValue: printerSpy}
+                {provide: PrintService, useValue: printerSpy},
             ],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));
@@ -32,11 +32,11 @@ describe('PrintDayButtonComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should fetch all orders for the day set to the input and then call the PDF print service', ()=>{
+    it('should fetch all orders for the day set to the input and then call the PDF print service', () => {
         let date = new Date('2015-05-05');
         let ordersGetSpy = spyOn(component.ordersApi, 'ordersGET').and.callThrough();
         component.onClick(date);
         expect(ordersGetSpy).toHaveBeenCalled();
         expect(printerSpy.printListOfOrdersForKitchen).toHaveBeenCalled();
-    })
+    });
 });

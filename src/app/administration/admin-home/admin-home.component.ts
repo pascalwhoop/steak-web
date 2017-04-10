@@ -1,16 +1,15 @@
-import {Component, OnInit} from "@angular/core";
-import {PageTitleService} from "../../shared/services/page-title.service";
-import {Offer} from "../../shared/model/Offer";
-import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {toApiDate} from "../../core/util/util.service";
-import {Observable} from "rxjs";
-import {OfferCacheService} from "../../cache/offer-cache.service";
-
+import {Component, OnInit} from '@angular/core';
+import {PageTitleService} from '../../shared/services/page-title.service';
+import {Offer} from '../../shared/model/Offer';
+import {OffersApi} from '../../shared/api/endpoints/OffersApi';
+import {toApiDate} from '../../core/util/util.service';
+import {Observable} from 'rxjs';
+import {OfferCacheService} from '../../cache/offer-cache.service';
 
 @Component({
     selector: 'steak-admin-home',
     templateUrl: './admin-home.component.html',
-    styleUrls: ['./admin-home.component.scss']
+    styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent implements OnInit {
 
@@ -23,11 +22,11 @@ export class AdminHomeComponent implements OnInit {
 
     ngOnInit() {
 
-        this.title.title = "Administration";
+        this.title.title = 'Administration';
         //this.offers = this.offerCache.offers; //TODO causing many bugs! too many UI elements created, wrong Offers etc. still caching should be done
         this.fetchOffers()
-            .subscribe(offers => this.offerCache.putMany(offers));
-        this.ensureOffersCached()
+            .subscribe((offers) => this.offerCache.putMany(offers));
+        this.ensureOffersCached();
     }
 
     /**
@@ -53,13 +52,12 @@ export class AdminHomeComponent implements OnInit {
 
     filterOffersForDate(offers: Offer[], date: Date): Offer[] {
         if (!offers)return null;
-        return offers.filter(offer => toApiDate(offer.date) == toApiDate(date));
+        return offers.filter((offer) => toApiDate(offer.date) == toApiDate(date));
     }
 
-
-    private fetchOffers(): Observable<Array<Offer>> {
+    private fetchOffers(): Observable<Offer[]> {
         let obs = this.offerApi.offersGet(null, new Date());
-        obs.subscribe(offers => this.offers = offers);
+        obs.subscribe((offers) => this.offers = offers);
         return obs;
     }
 
@@ -70,7 +68,7 @@ export class AdminHomeComponent implements OnInit {
     }
 
     private fetchAllOffersAndCache(): void {
-        this.offerApi.offersGet().subscribe(offers => this.offerCache.putMany(offers));
+        this.offerApi.offersGet().subscribe((offers) => this.offerCache.putMany(offers));
     }
 
     /**
@@ -78,7 +76,7 @@ export class AdminHomeComponent implements OnInit {
      * @param offer
      */
     onOfferChange(offer: Offer) {
-        let changedIndex = this.offers.findIndex(_offer => _offer._id == offer._id);
+        let changedIndex = this.offers.findIndex((_offer) => _offer._id == offer._id);
         if (changedIndex > -1) {
             this.offers[changedIndex] = offer;
         }else{
@@ -91,6 +89,6 @@ export class AdminHomeComponent implements OnInit {
      * @param offer
      */
     onOfferDelete(offer: Offer) {
-        this.offers = this.offers.filter(_offer => _offer._id != offer._id);
+        this.offers = this.offers.filter((_offer) => _offer._id != offer._id);
     }
 }

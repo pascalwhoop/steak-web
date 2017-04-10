@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
-import {environment} from "../../environments/environment";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import {environment} from '../../environments/environment';
 
 export const LOGIN_PATH = environment.endpoints.HOST + environment.endpoints.AUTH_BASE_URI;
 
@@ -8,14 +8,12 @@ export const LOGIN_PATH = environment.endpoints.HOST + environment.endpoints.AUT
 export class UserService {
     private loggedIn = false;
 
-
-
     get username(): string {
-        return localStorage.getItem('username')
+        return localStorage.getItem('username');
     }
 
     set username(value: string) {
-        localStorage.setItem('username', value)
+        localStorage.setItem('username', value);
     }
 
     constructor(private http: Http) {
@@ -27,9 +25,8 @@ export class UserService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.buildBasicAuthHeader(username, password));
 
-
         return this.http.post(LOGIN_PATH, '', {headers})
-            .map(res => res.json())
+            .map((res) => res.json())
             .map((res) => {
                 if (res.success) {
                     localStorage.setItem('auth_token', res.auth_token);
@@ -50,11 +47,9 @@ export class UserService {
         return this.loggedIn;
     }
 
-
-
     buildBasicAuthHeader(user, password){
             let tok = user + ':' + password;
             let hash = btoa(tok);
-            return "Basic " + hash;
+            return 'Basic ' + hash;
     }
 }

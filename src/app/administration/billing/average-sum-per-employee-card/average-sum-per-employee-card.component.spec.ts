@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AverageSumPerEmployeeCardComponent } from './average-sum-per-employee-card.component';
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {CovalentCoreModule} from "@covalent/core";
+import {AverageSumPerEmployeeCardComponent} from './average-sum-per-employee-card.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {CovalentCoreModule} from '@covalent/core';
 
 describe('AverageSumPerEmployeeCardComponent', () => {
   let component: AverageSumPerEmployeeCardComponent;
@@ -12,7 +12,7 @@ describe('AverageSumPerEmployeeCardComponent', () => {
     TestBed.configureTestingModule({
       imports: [CovalentCoreModule],
       declarations: [ AverageSumPerEmployeeCardComponent ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

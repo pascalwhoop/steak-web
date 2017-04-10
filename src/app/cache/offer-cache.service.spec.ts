@@ -1,7 +1,7 @@
-import {inject, TestBed} from "@angular/core/testing";
-import {OfferCacheService} from "./offer-cache.service";
-import {MOCK_OFFERS} from "../../testing/mock-data";
-import * as _ from "lodash";
+import {inject, TestBed} from '@angular/core/testing';
+import {OfferCacheService} from './offer-cache.service';
+import {MOCK_OFFERS} from '../../testing/mock-data';
+import * as _ from 'lodash';
 
 describe('OfferCacheService', () => {
     let service: OfferCacheService;
@@ -9,7 +9,7 @@ describe('OfferCacheService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [OfferCacheService]
+            providers: [OfferCacheService],
         });
     });
 
@@ -22,7 +22,6 @@ describe('OfferCacheService', () => {
     it('should ...', inject([OfferCacheService], (service: OfferCacheService) => {
         expect(service).toBeTruthy();
     }));
-    
 
     it('should let components filter through offers based on search string', () => {
         expect(service.find('Wirsingeintopf').length).toBe(1);
@@ -37,14 +36,13 @@ describe('OfferCacheService', () => {
 
         //but then
         let otherId = 1000;
-        moreOffers.forEach(offer => offer._id = (otherId++).toString());
+        moreOffers.forEach((offer) => offer._id = (otherId++).toString());
         service.putMany(moreOffers);
         //and suddenly there were 10
         let them = JSON.parse(localStorage.getItem('offers'));
         expect(them.length).toBe(10);
     });
 });
-
 
 function clearLocalStorage(){
     localStorage.clear();

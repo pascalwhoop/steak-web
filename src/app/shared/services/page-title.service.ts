@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 /**
  * Service responsible for setting the title that appears above the components and guide pages.

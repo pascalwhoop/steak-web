@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {Observable} from "rxjs/Observable";
-import {UserService} from "./user.service";
-import {environment} from "../../environments/environment";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {UserService} from './user.service';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
@@ -18,11 +18,11 @@ export class LoggedInGuard implements CanActivate {
    * @returns {boolean}
    */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    //on development, we don't need to authorise a user. 
-    if(!environment.authorisation) return true;
+    //on development, we don't need to authorise a user.
+    if (!environment.authorisation) return true;
 
     let loggedIn = this.userService.isLoggedIn();
-    if(!loggedIn) this.router.navigateByUrl('login');
+    if (!loggedIn) this.router.navigateByUrl('login');
     return loggedIn;
   }
 }

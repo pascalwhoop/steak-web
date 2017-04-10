@@ -1,12 +1,12 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {OfferCacheService} from "./offer-cache.service";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {OfferCacheService} from './offer-cache.service';
 
 @NgModule({
   providers: [OfferCacheService],
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  declarations: []
+  declarations: [],
 })
 export class CacheModule { }

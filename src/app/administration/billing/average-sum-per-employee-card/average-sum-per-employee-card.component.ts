@@ -1,13 +1,12 @@
-import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
-import {Order} from "../../../shared/model/Order";
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Order} from '../../../shared/model/Order';
 
 @Component({
     selector: 'steak-average-sum-per-employee-card',
     templateUrl: './average-sum-per-employee-card.component.html',
-    styleUrls: ['./average-sum-per-employee-card.component.scss']
+    styleUrls: ['./average-sum-per-employee-card.component.scss'],
 })
 export class AverageSumPerEmployeeCardComponent implements OnChanges {
-
 
     @Input()
     orders: Order[];
@@ -24,7 +23,7 @@ export class AverageSumPerEmployeeCardComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['orders'] && changes['orders'].currentValue) {
-            this.recalculate()
+            this.recalculate();
         }
     }
 

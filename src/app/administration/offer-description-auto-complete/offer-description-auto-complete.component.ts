@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Offer} from "../../shared/model/Offer";
-import {OfferCacheService} from "../../cache/offer-cache.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Offer} from '../../shared/model/Offer';
+import {OfferCacheService} from '../../cache/offer-cache.service';
 
 @Component({
     selector: 'steak-offer-description-auto-complete',
     templateUrl: './offer-description-auto-complete.component.html',
-    styleUrls: ['./offer-description-auto-complete.component.scss']
+    styleUrls: ['./offer-description-auto-complete.component.scss'],
 })
 export class OfferDescriptionAutoCompleteComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class OfferDescriptionAutoCompleteComponent implements OnInit {
     onOffer: EventEmitter<Offer> = new EventEmitter();
 
     constructor(public offerCache: OfferCacheService) {
-        
+
     }
 
     ngOnInit() {

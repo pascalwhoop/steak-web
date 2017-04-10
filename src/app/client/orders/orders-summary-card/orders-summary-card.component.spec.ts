@@ -1,8 +1,8 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
-import {OrdersSummaryCardComponent} from "./orders-summary-card.component";
-import {Component, NO_ERRORS_SCHEMA, ViewChild} from "@angular/core";
-import {MOCK_ORDERS} from "../../../../testing/mock-data";
-import {Order} from "../../../shared/model/Order";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {OrdersSummaryCardComponent} from './orders-summary-card.component';
+import {Component, NO_ERRORS_SCHEMA, ViewChild} from '@angular/core';
+import {MOCK_ORDERS} from '../../../../testing/mock-data';
+import {Order} from '../../../shared/model/Order';
 
 describe('OrdersSummaryCardComponent', () => {
     let component: OrdersSummaryCardComponent;
@@ -11,8 +11,8 @@ describe('OrdersSummaryCardComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
 
-            declarations: [OrdersSummaryCardComponent,TestParentComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            declarations: [OrdersSummaryCardComponent, TestParentComponent],
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .compileComponents();
     }));
@@ -41,7 +41,6 @@ describe('OrdersSummaryCardComponent', () => {
         expect(testParentComponent.summaryCardChild.ngOnChanges).toHaveBeenCalled();
     }));
 
-
     it('should calc sum of orders properly', () => {
         expect(component.openSum).toBe(0);
         callOnChangesWithMockOrders(component);
@@ -62,7 +61,6 @@ describe('OrdersSummaryCardComponent', () => {
 
 });
 
-
 let callOnChangesWithMockOrders = function (component) {
     component.ngOnChanges({orders: {currentValue: MOCK_ORDERS, previousValue: null, isFirstChange: () => true}});
 };
@@ -74,7 +72,7 @@ let callOnChangesWithMockOrders = function (component) {
  */
 @Component({
     selector: `test-host-component`,
-    template: `<div><steak-orders-summary-card [orders]="orders"></steak-orders-summary-card></div>`
+    template: `<div><steak-orders-summary-card [orders]="orders"></steak-orders-summary-card></div>`,
 })
 export class TestParentComponent {
     @ViewChild(OrdersSummaryCardComponent) /* using viewChild we get access to the OrdersSummaryCardComponent which is a child of TestHostComponent */

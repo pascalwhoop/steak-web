@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Injectable, Optional} from "@angular/core";
+import {Injectable, Optional} from '@angular/core';
 import {
     Headers,
     Http,
@@ -17,19 +17,17 @@ import {
     RequestOptions,
     RequestOptionsArgs,
     Response,
-    URLSearchParams
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import {Configuration} from "../configuration";
-import {environment} from "../../../../environments/environment";
-import {Offer} from "../../model/Offer";
-import {toApiDate} from "../../../core/util/util.service";
-import * as _ from "lodash";
-
+    URLSearchParams,
+} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import {Configuration} from '../configuration';
+import {environment} from '../../../../environments/environment';
+import {Offer} from '../../model/Offer';
+import {toApiDate} from '../../../core/util/util.service';
+import * as _ from 'lodash';
 
 /* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class OffersApi {
@@ -63,9 +61,8 @@ export class OffersApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
-
 
         return this.http.delete(path, requestOptions)
             .share()
@@ -86,7 +83,7 @@ export class OffersApi {
      * @param startdate
      * @param enddate
      */
-    public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Array<Offer>> {
+    public offersGet(date?: Date, startdate?: Date, enddate?: Date): Observable<Offer[]> {
         const path = this.basePath + `/offers`;
 
         let queryParameters = new URLSearchParams();
@@ -115,13 +112,11 @@ export class OffersApi {
             }
         }
 
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
-
 
         return this.http.request(path, requestOptions)
             .map((response: Response) => {
@@ -129,7 +124,7 @@ export class OffersApi {
                     return undefined;
                 } else {
                     let offers = response.json();
-                    return offers.map(o => OffersApi.inflateOfferFromJson(o));
+                    return offers.map((o) => OffersApi.inflateOfferFromJson(o));
                 }
             })
             .share();
@@ -171,13 +166,12 @@ export class OffersApi {
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
 
         let offerData = offer as any;
         //simplify the date by capping of the time part
         offerData.date = toApiDate(offerData.date);
-
 
         return this.http.post(path, offerData, requestOptions)
             .share()
@@ -213,7 +207,6 @@ export class OffersApi {
         //simplify the date by capping of the time part
         offerData.date = toApiDate(offerData.date);
 
-
         return this.http.put(path, offerData, requestOptions)
             .share()
             .map((response: Response) => {
@@ -224,8 +217,6 @@ export class OffersApi {
                 }
             });
     }
-
-
 
     /**
      * Offer
@@ -248,22 +239,18 @@ export class OffersApi {
         }
         headers.set('username', String(username));
 
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
         });
-
 
         return this.http.request(path, requestOptions);
     }
-
 
     static inflateOfferFromJson(json): Offer {
         json.date = new Date(json.date);
         return json as Offer;
     }
-
 
 }

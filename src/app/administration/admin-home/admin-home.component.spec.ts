@@ -1,15 +1,15 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {AdminHomeComponent} from "./admin-home.component";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {PageTitleService} from "../../shared/services/page-title.service";
-import {OffersApi} from "../../shared/api/endpoints/OffersApi";
-import {OffersApiStub} from "../../../testing/offers-api-stub";
-import {MOCK_COMPLETE_DAY, MOCK_OFFERS} from "../../../testing/mock-data";
-import {MdDialogModule} from "@angular/material";
-import * as _ from "lodash";
-import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
-import {FormsModule} from "@angular/forms";
-import {OfferCacheService} from "../../cache/offer-cache.service";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {AdminHomeComponent} from './admin-home.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {PageTitleService} from '../../shared/services/page-title.service';
+import {OffersApi} from '../../shared/api/endpoints/OffersApi';
+import {OffersApiStub} from '../../../testing/offers-api-stub';
+import {MOCK_COMPLETE_DAY, MOCK_OFFERS} from '../../../testing/mock-data';
+import {MdDialogModule} from '@angular/material';
+import * as _ from 'lodash';
+import {OfferFormDialogComponent} from '../offer-form-dialog/offer-form-dialog.component';
+import {FormsModule} from '@angular/forms';
+import {OfferCacheService} from '../../cache/offer-cache.service';
 
 describe('AdminHomeComponent', () => {
     let component: AdminHomeComponent;
@@ -17,18 +17,16 @@ describe('AdminHomeComponent', () => {
     let titleService: PageTitleService;
     let offerCacheSpy = jasmine.createSpyObj('offerCacheSpy', ['putMany', 'put', 'find']);
 
-
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [MdDialogModule, FormsModule],
             providers: [
                 PageTitleService,
                 {provide: OffersApi, useClass: OffersApiStub},
-                {provide: OfferCacheService , useValue: offerCacheSpy}
+                {provide: OfferCacheService , useValue: offerCacheSpy},
             ],
             declarations: [AdminHomeComponent, OfferFormDialogComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         });
 
         TestBed.configureTestingModule({}).compileComponents();
@@ -53,7 +51,7 @@ describe('AdminHomeComponent', () => {
     });
 
     it('should generate the next three weeks as possible days to add stuff to', () => {
-        expect(component.dates.length > 14).toBeTruthy()
+        expect(component.dates.length > 14).toBeTruthy();
     });
 
     // it('should call the filterOffersForDate method as often as there are days', () => {
@@ -76,14 +74,12 @@ describe('AdminHomeComponent', () => {
         expect(component.offers.length).toBe(6);
     });
 
-
 });
-
 
 let makeFourMockOffersForTomorrow = function () {
     //create a copy of mock offers
     let mockOffers = _.cloneDeep(MOCK_OFFERS);
     //set all dates to tomorrow
-    mockOffers.forEach(offer => offer.date = new Date(new Date().getTime() + 1000 * 3600 * 24));
+    mockOffers.forEach((offer) => offer.date = new Date(new Date().getTime() + 1000 * 3600 * 24));
     return mockOffers;
 };

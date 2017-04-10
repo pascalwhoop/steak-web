@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Order} from "../shared/model/Order";
-import * as jsPDF from "jspdf";
-import {makeDaySubtitle, offerCountMapFromOrders, toApiDate} from "../core/util/util.service";
-import {MdSnackBar} from "@angular/material";
+import {Injectable} from '@angular/core';
+import {Order} from '../shared/model/Order';
+import * as jsPDF from 'jspdf';
+import {makeDaySubtitle, offerCountMapFromOrders, toApiDate} from '../core/util/util.service';
+import {MdSnackBar} from '@angular/material';
 
 @Injectable()
 export class PrintService {
@@ -22,7 +22,7 @@ export class PrintService {
             this.notifyNoOrders(date);
             return;
         }
-        yOffset = this.addHeader(doc, "Orders for: " + makeDaySubtitle(orders[0].offer.date), this.TOP_MARGIN);
+        yOffset = this.addHeader(doc, 'Orders for: ' + makeDaySubtitle(orders[0].offer.date), this.TOP_MARGIN);
         this.addLines(doc, this.getLinesFromOffersMap(ordersMap), yOffset, this.LINE_HEIGHT);
         doc.save('orders' + toApiDate(orders[0].offer.date) + '.pdf');
         this.notifyPdfCreated(date);
@@ -38,7 +38,7 @@ export class PrintService {
      */
     private addLines(doc: jsPDF, lines: string[], yOffset: number, lineHeight: number): number {
         let i = 0;
-        lines.forEach(line => doc.text(line, this.LEFT_MARGIN, yOffset + lineHeight * i++));
+        lines.forEach((line) => doc.text(line, this.LEFT_MARGIN, yOffset + lineHeight * i++));
         return yOffset + lineHeight * i;
     }
 
@@ -67,7 +67,6 @@ export class PrintService {
     private notifyNoOrders(date: Date) {
         this.snackBar.open('No orders for ' + makeDaySubtitle(date), null, {duration: 2000});
     }
-
 
     private notifyPdfCreated(date: Date) {
         this.snackBar.open('PDF generated for ' + makeDaySubtitle(date), null, {duration: 2000});
