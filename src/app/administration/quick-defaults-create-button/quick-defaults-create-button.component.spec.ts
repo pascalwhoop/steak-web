@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed, fakeAsync} from "@angular/core/testing";
+import {async, ComponentFixture, fakeAsync, TestBed} from "@angular/core/testing";
 import {QuickDefaultsCreateButtonComponent} from "./quick-defaults-create-button.component";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";

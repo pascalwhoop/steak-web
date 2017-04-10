@@ -1,4 +1,4 @@
-import {toApiDate, offerCountMapFromOrders} from "./util.service";
+import {offerCountMapFromOrders, toApiDate} from "./util.service";
 import {MOCK_ORDERS} from "../../../testing/mock-data";
 describe('UtilService', () => {
     beforeEach(() => {

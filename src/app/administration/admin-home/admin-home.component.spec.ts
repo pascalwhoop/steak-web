@@ -1,10 +1,10 @@
-import {async, ComponentFixture, TestBed, fakeAsync, tick} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {AdminHomeComponent} from "./admin-home.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {PageTitleService} from "../../shared/services/page-title.service";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
-import {MOCK_OFFERS, MOCK_COMPLETE_DAY} from "../../../testing/mock-data";
+import {MOCK_COMPLETE_DAY, MOCK_OFFERS} from "../../../testing/mock-data";
 import {MdDialogModule} from "@angular/material";
 import * as _ from "lodash";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";

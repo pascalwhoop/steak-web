@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed, fakeAsync, tick} from "@angular/core/testing";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {OrdersSummaryCardComponent} from "./orders-summary-card.component";
-import {NO_ERRORS_SCHEMA, ViewChild, Component, SimpleChanges} from "@angular/core";
+import {Component, NO_ERRORS_SCHEMA, ViewChild} from "@angular/core";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {Order} from "../../../shared/model/Order";
 

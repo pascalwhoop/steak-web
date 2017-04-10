@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { LogoutButtonComponent } from './logout-button.component';
+import {LogoutButtonComponent} from "./logout-button.component";
 
 describe('LogoutButtonComponent', () => {
   let component: LogoutButtonComponent;

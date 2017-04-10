@@ -1,6 +1,6 @@
-import {TestBed, inject, fakeAsync, tick} from "@angular/core/testing";
+import {fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
 import {CustomBrowserXhr} from "./custom-browser-xhr.service";
-import {Http, BrowserXhr, ConnectionBackend, RequestOptions, HttpModule} from "@angular/http";
+import {BrowserXhr, Http, HttpModule} from "@angular/http";
 //import {beforeEachProviders} from '@angular/core/testing'
 
 describe('CustomBrowserXhrService', () => {

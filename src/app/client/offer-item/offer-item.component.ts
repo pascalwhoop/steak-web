@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {OfferOrdersPair} from "../../shared/model/OfferOrdersPair";

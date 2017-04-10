@@ -10,7 +10,6 @@ import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {Order} from "../../shared/model/Order";
 import * as _ from "lodash";
 import {UserService} from "../../login/user.service";
-import {MdSnackBar} from "@angular/material";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
 
 export interface IDayPack {

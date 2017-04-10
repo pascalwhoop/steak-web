@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Order} from "../../../shared/model/Order";
 import {roundToTwoAfterDecimal} from "../../../core/util/util.service";
 

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
+import {Headers, Http} from "@angular/http";
 import {environment} from "../../environments/environment";
 
 export const LOGIN_PATH = environment.endpoints.HOST + environment.endpoints.AUTH_BASE_URI;

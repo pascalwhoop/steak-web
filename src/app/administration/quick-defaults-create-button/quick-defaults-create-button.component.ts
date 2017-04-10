@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {TdDialogService, TdLoadingService} from "@covalent/core";
 import {DefaultOffersService} from "../default-offers-service/default-offers.service";

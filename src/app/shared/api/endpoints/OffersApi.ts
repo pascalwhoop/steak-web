@@ -11,13 +11,13 @@
  */
 import {Injectable, Optional} from "@angular/core";
 import {
-    Http,
     Headers,
-    URLSearchParams,
+    Http,
     RequestMethod,
     RequestOptions,
     RequestOptionsArgs,
-    Response
+    Response,
+    URLSearchParams
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";

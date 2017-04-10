@@ -1,7 +1,6 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {IDayPack} from "../offers-page/offers-page.component";
-import {Offer} from "../../shared/model/Offer";
-import {makeDayTitle, makeDaySubtitle} from "../../core/util/util.service";
+import {makeDaySubtitle, makeDayTitle} from "../../core/util/util.service";
 
 @Component({
     selector: 'steak-day-offers-card',

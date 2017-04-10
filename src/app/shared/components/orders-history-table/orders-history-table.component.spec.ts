@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed, fakeAsync, tick} from "@angular/core/testing";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {OrdersHistoryTableComponent} from "./orders-history-table.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {TdDataTableService, CovalentCoreModule, ITdDataTableColumn} from "@covalent/core";
+import {CovalentCoreModule, ITdDataTableColumn, TdDataTableService} from "@covalent/core";
 import {By} from "@angular/platform-browser";
 import {MOCK_ORDERS} from "../../../../testing/mock-data";
 import {CoreModule} from "../../../core/core.module";

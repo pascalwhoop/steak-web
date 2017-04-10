@@ -5,8 +5,6 @@ import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {toApiDate} from "../../core/util/util.service";
 import {Observable} from "rxjs";
 import {OfferCacheService} from "../../cache/offer-cache.service";
-import {MdIconRegistry} from "@angular/material";
-import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({

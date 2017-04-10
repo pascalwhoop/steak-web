@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Order} from "../shared/model/Order";
 import * as jsPDF from "jspdf";
-import {offerCountMapFromOrders, makeDaySubtitle, toApiDate} from "../core/util/util.service";
+import {makeDaySubtitle, offerCountMapFromOrders, toApiDate} from "../core/util/util.service";
 import {MdSnackBar} from "@angular/material";
 
 @Injectable()

@@ -1,7 +1,7 @@
-import {TestBed, inject} from "@angular/core/testing";
+import {inject, TestBed} from "@angular/core/testing";
 import {OfferCacheService} from "./offer-cache.service";
 import {MOCK_OFFERS} from "../../testing/mock-data";
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 describe('OfferCacheService', () => {
     let service: OfferCacheService;

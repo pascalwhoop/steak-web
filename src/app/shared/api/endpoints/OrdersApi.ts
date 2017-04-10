@@ -11,13 +11,13 @@
  */
 import {Injectable, Optional} from "@angular/core";
 import {
-    Http,
     Headers,
-    URLSearchParams,
+    Http,
     RequestMethod,
     RequestOptions,
     RequestOptionsArgs,
-    Response
+    Response,
+    URLSearchParams
 } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
@@ -26,8 +26,7 @@ import {Configuration} from "../configuration";
 import {environment} from "../../../../environments/environment";
 import {OrderBooking} from "../../model/OrderBooking";
 import {Order} from "../../model/Order";
-import {toApiDate, isNullOrUndefined} from "../../../core/util/util.service";
-import {OffersApi} from "./OffersApi";
+import {isNullOrUndefined, toApiDate} from "../../../core/util/util.service";
 
 
 /* tslint:disable:no-unused-variable member-ordering */

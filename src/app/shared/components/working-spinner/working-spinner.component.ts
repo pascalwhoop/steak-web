@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {AnonymousSubscription} from "rxjs/Subscription";
 import {AjaxVisualFeedbackService} from "../../../ajax-visual-feedback/ajax-visual-feedback.service";
 

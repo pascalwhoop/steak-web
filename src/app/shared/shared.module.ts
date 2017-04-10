@@ -10,10 +10,10 @@ import {ObjectToArrayPipe} from "./pipes/object-to-array.pipe";
 import {WorkingSpinnerComponent} from "./components/working-spinner/working-spinner.component";
 import {BrowserXhr} from "@angular/http";
 import {CustomBrowserXhr} from "../ajax-visual-feedback/custom-browser-xhr.service";
-import {CovalentCoreModule, TdLoadingService, LoadingType} from "@covalent/core";
+import {CovalentCoreModule, TdLoadingService} from "@covalent/core";
 import {MainComponent} from "./components/main/main.component";
 import {DomSanitizer} from "@angular/platform-browser";
-import { NothingHereComponent } from './components/nothing-here/nothing-here.component';
+import {NothingHereComponent} from "./components/nothing-here/nothing-here.component";
 import {OrdersHistoryTableComponent} from "./components/orders-history-table/orders-history-table.component";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 

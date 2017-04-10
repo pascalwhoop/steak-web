@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { MainComponent } from './main.component';
+import {MainComponent} from "./main.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {PageTitleService} from "../../services/page-title.service";
 import {UserService} from "../../../login/user.service";

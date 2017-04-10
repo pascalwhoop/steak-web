@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 import {DayOffersCardComponent} from "./day-offers-card.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {MOCK_OFFER_ORDER_PAIRS, MOCK_OFFERS} from "../../../testing/mock-data";
-import {itemsFrom, itemFrom} from "../../../testing/testing-utility-functions";
+import {itemFrom, itemsFrom} from "../../../testing/testing-utility-functions";
 
 describe('DayOffersCardComponent', () => {
     let component: DayOffersCardComponent;

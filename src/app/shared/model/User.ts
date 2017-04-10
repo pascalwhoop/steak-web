@@ -10,8 +10,6 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
-
 export interface User {
     /**
      * The three letter shortcut code for the employee

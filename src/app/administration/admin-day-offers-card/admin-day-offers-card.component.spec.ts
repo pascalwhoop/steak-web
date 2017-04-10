@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed, tick, fakeAsync} from "@angular/core/testing";
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {AdminDayOffersCardComponent} from "./admin-day-offers-card.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {By} from "@angular/platform-browser";
-import {MdDialog, OverlayRef, MdDialogRef, MdDialogModule, MdMenuModule} from "@angular/material";
+import {MdDialog, MdDialogModule, MdDialogRef, MdMenuModule, OverlayRef} from "@angular/material";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
 import {FormsModule} from "@angular/forms";
 import {makeFourMockOffersForTomorrow} from "../../../testing/testing-utility-functions";
-import {MOCK_OFFERS, MOCK_COMPLETE_DAY} from "../../../testing/mock-data";
+import {MOCK_COMPLETE_DAY, MOCK_OFFERS} from "../../../testing/mock-data";
 import {Observable} from "rxjs";
 
 describe('AdminDayOffersCardComponent', () => {

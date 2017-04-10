@@ -1,4 +1,4 @@
-import {Injectable, SkipSelf, Optional} from "@angular/core";
+import {Injectable, Optional, SkipSelf} from "@angular/core";
 import {BrowserXhr} from "@angular/http";
 import {Observable, Subscriber} from "rxjs";
 import {XhrEvent} from "./ajax-visual-feedback.service";

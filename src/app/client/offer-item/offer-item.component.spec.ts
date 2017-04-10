@@ -3,12 +3,12 @@ import {OfferItemComponent} from "./offer-item.component";
 import {OffersApiStub} from "../../../testing/offers-api-stub";
 import {OffersApi} from "../../shared/api/endpoints/OffersApi";
 import {MOCK_OFFER_ORDER_PAIRS, MOCK_OFFERS} from "../../../testing/mock-data";
-import Spy = jasmine.Spy;
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OrdersApi} from "../../shared/api/endpoints/OrdersApi";
 import {OrdersApiStub} from "../../../testing/orders-api-stub";
 import {Observable} from "rxjs";
 import {AjaxVisualFeedbackService} from "../../ajax-visual-feedback/ajax-visual-feedback.service";
+import Spy = jasmine.Spy;
 
 
 describe('OfferItemComponent', () => {

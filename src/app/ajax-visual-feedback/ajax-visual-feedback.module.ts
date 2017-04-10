@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 import {CustomBrowserXhr} from "./custom-browser-xhr.service";
 import {AjaxVisualFeedbackService} from "./ajax-visual-feedback.service";
 

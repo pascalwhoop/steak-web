@@ -2,10 +2,10 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {SharedModule} from "../shared/shared.module";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {UserService} from "./user.service";
 import {LoggedInGuard} from "./logged-in.guard";
-import { LogoutButtonComponent } from './logout-button/logout-button.component';
+import {LogoutButtonComponent} from "./logout-button/logout-button.component";
 
 
 const ROUTES : Routes =[

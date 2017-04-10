@@ -1,7 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Order} from "../../model/Order";
 import {
-    ITdDataTableColumn, ITdDataTableSortChangeEvent, TdDataTableService,
+    ITdDataTableColumn,
+    ITdDataTableSortChangeEvent,
+    TdDataTableService,
     TdDataTableSortingOrder
 } from "@covalent/core";
 

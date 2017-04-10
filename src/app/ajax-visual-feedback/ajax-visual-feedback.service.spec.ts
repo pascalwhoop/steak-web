@@ -1,4 +1,4 @@
-import {TestBed, inject, fakeAsync, tick} from "@angular/core/testing";
+import {fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
 import {AjaxVisualFeedbackService, XhrEvent} from "./ajax-visual-feedback.service";
 import {MdSnackBar} from "@angular/material";
 import {Observable, Subscriber} from "rxjs";

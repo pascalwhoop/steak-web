@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Offer} from "../../shared/model/Offer";
-import {EditMode, STANDARD_TIMES, STANDARD_DESCRIPTIONS} from "../../core/util/util.service";
+import {EditMode, STANDARD_DESCRIPTIONS, STANDARD_TIMES} from "../../core/util/util.service";
 import {OfferFormDialogComponent} from "../offer-form-dialog/offer-form-dialog.component";
 import {MdDialog, MdDialogRef} from "@angular/material";
 

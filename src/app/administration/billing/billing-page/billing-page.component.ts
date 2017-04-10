@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../../login/user.service";
+import {Component, OnInit} from "@angular/core";
 import {OrdersApi} from "../../../shared/api/endpoints/OrdersApi";
 import {PageTitleService} from "../../../shared/services/page-title.service";
 import {ITdDataTableColumn} from "@covalent/core";
