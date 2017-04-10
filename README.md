@@ -1,3 +1,6 @@
+![Build Status](https://travis-ci.org/pascalwhoop/steak-web.svg?branch=master)
+![Coveralls]()
+
 # SteakWeb Overview
 
 This application is based on Angular 2 + Angular Material + Angular flex-layout
