@@ -57,11 +57,11 @@ let expectedChartData = [
         series: [
             {
                 value: 5,
-                name: new Date('2017-02-22T00:00:00.000Z')
+                name: new Date('2017-02-21T00:00:00.000Z')
             },
             {
                 value: 10,
-                name: new Date('2018-02-22T00:00:00.000Z')
+                name: new Date('2018-02-21T00:00:00.000Z')
             }
         ]
     },
@@ -88,6 +88,6 @@ function getMockOrdersForChartTest(): Order[] {
     chartInputOrders[2].amount *= 2;
     chartInputOrders[2].offer.date = new Date('2018-02-22T00:00:00.000Z');
     chartInputOrders[3].amount *= 2;
-    chartInputOrders[3].offer.date = new Date('2018-02-22T00:00:00.000Z');
+    chartInputOrders[3].offer.date = new Date('2018-02-21T00:00:00.000Z');
     return chartInputOrders;
 }
